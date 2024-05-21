@@ -11,7 +11,6 @@ public class MainController {
 	@GetMapping()
 	public String init()
 	{
-//		aa
 		return "index";
 	}
 }
