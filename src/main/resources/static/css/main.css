@@ -2759,11 +2759,12 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   color: #fff;
   padding: 0 20px;
   letter-spacing: 0.2px;
-  background-color: #2b2b31;
+    background-color: #0f0f10;
   margin-bottom: 20px;
   width: 100%;
   font-family: 'Open Sans', sans-serif;
   font-size: 15px;
+  border-radius: 10px;
 }
 .form__textarea {
   border: none;
@@ -2776,8 +2777,9 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   padding: 15px 20px;
   letter-spacing: 0.2px;
   resize: none;
-  background-color: #2b2b31;
+   background-color: #0f0f10;
   font-family: 'Open Sans', sans-serif;
+  border-radius: 10px;
 }
 .form__btn {
   display: flex;
