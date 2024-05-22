@@ -38,6 +38,7 @@ Primary use:	FlixGo Template
 /*==============================
 	Common styles
 ==============================*/
+
 html {
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
@@ -620,7 +621,7 @@ ul {
     top: auto;
     right: auto;
     bottom: auto;
-    margin-left: 45px;
+    margin-left: 20px;
   }
   .header__nav:before {
     display: none;

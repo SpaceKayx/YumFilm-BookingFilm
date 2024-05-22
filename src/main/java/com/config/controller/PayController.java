@@ -5,12 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/home")
-public class MainController {
-
+@RequestMapping("/booking")
+public class PayController {
 	@GetMapping()
-	public String init()
+	public String pay()
 	{
-		return "index";
+		return"pay";
 	}
 }
