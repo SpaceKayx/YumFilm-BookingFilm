@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:insert="~{title/titleBootstrap}">
-		
 </head>
-
+<style>
+	.card{
+		background-color: #2b2b31 !important;
+		color: white;
+	}
+</style>
 <body class="body">
 	<!-- header -->
-	<header th:insert="~{header/header}">
-	</header>
+	<header th:insert="~{header/header}"> </header>
 	<!-- end header -->
 
 	<!-- home -->
@@ -15,29 +18,29 @@
 		<div class="container">
 			<form action="" method="post">
 				<div class="d-flex justify-content-between row">
-					<div class="col-8">
+					<div class="col-7 border border-light">
 						<form action="" method="get">
-							<div class="card mb-1">
+							<div class="card mb-3">
 								<div class="card-body">
 									<h3 class="card-title">Khuyến mãi</h3>
-									<div class="mb-3">
+									<div class="my-3">
 										<label for="" class="form-label">Nhập mã khuyến mãi</label>
-										<div class="d-flex">
-											<input type="text" class="form-control me-3" name="" id=""
+										<div class="d-flex my-4">
+											<input type="text" class="form-control me-3 " name="" id=""
 												aria-describedby="helpId" placeholder="" />
 											<button type="submit" class="btn btn-primary"> Nhập</button>
 										</div>
-										<small id="helpId" class="form-text text-muted">* Lưu ý: Sử dụng mã giảm giá để tiết kiệm nhé !!</small>
+										<small id="helpId" class="form-text text-muted text-white-50">* Lưu ý: Sử dụng mã giảm giá để tiết kiệm nhé !!</small>
 									</div>
 								</div>
 							</div>
 						</form>
 						<div class="card">
 							<div class="card-body">
-								<h3 class="card-title">Phương thức thanh toán</h3>
+								<h3 class="card-title mb-3">Phương thức thanh toán</h3>
 								<div class="mb-3">
-									<div class="form-check mb-2">
-										<input class="form-check-input mt-4" type="radio" name="" id="" />
+									<div class="form-check mb-4">
+										<input class="form-check-input mt-4 me-3" type="radio" name="" id="" />
 										<picture>
 											<source srcset="sourceset" type="image/svg" />
 											<svg xmlns="http://www.w3.org/2000/svg"
@@ -69,10 +72,10 @@
 												</g>
 											</svg>
 										</picture>
-										<label class="form-check-label" for="">Ví thanh toán Momo</label>
+										<label class="form-check-label ms-3" for="">Ví thanh toán Momo</label>
 									</div>
-									<div class="form-check mb-2">
-										<input class="form-check-input mt-4" type="radio" name="" id="" />
+									<div class="form-check mb-4">
+										<input class="form-check-input mt-4 me-3" type="radio" name="" id="" />
 										<picture>
 											<source srcset="sourceset" type="image/svg" />
 											<svg xmlns="http://www.w3.org/2000/svg"
@@ -97,10 +100,10 @@
 												</g>
 											</svg>
 										</picture>
-										<label class="form-check-label" for="">Ví thanh toán Shopee Pay</label>
+										<label class="form-check-label ms-3" for="">Ví thanh toán Shopee Pay</label>
 									</div>
-									<div class="form-check mb-2">
-										<input class="form-check-input mt-2" type="radio" name="" id="" />
+									<div class="form-check mb-4">
+										<input class="form-check-input mt-2 me-3" type="radio" name="" id="" />
 										<picture>
 											<source srcset="sourceset" type="image/svg" />
 											<svg xmlns="http://www.w3.org/2000/svg"
@@ -269,61 +272,50 @@
 												</g>
 											</svg>
 										</picture>
-										<label class="form-check-label" for="">Ví thanh toán VNPay</label>
+										<label class="form-check-label ms-3" for="">Ví thanh toán VNPay</label>
 									</div>
 
-									<small id="helpId" class="form-text text-muted">* Lưu ý: Chọn vào nút Thanh Toán bên
+									<small id="helpId" class="form-text text-muted text-white-50 mt-2">* Lưu ý: Chọn vào nút Thanh Toán bên
 										cạnh để thanh toán nhé !!</small>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col-4">
-						<div class="card mb-3">
-							<div class="d-flex">
-								<img class="card-img-top" src="img/google-play-badge.png"
-									style="width: 10rem; height: 10rem;" alt="Title" />
-								<label for="" class="label-title ms-2">Phim gì ai biết đâu</label>
-							</div>
-							<div class="card-body border-bottom border-4">
-								<div class="d-flex">
-									<strong class="card-title">Tên Rap: </strong>
-									<span class="card-text text-uppercase ms-2">rap 5</span>
-								</div>
-								<div class="d-flex">
-									<strong class="card-title">Suất chiếu: </strong>
-									<span class="card-text text-uppercase ms-2">12:12</span>
-									<strong class="card-title ms-2"> - Ngày: </strong>
-									<span class="card-text ms-2">12-12-2012</span>
-								</div>
-							</div>
-							<div class="card-body border-bottom border-4">
-								<div class="d-flex">
-									<strong class="card-title">Số vé: </strong>
-									<span class="card-text ms-2">02 -</span>
-									<span class="card-text ms-2 text-uppercase">Ghế Đơn</span>
-								</div>
-								<div class="d-flex">
-									<strong class="card-title">GHẾ: </strong>
-									<span class="card-text ms-2">A1,B2</span>
-								</div>
-							</div>
-							<div class="card-body border-bottom border-4">
-								<div class="d-flex justify-content-between">
-									<strong class="card-title">Tổng cộng: </strong>
-									<span class="card-text ms-2 float-right">10000&nbsp;₫</span>
-								</div>
-							</div>
-						</div>
-						<div class="mb-3 d-flex justify-content-between mx-5">
-							<button type="submit" class="btn btn-light">
-								Quay lại
-							</button>
-							<button type="submit" class="btn btn-primary">
-								Thanh Toán
-							</button>
-
-						</div>
+					<div class="col-5">
+						<div class="row" style="padding: 10px;">
+                        <div class="col-5" style="padding: 0px; margin: 0px;">
+                            <img src="img/haikyuu-the-dumpster-battle-4_1715588036535.jpg" alt=""
+                                style="width: 170px; height: 220px;padding: 0; ">
+                        </div>
+                        <div class="col-7">
+                            <label style="font-weight: bold; color: white; font-size: 18px;">Haikyu!!: Trận Chiến Bãi Phế Liệu</label>
+                            <label style="color: white;">2D Phụ Đề</label>
+                        </div>
+                    </div>
+                    <div style="margin-top: 10px; color: white; ">
+                        <span style="font-size: 16px; font-weight: bold;">FumFilm Quang Trung</span>
+                        <span> - </span>
+                        <span>RAP 3</span>
+                    </div>
+                    <div style="margin-top: 10px; color: white;  border-bottom: 2px dotted #ff55a5; padding-bottom: 15px ;">
+                        <span style="font-size: 16px;">Suất: </span>
+                        <span style="font-size: 16px; font-weight: bold;">9:00</span>
+                        <span> - </span>
+                        <span style="font-size: 16px;">Thứ 3, </span>
+                        <span style="font-size: 16px; font-weight: bold;">21-05-2024</span>
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <strong style="color: white;">Tổng cổng: </strong>
+                        <span style="color: orange; margin-left: 400px;">0đ</span>
+                    </div>
+                    <div class="row" style="margin-top: 20px; ">
+                        <div class="col-6 m-0 p-0 px-2">
+                            <button type="submit" class="btn btn-light w-100" formaction="/booking/orderFood">Quay lại</button>
+                        </div>
+                        <div class="col-6 m-0 p-0 px-2">
+                            <button type="submit" class="btn btn-warning w-100">Thanh toán</button>
+                        </div>
+                    </div>
 
 					</div>
 				</div>

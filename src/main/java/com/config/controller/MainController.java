@@ -13,4 +13,10 @@ public class MainController {
 	{
 		return "index";
 	}
+	
+	@GetMapping("/film-detail")
+	public String filmDetail()
+	{
+		return "filmdetail";
+	}
 }

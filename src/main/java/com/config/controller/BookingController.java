@@ -6,16 +6,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/oder")
-public class oder_Controller {
+@RequestMapping("/booking")
+public class BookingController {
 
-	@GetMapping
+	@GetMapping()
 	public String showOder() {
-		return "oder";
+		return "order";
 	}
 	
-	@PostMapping("/oderFood")
+	@PostMapping("/orderFood")
 	public String showOderFood() {
-		return "oderFood";
+		return "orderFood";
 	} 
+	@PostMapping("/pay")
+	public String pay()
+	{
+		return"pay";
+	}
 }
