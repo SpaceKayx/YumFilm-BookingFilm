@@ -3,35 +3,49 @@ package com.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.config.security.CustomerAuthProvider;
+import com.config.security.SuccessHandler;
 import com.config.service.UserService;
 
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 
 @Configuration
 public class SecurityConfig {
     @Autowired
     UserService userService;
 
-    @Autowired
-    HttpServletResponse resp;
+    private final CustomerAuthProvider provider;
     
-    @Bean
+    private final SuccessHandler successHandler;
+    
+
+	public SecurityConfig(CustomerAuthProvider provider, SuccessHandler successHandler) {
+		super();
+		this.provider = provider;
+		this.successHandler = successHandler;
+	}
+
+	@Bean
     public SecurityFilterChain filter(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) -> requests
-        		.requestMatchers("/manager", "/manager/**").hasAuthority("ROLE_ADMIN")
+        	.requestMatchers("/manager", "/manager/**").hasAuthority("ROLE_ADMIN")
             .requestMatchers("/booking", "/manager", "/booking/**", "/manager/**").authenticated()
             .requestMatchers("/**").permitAll()
         )
         .formLogin((form) -> form
             .loginPage("/signin")
-            .defaultSuccessUrl("/home", true)
+            .successHandler(successHandler)
             .permitAll()
         )
-        .userDetailsService(userService)
+        .authenticationProvider(provider)
         .logout((logout) -> logout
         		.logoutUrl("/signout")
         		.permitAll()
@@ -47,6 +61,8 @@ public class SecurityConfig {
     }
 
     @Bean
+    @Primary
+    @Lazy
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
