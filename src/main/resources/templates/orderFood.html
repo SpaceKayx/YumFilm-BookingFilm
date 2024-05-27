@@ -61,9 +61,8 @@
 	<!-- details -->
 	<div class="content" style="padding: 0px; background-color: #2b2b31;">
 		<div class="container">
-			<form action="" method="post">
+			<form  th:action="@{/booking}" method="post">
 			<div class="row">
-
 					<div class="col-12" style="margin-top: 15px;">
 						<div class="step_oder">
 							<ul style="color: white;">
@@ -232,11 +231,11 @@
 				</div>
 				<div class="row" style="margin-top: 20px;">
 					<div class="col-6 m-0 p-0 px-2">
-						<button type="submit" class="btn btn-light w-100" formmethod="get" formaction="/booking">Quay
+						<button type="submit" class="btn btn-light w-100" th:formmethod="get" th:formaction="@{/booking}">Quay
 							lại</button>
 					</div>
 					<div class="col-6 m-0 p-0 px-2">
-						<button type="submit" class="btn btn-warning w-100" formaction="/booking/pay">Tiếp
+						<button type="submit" class="btn btn-warning w-100" th:formaction="@{/booking/pay}">Tiếp
 							tục</button>
 					</div>
 				</div>

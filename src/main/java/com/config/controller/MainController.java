@@ -1,8 +1,13 @@
 package com.config.controller;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,12 +25,9 @@ public class MainController {
 	@GetMapping()
 	public String init()
 	{
-		User user = new User();
-		
-		List<User> list = repo.findAll();
-		for (User u : list) {
-			System.out.println(u.getUsername());
-		}
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+		System.out.println(authorities);
 		return "index";
 	}
 	
@@ -33,5 +35,10 @@ public class MainController {
 	public String filmDetail()
 	{
 		return "filmdetail";
+	}
+	@GetMapping("/list-film")
+	public String listfilm()
+	{
+		return "listfilm";
 	}
 }

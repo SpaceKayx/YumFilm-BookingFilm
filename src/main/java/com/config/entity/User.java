@@ -33,14 +33,14 @@ public class User implements Serializable {
 	private String Firstname;
 	@Nationalized
 	private String Lastname;
-	@Nationalized
-	private String Password;
+	 @Column(columnDefinition = "NCHAR(255)")
+	private String password;
 	@Nationalized
 	private String Phonenumber;
 	private boolean Role;
 	private boolean Sex;
 	private boolean Status;
 	@Nationalized
-	private String Username;
+	private String username;
 
 }

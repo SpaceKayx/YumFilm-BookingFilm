@@ -16,10 +16,10 @@
 	<!-- home -->
 	<section class="home">
 		<div class="container">
-			<form action="" method="post">
+			<form  th:action="@{/booking}" method="post">
 				<div class="d-flex justify-content-between row">
 					<div class="col-7 border border-light">
-						<form action="" method="get">
+						<form  th:action="@{/booking}" method="get">
 							<div class="card mb-3">
 								<div class="card-body">
 									<h3 class="card-title">Khuyến mãi</h3>
@@ -310,7 +310,7 @@
                     </div>
                     <div class="row" style="margin-top: 20px; ">
                         <div class="col-6 m-0 p-0 px-2">
-                            <button type="submit" class="btn btn-light w-100" formaction="/booking/orderFood">Quay lại</button>
+                            <button type="submit" class="btn btn-light w-100" th:formaction="@{/booking/orderFood}">Quay lại</button>
                         </div>
                         <div class="col-6 m-0 p-0 px-2">
                             <button type="submit" class="btn btn-warning w-100">Thanh toán</button>

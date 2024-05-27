@@ -32,7 +32,7 @@
 							<!-- card cover -->
 							<div class="col-12 col-sm-4 col-md-4 col-lg-3 col-xl-5">
 								<div class="card__cover">
-									<img src="img/home/Ourbelovesummer.jpeg" alt="">
+									<img th:src="@{/img/home/Ourbelovesummer.jpeg}" alt="">
 								</div>
 							</div>
 							<!-- end card cover -->
@@ -75,7 +75,7 @@
 
 				<!-- player -->
 				<div class="col-12 col-xl-6">
-					<video controls crossorigin playsinline poster="../../../cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg" id="player">
+					<video controls crossorigin playsinline th:poster="@{/../../../cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg}" id="player">
 						<!-- Video files -->
 						<source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" type="video/mp4" size="576">
 						<source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4" type="video/mp4" size="720">
@@ -129,6 +129,10 @@
 								<li class="vk"><a href="#"><i class="icon ion-logo-vk"></i></a></li>
 							</ul>
 						</div>
+						<a href="/booking" class="header__sign-in">
+									<i class="icon ion-ios-log-in"></i>
+									<span>Đặt vé</span>
+								</a>
 						<!-- end share -->
 					</div>
 				</div>
@@ -200,7 +204,7 @@
 										<ul class="comments__list">
 											<li class="comments__item">
 												<div class="comments__autor">
-													<img class="comments__avatar" src="img/user.png" alt="">
+													<img class="comments__avatar" th:src="@{/img/user.png}" alt="">
 													<span class="comments__name">Chồng Kim dami</span>
 													<span class="comments__time">30.08.2018, 17:53</span>
 												</div>
@@ -236,7 +240,7 @@
 										<ul class="reviews__list">
 											<li class="reviews__item">
 												<div class="reviews__autor">
-													<img class="reviews__avatar" src="img/user.png" alt="">
+													<img class="reviews__avatar" th:src="@{/img/user.png}" alt="">
 													<span class="reviews__name">Chồng Kim dami</span>
 													<span class="reviews__time">24.08.2018, 17:53 by John Doe</span>
 
@@ -268,7 +272,7 @@
 									<!-- gallery item -->
 									<figure class="col-12 col-sm-6 col-xl-4" itemprop="associatedMedia" itemscope>
 										<a href="img/gallery/project-1.jpg" itemprop="contentUrl" data-size="1920x1280">
-											<img src="img/gallery/OBS1.jpg" itemprop="thumbnail" alt="Image description" />
+											<img th:src="@{/img/gallery/OBS1.jpg}" itemprop="thumbnail" alt="Image description" />
 										</a>
 										<figcaption itemprop="caption description">Some image caption 1</figcaption>
 									</figure>
@@ -277,7 +281,7 @@
 									<!-- gallery item -->
 									<figure class="col-12 col-sm-6 col-xl-4" itemprop="associatedMedia" itemscope>
 										<a href="img/gallery/project-2.jpg" itemprop="contentUrl" data-size="1920x1280">
-											<img src="img/gallery/OB2.jpg" itemprop="thumbnail" alt="Image description" />
+											<img  th:src="@{/img/gallery/OB2.jpg}" itemprop="thumbnail" alt="Image description" />
 										</a>
 										<figcaption itemprop="caption description">Some image caption 2</figcaption>
 									</figure>
@@ -313,7 +317,7 @@
 						<div class="col-6 col-sm-4 col-lg-6">
 							<div class="card">
 								<div class="card__cover">
-									<img src="img/covers/cover.jpg" alt="">
+									<img th:src="@{/img/covers/cover.jpg}" alt="">
 									<a href="#" class="card__play">
 										<i class="icon ion-ios-play"></i>
 									</a>
@@ -334,7 +338,7 @@
 						<div class="col-6 col-sm-4 col-lg-6">
 							<div class="card">
 								<div class="card__cover">
-									<img src="img/covers/cover2.jpg" alt="">
+									<img th:src="@{/img/covers/cover2.jpg}" alt="">
 									<a href="#" class="card__play">
 										<i class="icon ion-ios-play"></i>
 									</a>
