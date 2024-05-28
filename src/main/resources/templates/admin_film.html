@@ -197,7 +197,7 @@
 									</div>
 
 									<div class="col-12 col-sm-8">
-										<form action="" method="post">
+										<form th:action="@{/manager}" method="post">
 											<div class="card__content">
 												<h3 class="card__title">
 													<a href="#">Mùa hè kỳ diệu của chúng ta</a>
@@ -223,7 +223,7 @@
 														type specimen book.</p>
 												</div>
 											</div>
-											<button class="form__btn" formaction="/manager/film-detail">Chỉnh sửa chi tiết</button>
+											<button class="form__btn" type="submit" th:formaction="@{/manager/film-detail}">Chỉnh sửa chi tiết</button>
 										</form>
 									</div>
 								</div>
