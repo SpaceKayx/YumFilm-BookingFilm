@@ -21,9 +21,9 @@ public class CustomerUserDetails implements UserDetails{
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		System.out.println(2);
-		System.out.println("hihi: " +user.getUsername());
-		System.out.println("hihi: " +user.isRole());
+		System.out.println("CustomerUserDetails: ");
+		System.out.println("Username: " +user.getUsername());
+		System.out.println("Role: " +user.isRole());
 		if(user.isRole())
 		{
 			return Collections.singleton(new SimpleGrantedAuthority("ROLE_ADMIN"));
