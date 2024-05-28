@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-<head th:insert="~{title/title}"></head>
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org">
+<head th:insert="~{title/titleBootstrap}"></head>
 
 <body class="body">
 
@@ -22,7 +22,9 @@
 							<div class="sign__group">
 								<input type="password" class="sign__input" placeholder="Password" name="password">
 							</div>
-
+							<div class="mb-3">
+								<p th:text="${invalidInfo}"></p>
+							</div>
 							<div class="sign__group sign__group--checkbox">
 								<input id="remember" name="remember" type="checkbox" checked="checked">
 								<label for="remember">Remember Me</label>

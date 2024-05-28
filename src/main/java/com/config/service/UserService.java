@@ -19,8 +19,9 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    	System.out.println(1);
+    	System.out.println("userService");
         User user = userRepository.findByUserName(username);
+        user.setPassword(user.getPassword().trim());
         if (user == null) {
             throw new UsernameNotFoundException("Không tìm thấy người dùng với tên: " + username);
         }
