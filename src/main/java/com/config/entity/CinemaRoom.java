@@ -25,7 +25,7 @@ import lombok.experimental.FieldDefaults;
 public class CinemaRoom {
 	
 	@Id
-	@Column(name = "CinemaRoom")
+	@Column(name = "CinemaRoomId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int cinemaRoomId;
 	@Column(name = "NameRoom", columnDefinition = "nvarchar(50)", nullable = false)

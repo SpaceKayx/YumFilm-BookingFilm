@@ -45,7 +45,7 @@ public class User {
 	@Column(name = "Email" , columnDefinition = "nvarchar(255)" , nullable = false)
 	String email;
 	
-	@Column(name = "Username" , columnDefinition= "varchar(255)" , nullable = false)
+	@Column(name = "Username" , columnDefinition= "nvarchar(255)" , nullable = false)
 	String username;
 	
 	@Column(name = "Password" , columnDefinition = "nchar(60)", nullable = false)

@@ -41,6 +41,9 @@ public class Food {
 	@Column(name = "Description" , columnDefinition= "nvarchar(max)" )
 	String description;
 	
+	@Column(name = "FoodImage" , columnDefinition= "nvarchar(255)" )
+	String foodImage;
+	
 	@Column(name = "Status", nullable = false)
 	boolean status;
 	
