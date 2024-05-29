@@ -49,6 +49,12 @@ public class Film {
 	@Column(name = "Price" , nullable = false)
 	double price;
 	
+	@Column(name = "Age")
+	int age;
+	
+	@Column(name = "Rate")
+	double rate;
+	
 	@ManyToOne()
 	@JoinColumn(name = "CountryId" , nullable = false)
 	Country country;
