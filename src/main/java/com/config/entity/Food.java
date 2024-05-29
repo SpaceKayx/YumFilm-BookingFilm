@@ -44,6 +44,9 @@ public class Food {
 	@Column(name = "Status", nullable = false)
 	boolean status;
 	
+	@Column(name = "FoodImage", columnDefinition= "nvarchar(255)")
+	String foodImage;
+	
 	@OneToMany(mappedBy = "food")
 	List<OrderFood> listOrderFood;
 }

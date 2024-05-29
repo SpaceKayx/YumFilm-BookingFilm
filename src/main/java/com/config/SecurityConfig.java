@@ -35,27 +35,27 @@ public class SecurityConfig {
 
 	@Bean
     public SecurityFilterChain filter(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests((requests) -> requests
-        	.requestMatchers("/manager", "/manager/**").hasAuthority("ROLE_ADMIN")
-            .requestMatchers("/booking", "/manager", "/booking/**", "/manager/**").authenticated()
-            .requestMatchers("/**").permitAll()
-        )
-        .formLogin((form) -> form
-            .loginPage("/signin")
-            .successHandler(successHandler)
-            .permitAll()
-        )
-        .authenticationProvider(provider)
-        .logout((logout) -> logout
-        		.logoutUrl("/signout")
-        		.permitAll()
-        )
-        .exceptionHandling()
-        .accessDeniedHandler((request, response, AccessDeniedHandler) ->
-        {
-        	response.sendRedirect("/home");
-        })
-        ;
+//        http.authorizeHttpRequests((requests) -> requests
+//        	.requestMatchers("/manager", "/manager/**").hasAuthority("ROLE_ADMIN")
+//            .requestMatchers("/booking", "/manager", "/booking/**", "/manager/**").authenticated()
+//            .requestMatchers("/**").permitAll()
+//        )
+//        .formLogin((form) -> form
+//            .loginPage("/signin")
+//            .successHandler(successHandler)
+//            .permitAll()
+//        )
+//        .authenticationProvider(provider)
+//        .logout((logout) -> logout
+//        		.logoutUrl("/signout")
+//        		.permitAll()
+//        )
+//        .exceptionHandling()
+//        .accessDeniedHandler((request, response, AccessDeniedHandler) ->
+//        {
+//        	response.sendRedirect("/home");
+//        })
+//        ;
 
         return http.build();
     }

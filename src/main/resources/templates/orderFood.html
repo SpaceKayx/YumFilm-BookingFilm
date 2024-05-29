@@ -81,107 +81,20 @@
 									<label
 										style="font-size: 18px; font-weight: bold; color: white;">Chọn
 										combo</label>
-									<div class="row">
+									<div class="row" th:each="food : ${listFood}">
 										<div class="col-3" style="margin-top: 15px;">
 											<img
-												src="img/menuboard-coonline-2024-combo1-min_1711699834430.jpg"
+												th:src="@{'/image/' + ${food.foodimage}}"
 												alt=""
 												style="width: 150px; height: 100px; padding: 0; border-radius: 5px;">
 
 										</div>
 										<div class="col-6">
-											<label style="margin-top: 10px; color: white;">iCombo
-												1 Big Extra STD</label> <br> <label
-												style="color: white; font-size: 14px;">1 Ly nước
-												ngọt size L + 01 Hộp bắp + 1 Snack</label> <br> <strong
-												style="color: white;">Giá: 109.000 VNĐ</strong>
-										</div>
-										<div class="col-3">
-											<div style="width: 120px; height: 30px; margin-top: 40px;">
-												<div class="input-group mb-3">
-													<button class="btn btn-outline-secondary" type="button"
-														id="button-addon1">-</button>
-													<input type="number" class="form-control" placeholder=""
-														aria-label="Example text with button addon"
-														aria-describedby="button-addon1">
-													<button class="btn btn-outline-secondary" type="button"
-														id="button-addon2">+</button>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-3" style="margin-top: 15px;">
-											<img
-												src="img/menuboard-coonline-2024-combo1-min_1711699834430.jpg"
-												alt=""
-												style="width: 150px; height: 100px; padding: 0; border-radius: 5px;">
-
-										</div>
-										<div class="col-6">
-											<label style="margin-top: 10px; color: white;">iCombo
-												1 Big Extra STD</label> <br> <label
-												style="color: white; font-size: 14px;">1 Ly nước
-												ngọt size L + 01 Hộp bắp + 1 Snack</label> <br> <strong
-												style="color: white;">Giá: 109.000 VNĐ</strong>
-										</div>
-										<div class="col-3">
-											<div style="width: 120px; height: 30px; margin-top: 40px;">
-												<div class="input-group mb-3">
-													<button class="btn btn-outline-secondary" type="button"
-														id="button-addon1">-</button>
-													<input type="number" class="form-control" placeholder=""
-														aria-label="Example text with button addon"
-														aria-describedby="button-addon1">
-													<button class="btn btn-outline-secondary" type="button"
-														id="button-addon2">+</button>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-3" style="margin-top: 15px;">
-											<img
-												src="img/menuboard-coonline-2024-combo1-min_1711699834430.jpg"
-												alt=""
-												style="width: 150px; height: 100px; padding: 0; border-radius: 5px;">
-
-										</div>
-										<div class="col-6">
-											<label style="margin-top: 10px; color: white;">iCombo
-												1 Big Extra STD</label> <br> <label
-												style="color: white; font-size: 14px;">1 Ly nước
-												ngọt size L + 01 Hộp bắp + 1 Snack</label> <br> <strong
-												style="color: white;">Giá: 109.000 VNĐ</strong>
-										</div>
-										<div class="col-3">
-											<div style="width: 120px; height: 30px; margin-top: 40px;">
-												<div class="input-group mb-3">
-													<button class="btn btn-outline-secondary" type="button"
-														id="button-addon1">-</button>
-													<input type="number" class="form-control" placeholder=""
-														aria-label="Example text with button addon"
-														aria-describedby="button-addon1">
-													<button class="btn btn-outline-secondary" type="button"
-														id="button-addon2">+</button>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-3" style="margin-top: 15px;">
-											<img
-												src="img/menuboard-coonline-2024-combo1-min_1711699834430.jpg"
-												alt=""
-												style="width: 150px; height: 100px; padding: 0; border-radius: 5px;">
-
-										</div>
-										<div class="col-6">
-											<label style="margin-top: 10px; color: white;">iCombo
-												1 Big Extra STD</label> <br> <label
-												style="color: white; font-size: 14px;">1 Ly nước
-												ngọt size L + 01 Hộp bắp + 1 Snack</label> <br> <strong
-												style="color: white;">Giá: 109.000 VNĐ</strong>
+											<label style="margin-top: 10px; color: white;" th:text="${food.foodName}">  </label> <br>
+											<label
+												style="color: white; font-size: 14px;" th:text="${food.description}"></label> 
+												<br> 
+												<strong style="color: white;" th:text="@{${#numbers.formatDecimal(food.price, 0, 'COMMA', 0, 'POINT')} + ' VND' }"></strong>
 										</div>
 										<div class="col-3">
 											<div style="width: 120px; height: 30px; margin-top: 40px;">

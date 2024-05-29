@@ -31,17 +31,19 @@
 
 				<div class="col-12">
 					<div class="owl-carousel home__carousel">
-						<div class="item">
+						<div class="item" th:each="film : ${listFilm}">
 							<!-- card -->
 							<div class="card card--big">
 								<div class="card__cover">
-									<img src="img/covers/cover.jpg" alt="">
+									<img th:src="@{'/image/' + ${film.FilmImage}}" alt="">
 									<a href="#" class="card__play">
 										<i class="icon ion-ios-play"></i>
 									</a>
 								</div>
 								<div class="card__content">
-									<h3 class="card__title"><a href="#">I Dream in Another Language</a></h3>
+									<h3 class="card__title">
+										<a href="#" th:text="${film.filmName}"></a>
+										</h3>
 									<span class="card__category">
 										<a href="#">Action</a>
 										<a href="#">Triler</a>
@@ -52,8 +54,8 @@
 							<!-- end card -->
 						</div>
 
-						<div class="item">
-							<!-- card -->
+<!-- 						<div class="item">
+							card
 							<div class="card card--big">
 								<div class="card__cover">
 									<img src="img/covers/cover2.jpg" alt="">
@@ -69,11 +71,11 @@
 									<span class="card__rate"><i class="icon ion-ios-star"></i>7.1</span>
 								</div>
 							</div>
-							<!-- end card -->
+							end card
 						</div>
-
+						
 						<div class="item">
-							<!-- card -->
+							card
 							<div class="card card--big">
 								<div class="card__cover">
 									<img src="img/covers/cover3.jpg" alt="">
@@ -90,11 +92,11 @@
 									<span class="card__rate"><i class="icon ion-ios-star"></i>6.3</span>
 								</div>
 							</div>
-							<!-- end card -->
+							end card
 						</div>
-
+						
 						<div class="item">
-							<!-- card -->
+							card
 							<div class="card card--big">
 								<div class="card__cover">
 									<img src="img/covers/cover4.jpg" alt="">
@@ -111,8 +113,8 @@
 									<span class="card__rate"><i class="icon ion-ios-star"></i>7.9</span>
 								</div>
 							</div>
-							<!-- end card -->
-						</div>
+							end card
+						</div> -->
 					</div>
 				</div>
 			</div>
