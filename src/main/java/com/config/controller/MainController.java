@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.config.entity.User;
 import com.config.repository.UserRepository;
+import com.config.security.CustomerUserDetails;
+import com.config.utils.Auth;
+
+import lombok.AllArgsConstructor;
 
 @Controller
 @RequestMapping("/home")
@@ -21,11 +25,11 @@ public class MainController {
 
 	@Autowired
 	UserRepository repo;
-	
 	@GetMapping()
 	public String init()
 	{
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
 		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 		System.out.println(authorities);
 		return "index";

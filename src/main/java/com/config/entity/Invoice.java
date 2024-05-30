@@ -1,6 +1,7 @@
 package com.config.entity;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 //import org.hibernate.metamodel.ValueClassification;
@@ -38,7 +39,7 @@ public class Invoice {
 	
 	@Temporal(value = TemporalType.TIMESTAMP)
 	@Column(name = "CreateDate", columnDefinition = "datetime", nullable = false)
-	Timestamp creatDate;
+	Date creatDate;
 	
 	@Column(name = "PaymentStatus", nullable = false)
 	boolean paymentStatus;

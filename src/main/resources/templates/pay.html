@@ -16,7 +16,7 @@
 	<!-- home -->
 	<section class="home">
 		<div class="container">
-			<form  th:action="@{/booking}" method="post">
+			<form  th:action="@{/booking/pay}" method="post">
 				<div class="d-flex justify-content-between row">
 					<div class="col-7 border border-light">
 						<form  th:action="@{/booking}" method="get">
@@ -310,7 +310,7 @@
                     </div>
                     <div class="row" style="margin-top: 20px; ">
                         <div class="col-6 m-0 p-0 px-2">
-                            <button type="submit" class="btn btn-light w-100" th:formaction="@{/booking/orderFood}">Quay lại</button>
+                            <button type="submit" class="btn btn-light w-100" th:formmethod="get" th:formaction="@{/booking/orderFood}">Quay lại</button>
                         </div>
                         <div class="col-6 m-0 p-0 px-2">
                             <button type="submit" class="btn btn-warning w-100">Thanh toán</button>

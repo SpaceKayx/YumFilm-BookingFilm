@@ -30,7 +30,7 @@ public class DirectorOfFilm {
 	int directorOfFilmId; 
 	
 	@ManyToOne
-	@JoinColumn(name= "FilmId" , nullable = false)
+	@JoinColumn(name= "FilmDetailId" , nullable = false)
 	FilmDetail filmDetail;
 	
 	@ManyToOne

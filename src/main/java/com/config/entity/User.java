@@ -3,7 +3,6 @@ package com.config.entity;
 import java.util.Date;
 import java.util.List;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,35 +33,35 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	long userId;
 	
-	@Column(name = "LastName" , columnDefinition = "nvarchar(50)", nullable = true)
+	@Column(name = "LastName" , columnDefinition = "nvarchar(50)", nullable = false)
 	String lastName; 
 	
-	@Column(name = "FirstName" , columnDefinition ="nvarchar(50)", nullable = true)
+	@Column(name = "FirstName" , columnDefinition ="nvarchar(50)", nullable = false)
 	String firstName;
 	
-	@Column(name = "PhoneNumber", columnDefinition = "nvarchar(50)", nullable = true)
+	@Column(name = "PhoneNumber", columnDefinition = "nvarchar(50)", nullable = false)
 	String phoneNumber;
 	
-	@Column(name = "Email" , columnDefinition = "nvarchar(255)" , nullable = true)
+	@Column(name = "Email" , columnDefinition = "nvarchar(255)" , nullable = false)
 	String email;
 	
-	@Column(name = "Username" , columnDefinition= "nvarchar(255)" , nullable = true)
+	@Column(name = "Username" , columnDefinition= "nvarchar(255)" , nullable = false)
 	String username;
 	
-	@Column(name = "Password" , columnDefinition = "nchar(60)", nullable = true)
+	@Column(name = "Password" , columnDefinition = "nchar(60)", nullable = false)
 	String password;
 	
-	@Column(name = "Birthdate" , nullable =true)
+	@Column(name = "Birthdate" , nullable =false)
 	@Temporal(TemporalType.DATE)
 	Date birthday;
 	
-	@Column(name = "Sex", nullable = true)
+	@Column(name = "Sex", nullable = false)
 	boolean sex;
 	
-	@Column(name = "Role" , nullable = true)
+	@Column(name = "Role" , nullable = false)
 	boolean role;
 	
-	@Column(name = "Status", nullable = true)
+	@Column(name = "Status", nullable = false)
 	boolean status;
 	
 	@OneToMany(mappedBy = "user")
