@@ -182,14 +182,15 @@
 						<button class="form__btn" style="margin-left: 1000px;">Thêm
 							phim</button>
 					</div>
-					<div class="row">
+					<div class="row" >
 						<!-- card -->
-						<div class="col-6 col-sm-12 col-lg-6">
+						<div class="col-6 col-sm-12 col-lg-6" th:each="adminFiml : ${listAdminFilm}">
 							<div class="card card--list">
 								<div class="row">
 									<div class="col-12 col-sm-4">
 										<div class="card__cover">
-											<img src="img/home/Ourbelovesummer.jpeg" alt=""> <a
+											<img th:src="@{'/images/' + ${adminFiml.filmImage}}" alt=""> 
+											<a
 												href="#" class="card__play"> <i
 												class="icon ion-ios-play"></i>
 											</a>
@@ -197,10 +198,10 @@
 									</div>
 
 									<div class="col-12 col-sm-8">
-										<form th:action="@{/manager}" method="post">
+										<form action="/manager" method="post">
 											<div class="card__content">
 												<h3 class="card__title">
-													<a href="#">Mùa hè kỳ diệu của chúng ta</a>
+													<a href="#" th:text="${adminFiml.filmName}"></a>
 												</h3>
 												<div class="card__wrap">
 													<span class="card__rate"><i
@@ -223,151 +224,13 @@
 														type specimen book.</p>
 												</div>
 											</div>
-											<button class="form__btn" type="submit" th:formaction="@{/manager/film-detail}">Chỉnh sửa chi tiết</button>
+											<button class="form__btn" type="submit" formaction="/manager/film-detail">Chỉnh sửa chi tiết</button>
 										</form>
 									</div>
 								</div>
 							</div>
 						</div>
 						<!-- end card -->
-
-						<!-- card -->
-						<div class="col-6 col-sm-12 col-lg-6">
-							<div class="card card--list">
-								<div class="row">
-									<div class="col-12 col-sm-4">
-										<div class="card__cover">
-											<img src="img/home/Ourbelovesummer.jpeg" alt=""> <a
-												href="#" class="card__play"> <i
-												class="icon ion-ios-play"></i>
-											</a>
-										</div>
-									</div>
-
-									<div class="col-12 col-sm-8">
-										<div class="card__content">
-											<h3 class="card__title">
-												<a href="#">Mùa hè kỳ diệu của chúng ta</a>
-											</h3>
-											<div class="card__wrap">
-												<span class="card__rate"><i class="icon ion-ios-star"></i>8.4</span>
-												<ul class="card__list">
-													<li>HD</li>
-													<li>16+</li>
-												</ul>
-											</div>
-
-											<span class="card__category"> <a href="#">Tình cảm</a>
-												<a href="#">Lãng mạng</a> <a href="#">Hài hước</a>
-											</span>
-
-											<div class="card__description">
-												<p>Lorem Ipsum is simply dummy text of the printing and
-													typesetting industry. Lorem Ipsum has been the industry's
-													standard dummy text ever since the 1500s, when an unknown
-													printer took a galley of type and scrambled it to make a
-													type specimen book.</p>
-											</div>
-
-										</div>
-										<button class="form__btn">Chỉnh sửa chi tiết</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- end card -->
-						<!-- card -->
-						<div class="col-6 col-sm-12 col-lg-6">
-							<div class="card card--list">
-								<div class="row">
-									<div class="col-12 col-sm-4">
-										<div class="card__cover">
-											<img src="img/home/Ourbelovesummer.jpeg" alt=""> <a
-												href="#" class="card__play"> <i
-												class="icon ion-ios-play"></i>
-											</a>
-										</div>
-									</div>
-
-									<div class="col-12 col-sm-8">
-										<div class="card__content">
-											<h3 class="card__title">
-												<a href="#">Mùa hè kỳ diệu của chúng ta</a>
-											</h3>
-											<div class="card__wrap">
-												<span class="card__rate"><i class="icon ion-ios-star"></i>8.4</span>
-												<ul class="card__list">
-													<li>HD</li>
-													<li>16+</li>
-												</ul>
-											</div>
-
-											<span class="card__category"> <a href="#">Tình cảm</a>
-												<a href="#">Lãng mạng</a> <a href="#">Hài hước</a>
-											</span>
-
-											<div class="card__description">
-												<p>Lorem Ipsum is simply dummy text of the printing and
-													typesetting industry. Lorem Ipsum has been the industry's
-													standard dummy text ever since the 1500s, when an unknown
-													printer took a galley of type and scrambled it to make a
-													type specimen book.</p>
-											</div>
-
-										</div>
-										<button class="form__btn">Chỉnh sửa chi tiết</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- end card -->
-						<!-- card -->
-						<div class="col-6 col-sm-12 col-lg-6">
-							<div class="card card--list">
-								<div class="row">
-									<div class="col-12 col-sm-4">
-										<div class="card__cover">
-											<img src="img/home/Ourbelovesummer.jpeg" alt=""> <a
-												href="#" class="card__play"> <i
-												class="icon ion-ios-play"></i>
-											</a>
-										</div>
-									</div>
-
-									<div class="col-12 col-sm-8">
-										<div class="card__content">
-											<h3 class="card__title">
-												<a href="#">Mùa hè kỳ diệu của chúng ta</a>
-											</h3>
-											<div class="card__wrap">
-												<span class="card__rate"><i class="icon ion-ios-star"></i>8.4</span>
-												<ul class="card__list">
-													<li>HD</li>
-													<li>16+</li>
-												</ul>
-											</div>
-
-											<span class="card__category"> <a href="#">Tình cảm</a>
-												<a href="#">Lãng mạng</a> <a href="#">Hài hước</a>
-											</span>
-
-											<div class="card__description">
-												<p>Lorem Ipsum is simply dummy text of the printing and
-													typesetting industry. Lorem Ipsum has been the industry's
-													standard dummy text ever since the 1500s, when an unknown
-													printer took a galley of type and scrambled it to make a
-													type specimen book.</p>
-											</div>
-
-										</div>
-										<button class="form__btn">Chỉnh sửa chi tiết</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- end card -->
-
-
 					</div>
 				</div>
 
