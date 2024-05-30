@@ -75,13 +75,13 @@ public class BookingController {
 	}
 
 	@PostMapping("/pay")
-	public ResponseEntity<?> payment() throws UnsupportedEncodingException {
+	public String payment() throws UnsupportedEncodingException {
 
 		int invoiceID = 10;
 		Date date = new Date();
 		boolean paymentStatus = false;
 		String note = "note của invoice1";
-		double total = 100000000;
+		double total = 1000000 *100;
 		boolean status = false; // trạng thái hóa đơn, còn tồn tại không
 
 		int value_in_voucher = 35;
@@ -166,42 +166,71 @@ public class BookingController {
 		System.out.println("queryUrl: " +queryUrl);
 		System.out.println("vnp_SecureHash: " +vnp_SecureHash);
 		
-		return ResponseEntity.status(HttpStatus.OK).body(paymentDTO);
+		return "redirect:"+paymentUrl;
 	}
 
 	@GetMapping("/payment-status")
-	public String paymentStatus(Model model)
+	public String paymentStatus(Model model,
+			@RequestParam("vnp_Amount") double amount,
+			@RequestParam("vnp_BankCode") String vnp_BankCode,
+			@RequestParam("vnp_BankTranNo") String vnp_BankTranNo, // mã giao dịch tại ngân hàng
+//			@RequestParam("vnp_CardType") String vnp_CardType, // loại thẻ
+			@RequestParam("vnp_OrderInfo") String vnp_OrderInfo, // ghi chú trong thanh toán
+			@RequestParam("vnp_PayDate") String vnp_PayDate, // ngày thanh toán
+			@RequestParam("vnp_ResponseCode") String vnp_ResponseCode, // mã phản hồi thanh toán
+			@RequestParam("vnp_TransactionNo") String vnp_TransactionNo, // mã giao dịch ghi nhân tại hệ thống
+			@RequestParam("vnp_TransactionStatus") String vnp_TransactionStatus // kết quả thanh toán
+			)
 	{
+		if(vnp_ResponseCode.equals("00") ) // 00: giao dịch thành công
+		{
+			model.addAttribute("success", successSVG);
+			
+			model.addAttribute("paymentMoney", amount/100);
+			model.addAttribute("paymentNameBank", vnp_BankCode);
+			model.addAttribute("paymentStatus", "Giao dịch thành công");
+		}
+		else
+		{
+			model.addAttribute("warning", warningSVG);
+			model.addAttribute("paymentStatus", "Giao dịch thất bại");
+		}
 	    //Begin process return from VNPAY
-	    Map fields = new HashMap();
-	    for (Enumeration params = request.getParameterNames(); params.hasMoreElements();) {
-		    String fieldName = (String) params.nextElement();
-		    String fieldValue = request.getParameter(fieldName);
-		    if ((fieldValue != null) && (fieldValue.length() > 0)) {
-		        fields.put(fieldName, fieldValue);
-		    }
-	    }
-	    String vnp_SecureHash = request.getParameter("vnp_SecureHash");
-	    System.out.println("vnp_SecureHash in status: " +vnp_SecureHash);
-	    if (fields.containsKey("vnp_SecureHashType")) {
-	    fields.remove("vnp_SecureHashType");
-	    }
-	    if (fields.containsKey("vnp_SecureHash")) {
-	    fields.remove("vnp_SecureHash");
-	    }
-	    String signValue = VNPayConfig.hashAllFields(fields);
-	    System.out.println("signValue: " +signValue);
-	    if (signValue.equals(vnp_SecureHash)) {
-	        if ("00".equals(request.getParameter("vnp_ResponseCode"))) {
-	            model.addAttribute("message", "Giao dịch thành công !!");
-	        } else {
-	            model.addAttribute("message", "Giao dịch không thành công !!");
-	        }
-	    
-	    } else {
-            model.addAttribute("message", "Chữ ký không hợp lệ !!");
-	    }
-		
+//	    Map fields = new HashMap();
+//	    for (Enumeration params = request.getParameterNames(); params.hasMoreElements();) {
+//		    String fieldName = (String) params.nextElement();
+//		    String fieldValue = request.getParameter(fieldName);
+//		    if ((fieldValue != null) && (fieldValue.length() > 0)) {
+//		        fields.put(fieldName, fieldValue);
+//		    }
+//	    }
+//	    String vnp_SecureHash = request.getParameter("vnp_SecureHash");
+//	    System.out.println("vnp_SecureHash in status: " +vnp_SecureHash);
+//	    if (fields.containsKey("vnp_SecureHashType")) {
+//	    fields.remove("vnp_SecureHashType");
+//	    }
+//	    if (fields.containsKey("vnp_SecureHash")) {
+//	    fields.remove("vnp_SecureHash");
+//	    }
+//	    String signValue = VNPayConfig.hashAllFields(fields);
+//	    System.out.println("signValue: " +signValue);
+//	    if (signValue.equals(vnp_SecureHash)) {
+//	        if ("00".equals(request.getParameter("vnp_ResponseCode"))) {
+//	            model.addAttribute("message", "Giao dịch thành công !!");
+//	        } else {
+//	            model.addAttribute("message", "Giao dịch không thành công !!");
+//	        }
+//	    
+//	    } else {
+//            model.addAttribute("message", "Chữ ký không hợp lệ !!");
+//	    }
 		return "paymentStatus";
 	}
+	
+//	@PostMapping("/payment-status")
+//	public String create_QRCode()
+//	{
+//
+//		return "paymentStatus";
+//	}
 }
