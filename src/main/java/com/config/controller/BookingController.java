@@ -1,10 +1,13 @@
 package com.config.controller;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -36,7 +39,13 @@ import com.config.entity.User;
 import com.config.entity.Voucher;
 import com.config.service.UserService;
 import com.config.utils.Auth;
+import com.config.utils.QRCodeUtils;
 import com.config.vnpay.VNPayConfig;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -180,15 +189,50 @@ public class BookingController {
 			@RequestParam("vnp_ResponseCode") String vnp_ResponseCode, // mã phản hồi thanh toán
 			@RequestParam("vnp_TransactionNo") String vnp_TransactionNo, // mã giao dịch ghi nhân tại hệ thống
 			@RequestParam("vnp_TransactionStatus") String vnp_TransactionStatus // kết quả thanh toán
-			)
+			) throws WriterException, IOException
 	{
 		if(vnp_ResponseCode.equals("00") ) // 00: giao dịch thành công
 		{
+			final int HEIGHT_QRCODE = 200;
+			final int WIDTH_QRCODE = 200;
+			
 			model.addAttribute("success", successSVG);
 			
 			model.addAttribute("paymentMoney", amount/100);
 			model.addAttribute("paymentNameBank", vnp_BankCode);
 			model.addAttribute("paymentStatus", "Giao dịch thành công");
+			
+
+			int invoiceID = 10;
+			Date date = new Date();
+			boolean paymentStatus = false;
+			String note = "note của invoice1";
+			double total = 1000000 *100;
+			boolean status = false; // trạng thái hóa đơn, còn tồn tại không
+
+			int value_in_voucher = 35;
+			Voucher voucher = new Voucher(invoiceID, "voucher name1", date, date, value_in_voucher, status, null);
+
+			Authentication authen = SecurityContextHolder.getContext().getAuthentication();
+
+			User user = userService.findByUsername((String) authen.getPrincipal());
+
+			Payment payment = new Payment(0, "Thanh toan vnpay1", status, null);
+
+			List<OrderFood> list_orderFood = new ArrayList<>();
+
+			List<InvoiceDetail> list_invoiceDetail = new ArrayList<>();
+
+			Invoice i = new Invoice(invoiceID, date, paymentStatus, note, total, status, voucher, user, payment,
+					list_orderFood, list_invoiceDetail);
+			
+			QRCodeUtils utils = new QRCodeUtils();
+			
+			String convertEntityToJSon = utils.prettyObj(i);
+			
+			String QRCode = utils.createQRCode(convertEntityToJSon, WIDTH_QRCODE, HEIGHT_QRCODE);
+			
+			model.addAttribute("QRCode", QRCode);
 		}
 		else
 		{
@@ -226,11 +270,4 @@ public class BookingController {
 //	    }
 		return "paymentStatus";
 	}
-	
-//	@PostMapping("/payment-status")
-//	public String create_QRCode()
-//	{
-//
-//		return "paymentStatus";
-//	}
 }
