@@ -29,9 +29,11 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Film {
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "FilmId")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	int filmId;
 	@Column(name = "FilmName" , columnDefinition ="nvarchar(255)", nullable = false)
 	String filmName;

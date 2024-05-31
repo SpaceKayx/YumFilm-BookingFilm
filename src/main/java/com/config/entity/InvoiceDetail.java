@@ -48,4 +48,7 @@ public class InvoiceDetail {
 	@JoinColumn(name = "ShowTimeId")
 	ShowTime showTime;
 	
+	
+	
+	
 }
