@@ -1,6 +1,7 @@
 package com.config.entity;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -34,11 +35,11 @@ public class Voucher {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "StartDate" , columnDefinition = "datetime", nullable = false)
-	Timestamp startDate;
+	Date startDate;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "EndDate" ,columnDefinition = "datetime" , nullable = false)
-	Timestamp endDate;
+	Date endDate;
 	
 	@Column(name = "VoucherValue" , nullable = false)
 	int voucherValue;

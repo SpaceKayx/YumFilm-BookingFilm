@@ -19,6 +19,7 @@ public class SuccessHandler implements AuthenticationSuccessHandler{
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 		Collection<? extends GrantedAuthority> author = authentication.getAuthorities();
+		System.out.println("SuccessHandler");
 		for (GrantedAuthority authority : author) 
 		{
 			if(authority.getAuthority().equals("ROLE_ADMIN"))

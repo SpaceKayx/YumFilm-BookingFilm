@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ <head th:insert="~{title/titleBootstrap}">
+	 <meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<header th:insert="~{header/header}"> </header>
+	<!-- Spinner Start -->
+	<div id="spinner"
+		class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
+		<div class="spinner-grow text-primary" role="status"></div>
+	</div>
+	<!-- Spinner End -->
+
+
+
+	<!-- Modal Search Start -->
+	<div class="modal fade" id="searchModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-fullscreen">
+			<div class="modal-content rounded-0">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Search by
+						keyword</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body d-flex align-items-center">
+					<div class="input-group w-75 mx-auto d-flex">
+						<input type="search" class="form-control p-3"
+							placeholder="keywords" aria-describedby="search-icon-1">
+						<span id="search-icon-1" class="input-group-text p-3"><i
+							class="fa fa-search"></i></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal Search End -->
+
+	<!-- Contact Start -->
+	<div class="container-fluid contact py-5">
+		<div class="container py-5">
+			<div class="p-5 bg-light rounded">
+				<div class="row g-4">
+					<div class="col-12">
+						<div class="text-center mx-auto" style="max-width: 700px;">
+							<br>
+							<h1 class="text-primary">Hồ sơ cá nhân</h1>
+							<!-- <p class="mb-4">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p> -->
+						</div>
+					</div>
+					<div class="col-lg-8">
+						<form action="" class="">
+							<div class="mb-3 row">
+								<label class="col-sm-4 col-form-label ">Tên đăng nhập:</label>
+								<div class="col-sm-8">
+									<input class="w-100 form-control border py-3 mb-4" type="text" name="tenDangNhap"
+										placeholder="Nhập tên đăng nhập">
+								</div>
+							</div>
+							<div class="mb-3 row">
+								<label class="col-sm-4 col-form-label ">Họ và tên:</label>
+								<div class="col-sm-8">
+									<input class="w-100 form-control border py-3 mb-4" type="text" name="fullName"
+										placeholder="Nhập họ và tên">
+									
+								</div>
+							</div>
+							<div class="mb-3 row">
+								<label class="col-sm-4 col-form-label ">Email:</label>
+								<div class="col-sm-8">
+									<input class="w-100 form-control border py-3 mb-4" type="email" name="email"
+										placeholder="Nhập email">
+									
+								</div>
+							</div>
+							<div class="mb-3 row">
+								<label class="col-sm-4 col-form-label ">Địa chỉ:</label>
+								<div class="col-sm-8">
+									<input class="w-100 form-control border py-3 mb-4" type="text" name="address"
+										placeholder="Nhập địa chỉ">
+									
+								</div>
+							</div>
+							<div class="mb-3 row">
+							    <label class="col-sm-4 col-form-label">Giới tính:</label>
+							    <div class="col-sm-8">
+							        <input type="radio" th:checked="${gioiTinh == 'Nam'}" th:value="true" name="gioiTinh">
+							        <label>Nam</label>
+							        <input type="radio" th:checked="${gioiTinh == 'Nu'}" th:value="false" name="gioiTinh">
+							        <label>Nữ</label>
+							    </div>
+							</div>
+							<div class="mb-3 row">
+								<label class="col-sm-4 col-form-label ">Ngày sinh:</label>
+								<div class="col-sm-8">
+									<input class="w-100 form-control border py-3 mb-4" type="date" name="birthday">									
+								</div>
+							</div>
+							<div class="mb-3 row">
+							    <label class="col-sm-4 col-form-label">Vai trò:</label>
+							    <div class="col-sm-8">
+							        <div>
+							            <input type="radio" id="vaiTroAdmin" name="vaiTro" value="admin">
+							            <label for="vaiTroAdmin">Admin</label>
+							        </div>
+							        <div>
+							            <input type="radio" id="vaiTroUser" name="vaiTro" value="user">
+							            <label for="vaiTroUser">User</label>
+							        </div>
+							    </div>
+							</div>
+							<button
+								class="w-100 btn form-control border-secondary py-3 bg-white text-primary "
+								type="submit">Thay đổi</button>
+						</form>
+					</div>
+					<div class="col-lg-4">
+						<div class="row">
+							<div class="col-lg-12 d-flex justify-content-center ">
+								<div class="align-items-center">
+									<h4>Hình ảnh</h4>
+								</div>
+							</div>
+							<div
+								class="col-lg-12 bg-info m-auto d-flex justify-content-center align-items-center"
+								style="height: 200px; width: 200px; border-radius: 50%;">
+								<div class="text-center"></div>
+							</div>
+							<div class="col-lg-12 d-flex justify-content-center p-1 mb-1">
+								<div class="align-items-center">
+									<span>Độ dài file: </span> <br> <span>Tên file:</span>
+								</div>
+							</div>
+							<div class="col-lg-12 d-flex justify-content-center ">
+								<div class="align-items-center">
+									<button class="btn btn-success">Lưu</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Contact End -->
+
+
+	<!-- Footer Start -->
+	<footer th:insert="~{footer/footer}"></footer>
+	<!-- Footer End -->
+
+	<!-- Copyright Start -->
+	<div class="container-fluid copyright bg-dark py-4">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+					<span class="text-light"><a href="#"><i
+							class="fas fa-copyright text-light me-2"></i>Your Site Name</a>, All
+						right reserved.</span>
+				</div>
+				<div class="col-md-6 my-auto text-center text-md-end text-white">
+					Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML
+						Codex</a> Distributed By <a class="border-bottom"
+						href="https://themewagon.com">ThemeWagon</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Copyright End -->
+
+	
+
+	<!-- Back to Top -->
+	<a href="#"
+		class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i
+		class="fa fa-arrow-up"></i></a>
+
+
+	<!-- JavaScript Libraries -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="./view/lib/easing/easing.min.js"></script>
+	<script src="./view/lib/waypoints/waypoints.min.js"></script>
+	<script src="./view/lib/lightbox/js/lightbox.min.js"></script>
+	<script src="./view/lib/owlcarousel/owl.carousel.min.js"></script>
+	<!-- Template Javascript -->
+	<script src="./view/js/main.js"></script>
+	<script>
+		var app = angular.module("myApp", []);
+		app.controller("myCtrl", function($scope) {
+
+		})
+	</script>
+</body>
+</html>

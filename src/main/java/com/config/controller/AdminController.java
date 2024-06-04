@@ -51,7 +51,12 @@ public class AdminController
 		String strDate = dateFormatter.format(premiereDate);
 //		System.out.println(obj.getFilmImage().toString());
 		model.addAttribute("detailFimlAdmin", obj);
-		
+		return "admin_film_detail";
+	}
+	
+	@GetMapping("film-detail/add")
+	public String addFilmDetail() {
+		 
 		return "admin_film_detail";
 	}
 	

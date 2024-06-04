@@ -37,7 +37,7 @@ public class SignUpController {
 	{
 		String encoder = passwordEncoder.encode(u.getPassword().trim());
 		u.setPassword(encoder);
-		repo.save(u);
+		service.createUser(u);
 		return "redirect:/signin";
 	}
 }

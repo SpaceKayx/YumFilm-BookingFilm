@@ -7,6 +7,7 @@ import com.config.entity.Food;
 
 
 @Repository
+
 public interface FoodRepository extends JpaRepository<Food, Integer> {
 
 }

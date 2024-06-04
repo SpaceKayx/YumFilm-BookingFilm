@@ -122,7 +122,7 @@
 				<div class="tab-pane fade show active" id="tab-1" role="tabpanel"
 					aria-labelledby="1-tab">
 					<div>
-						<button class="form__btn" style="margin-left: 1000px;"><a th:href="@{/manager/film-detail}" style="list-style: none; color: white">Thêm Phim</a></button>
+						<button class="form__btn" style="margin-left: 1000px; "><a th:href="@{/manager/film-detail}" style="list-style: none; color: white">Thêm Phim</a></button>
 					</div>
 					<div class="row">
 						<!-- card -->
@@ -139,7 +139,7 @@
 										</div>
 									</div>
 
-									<div class="col-12 col-sm-8">
+									<div class="col-12 col-sm-8">  
 										<form action="" method="post">
 
 												<div class="card__content">
@@ -149,10 +149,10 @@
 													</h3>
 													<div class="card__wrap">
 														<span class="card__rate"><i
-															class="icon ion-ios-star"></i>8.4</span>
+															class="icon ion-ios-star" th:text="${adminFiml[5]}"></i></span>
 														<ul class="card__list">
 															<li>HD</li>
-															<li>16+</li>
+															<li th:text="${adminFiml[3]} + '+'" ></li>
 														</ul>
 													</div>
 

@@ -34,46 +34,46 @@
 					<div class="row">
 						<div class="col-lg-6">
 							<label for="" style="color: aliceblue;">Tên phim</label> 
-							<input type="text" class="form__input" th:field="*{FilmName}">
+							<input name = "filmName" type="text" class="form__input" th:field="*{FilmName}">
 						</div>
 						<div class="col-lg-6">
-							<label for="" style="color: aliceblue;">Năm sản xuất</label> <input
-								type="text" class="form__input" th:field="*{YearProduction}">
+							<label for="" style="color: aliceblue;">Năm sản xuất</label> 
+							<input name = "yearProduction" type="text" class="form__input" th:field="*{YearProduction}">
 						</div>
 					</div>
 					<form action="">
 						<div class="row">
 							<div class="col-lg-6">
 								<label for="" style="color: aliceblue;">Thời lượng phim</label>
-								<input type="text" class="form__input" th:field="*{FilmTime}">
+								<input name = "filmTime" type="text" class="form__input" th:field="*{FilmTime}">
 							</div>
 							<div class="col-lg-6">
-								<label for="" style="color: aliceblue;">Đạo diễn</label> <input
-									type="text" class="form__input" th:field="*{DirectorName}">
+								<label for="" style="color: aliceblue;">Đạo diễn</label> 
+								<input name = "directorName" type="text" class="form__input" th:field="*{DirectorName}">
 							</div>
 						</div>
 					</form>
 					<div class="row">
 						<div class="col-lg-6">
 							<label for="" style="color: aliceblue;">Thể loại</label>
-							<textarea class="form__textarea" name="" id="" th:field="*{FILMTYPES}"></textarea>
+							<textarea  class="form__textarea" name="fimlTypes" id="" th:field="*{FILMTYPES}"></textarea>
 						</div>
 						<div class="col-lg-6">
-							<label for="" style="color: aliceblue;">Thời gian công
-								chiếu</label> <input type="date" class="form__input" th:field="*{PremiereDate}"> 
+							<label for="" style="color: aliceblue;">Thời gian công chiếu</label> 
+							<input name = "premiereDate" type="date" class="form__input" th:field="*{PremiereDate}"> 
 								<label for="" style="color: aliceblue;">Quốc gia</label> 
-								<input type="text" class="form__input" th:field="*{CountryName}">
+								<input name = "countryName" type="text" class="form__input" th:field="*{CountryName}">
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-lg-6">
 							<label for="" style="color: aliceblue;">Diễn viên</label>
-							<textarea class="form__textarea" name="" id="" th:field="*{ACTORS}"></textarea>
+							<textarea name = "actor" class="form__textarea" name="" id="" th:field="*{ACTORS}"></textarea>
 						</div>
 
 						<div class="col-lg-6">
 							<label for="" style="color: aliceblue;">Nội dung phim</label>
-							<textarea class="form__textarea" name="" id="" th:field="*{Description}"></textarea>
+							<textarea name = "description" class="form__textarea" name="" id="" th:field="*{Description}"></textarea>
 						</div>
 					</div>
 					<div class="row">
