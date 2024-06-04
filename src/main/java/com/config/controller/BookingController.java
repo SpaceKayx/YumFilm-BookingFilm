@@ -31,31 +31,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.config.dto.PaymentResDTO;
 import com.config.entity.Invoice;
 import com.config.entity.InvoiceDetail;
 import com.config.entity.OrderFood;
 import com.config.entity.Payment;
 import com.config.entity.User;
 import com.config.entity.Voucher;
-import com.config.repository.InvoiceRepository;
+import com.config.service.InvoiceService;
 import com.config.service.UserService;
 import com.config.service.VNPayService;
-import com.config.utils.Auth;
-import com.config.utils.QRCodeUtils;
 import com.config.vnpay.VNPayConfig;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.WriterException;
-import com.google.zxing.client.j2se.MatrixToImageWriter;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.QRCodeWriter;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import lombok.AllArgsConstructor;
 
 @Controller
 @RequestMapping("/booking")
@@ -77,7 +68,7 @@ public class BookingController {
 	HttpServletRequest request;
 
 	@Autowired
-	InvoiceRepository invoiceRepo;
+	InvoiceService invoiceService;
 	
 	@Autowired
 	UserService userService;
@@ -270,11 +261,12 @@ public class BookingController {
 		System.out.println(35);
         System.out.println( "vnp_TxnRef: " +vnp_TxnRef);
 		System.out.println(36);
-		session.setAttribute("invoice", i);
 		System.out.println(37);
 		System.out.println(38);
         
-        invoiceRepo.save(i);
+        Invoice invoice = invoiceService.createInvoice(i);
+        session.setAttribute("invoice", invoice.getInvoiceId());
+        System.out.println("invoice id in /pay: " +invoice.getInvoiceId());
 		System.out.println(39);
 //        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(job));
 //        resp.getWriter().write(gson.toJson(job));
@@ -287,7 +279,7 @@ public class BookingController {
 	{
 		Object invoice = session.getAttribute("invoice");
 		VNPayService vnpayService = new VNPayService();
-		vnpayService.validVNPay(session, request, invoiceRepo);
+		vnpayService.validVNPay(session, request, invoiceService);
 		return "paymentStatus";
 	}
 }

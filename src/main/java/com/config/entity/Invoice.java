@@ -5,6 +5,8 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 //import org.hibernate.metamodel.ValueClassification;
 
 import jakarta.persistence.Column;
@@ -67,8 +69,10 @@ public class Invoice  implements Serializable{
 	Payment payment;
 	
 	@OneToMany(mappedBy="invoice")
+	@JsonIgnore
 	List<OrderFood> listOrderFood;
 	
 	@OneToMany(mappedBy="invoice")
+	@JsonIgnore
 	List<InvoiceDetail> listInvoiceDetail;
 }
