@@ -27,13 +27,13 @@ public class QRCodeUtils {
 		}
 		return null;
 	}
-	public static String createQRCode(String invoice, int width, int height) throws IOException
+	public String createQRCode(String invoice, int width, int height) throws IOException
 	{
 		
 		try {
 	        // Tạo mã QR
 	        QRCodeWriter qrCodeWriter = new QRCodeWriter();
-	        BitMatrix bitMatrix = qrCodeWriter.encode(invoice, BarcodeFormat.QR_CODE, 700, 700);
+	        BitMatrix bitMatrix = qrCodeWriter.encode(invoice, BarcodeFormat.QR_CODE, width, height);
 
 	        // Chuyển đổi BitMatrix sang BufferedImage
 	        BufferedImage image = MatrixToImageWriter.toBufferedImage(bitMatrix);
@@ -49,8 +49,6 @@ public class QRCodeUtils {
 	        e.printStackTrace();
 	        return null;
 	    }
-		
-		
 	}
 //	public static void main(String[] args) throws IOException {
 //		String hihi = "Ai quét thì phai mua cho Dat 1kg bánh tráng";
