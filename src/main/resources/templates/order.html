@@ -24,7 +24,7 @@
 	.showtime {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 10px ;
+		gap: 10px;
 		justify-content: center;
 		align-items: center;
 	}
@@ -38,8 +38,8 @@
 		width: 120px;
 		border-radius: 5px;
 		height: 40px;
-		
-		
+
+
 	}
 
 	.showtime button:hover {
@@ -67,7 +67,7 @@
 	<!-- details -->
 	<div class="content" style="padding: 0px; background-color: #2b2b31; ">
 		<div class="container">
-			<form  method="post">
+			<form method="get" action="/booking/orderFood">
 				<div class="row">
 					<div class="col-12" style="margin-top: 15px;">
 						<div class="step_oder">
@@ -86,25 +86,23 @@
 								<label style="padding: 5px;">Đổi suất chiếu</label>
 							</div>
 							<div class="col-12 showtime">
-								<button type="submit"  th:each="filmShowTime : ${listShowTime}"th:text="${filmShowTime[7]}"></button>
-								
+								<button type="button" class="btn-showTime" th:each="filmShowTime : ${listShowTime}"
+									th:text="${filmShowTime[7]}" th:data-showTimeId="${filmShowTime[0]}"></button>
+
 							</div>
 						</div>
 						<div class="row" style="margin-top: 30px; ">
 							<div class="card-body seatLocation" style="background-color:#2b2b31;">
 								<ul class="seat">
 									<li th:each="seat : ${listSeat}">
-										<input type="text" id="seatId" th:value="${seat.seatLocationId}" hidden>										
-										<button type="button" onclick="selectSeat()" class="btn btn-outline-light" th:text="${seat.seatNumber}"></button>
+										<button type="button" class="btn-seat btn btn-outline-light"
+											th:text="${seat.seatNumber}"
+											th:data-seatPrice="${seat.seatType.price * film.price}" 
+											th:data-filmId="${film.filmId}"
+											></button>
 									</li>
 								</ul>
-								<script>
-									 function selectSeat()
-									{
-										const seatId = document.getElementById('seatId');
-										console.log(seatId)
-									}
-								</script>								
+
 								<div style="margin-top: 25px; text-align: center;">
 									<label style="color: white; font-size: 10px;">Màn hình</label>
 									<hr style="height: 2px; color: red;">
@@ -144,13 +142,15 @@
 					</div>
 					<div class="col-12 col-xl-5"
 						style="background-color: #2b2b31; margin-left: 60px; margin-top: 30px;">
-						<div class="row" style="padding: 10px;" th:each="film : ${listFilm}">
+						<div class="row" style="padding: 10px;">
 							<div class="col-4" style="padding: 0px; margin: 0px;">
 								<img th:src="@{'/image/' + ${film.filmImage}}" alt=""
 									style="width: 170px; height: 220px;padding: 0; ">
 							</div>
 							<div class="col-8">
-								<label style="font-weight: bold; color: white; font-size: 18px;" th:text="${film.filmName}"></label>
+								
+								<label style="font-weight: bold; color: white; font-size: 18px;"
+									th:text="${film.filmName}"></label>
 								<br>
 								<label style="color: white;">2D Phụ Đề</label>
 							</div>
@@ -163,14 +163,17 @@
 						<div
 							style="margin-top: 10px; color: white;  border-bottom: 2px dotted #ff55a5; padding-bottom: 15px ;">
 							<span style="font-size: 16px;">Suất: </span>
-							<span style="font-size: 16px; font-weight: bold;">9:00</span>
+							<span style="font-size: 16px; font-weight: bold;" class="showTime">00:00</span>
+							<input name="showTime" hidden></input>
 							<span> - </span>
-							<span style="font-size: 16px;">Thứ 3, </span>
 							<span style="font-size: 16px; font-weight: bold;">21-05-2024</span>
 						</div>
-						<div style="margin-top: 15px;">
+						<div class="seatBooking">
+
+						</div>
+						<div style="margin-top: 15px; display: flex; justify-content: space-between;">
 							<strong style="color: white;">Tổng cổng: </strong>
-							<span style="color: orange; margin-left: 400px;">0đ</span>
+							<span style="color: orange;"><span class="total"></span>đ</span>
 						</div>
 						<div class="row" style="margin-top: 20px; ">
 							<div class="col-6 m-0 p-0 px-2">
@@ -178,7 +181,7 @@
 									formaction="/home/film-detail">Quay lại</button>
 							</div>
 							<div class="col-6 m-0 p-0 px-2">
-								<button type="submit" formaction="/booking/orderFood" class="btn btn-warning w-100">Tiếp
+								<button type="submit" class="btn btn-warning w-100">Tiếp
 									tục</button>
 							</div>
 						</div>
@@ -238,6 +241,7 @@
 
 				<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
 
+				
 				<div class="pswp__caption">
 					<div class="pswp__caption__center"></div>
 				</div>
@@ -246,7 +250,7 @@
 	</div>
 
 	<!-- JS -->
-	<script src="js/jquery-3.3.1.min.js"></script>
+	<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
 	<script src="js/bootstrap.bundle.min.js"></script>
 	<script src="js/owl.carousel.min.js"></script>
 	<script src="js/jquery.mousewheel.min.js"></script>
@@ -263,6 +267,50 @@
 		crossorigin="anonymous"></script>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script>
+
+		var seat = [];
+		var total = 0;
+
+		$('.btn-showTime').on("click", function (event) {
+			event.preventDefault();
+			$(".showTime").text(jQuery(this).text());
+			$("input[name='showTime']").attr('value', $(this).attr("data-showTimeId"))
+		})
+
+		$(".btn-seat").click(function () {
+			$(this).toggleClass("bg-white text-dark");
+			if (!seat.find((se) => se === jQuery(this).text())) {
+				seat.push(jQuery(this).text())
+				total += $(this).attr("data-seatPrice") * 1
+			} else {
+				seat = seat.filter((se) => se !== jQuery(this).text())
+				total -= $(this).attr("data-seatPrice") * 1;
+			}
+			var seatBooking;
+			var filmID = $(this).attr("data-filmId")
+			if (seat.length) {
+				seatBooking = (`
+				<div class="row" style="margin-top: 10px; color: white;  border-bottom: 2px dotted #ff55a5; padding-bottom: 15px ;">
+					<div class="col-6 ">
+								<span style="font-size: 16px;">${seat.length}x ghế đơn</span> <br>
+									<input name='idFilm' value='${filmID}' hidden>
+									<input name='seatList' value='${seat}' hidden>
+									<input name='totalSeat' value='${total}' hidden>
+								<span style="font-size: 16px; font-weight: bold;">Ghế: ${seat.join(", ")}</span>
+							</div>
+							<div class="col-6" style="display: flex; justify-content: center;>
+								<span style="margin-left: 100px; color: orange; align-items: center;">${total.toLocaleString()}VNĐ</span>
+							</div>	
+				</div>				
+			`)
+			} else {
+				seatBooking = ``;
+			}
+			$('.total').text(total.toLocaleString())
+			$(".seatBooking").html(seatBooking)
+		});
+	</script>
 </body>
 
 </html>

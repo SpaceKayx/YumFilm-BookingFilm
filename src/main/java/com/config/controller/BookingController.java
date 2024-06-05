@@ -3,6 +3,7 @@ package com.config.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,29 +50,44 @@ public class BookingController {
 		return "order";
 	}
 	
-	@PostMapping("/orderFood")
-	public String showOderFood() {
+//	@PostMapping("/seat")
+//	public String doOder(@RequestParam("seatList") String[] arrStr) {
+//		System.out.println(arrStr);
+//		return "index";
+//	}
+	
+	@GetMapping("/orderFood")
+	public String showOderFood(
+			@RequestParam("showTime") int showTimeId,
+			@RequestParam("idFilm") int id,
+			@RequestParam("seatList") String[] seatList,
+			@RequestParam("totalSeat") Float totalSeat,
+			Model model
+			) {
+		showTime = showTimeService.findById(showTimeId);
+		film = filmService.findById(id);
+		model.addAttribute("showTime", showTime);
+		model.addAttribute("Film", film);
+		String seatsList = String.join(", ", seatList);
+		model.addAttribute("seatList", seatsList);
+		model.addAttribute("totalSeat", totalSeat);
 		return "orderFood";
 	}
 	
-	@RequestMapping("/seat")
+	@GetMapping("/seat")
 	public String oderSeat(
 			@RequestParam("idFilm") int idFilm,
 			Model model
 			) {
 		film = filmService.findById(idFilm);
 		showTime.setFilm(film);
-		model.addAttribute("listFilm", film);
-		
-
-		
+		model.addAttribute("film", film);
 		return "order";
 	}
 	
 	
 	
-	
-	@PostMapping("/pay")
+	@GetMapping("/pay")
 	public String pay()
 	{
 		return"pay";

@@ -7,5 +7,6 @@ import com.config.entity.SeatLocation;
 
 @Repository
 public interface SeatLocationRepository extends JpaRepository<SeatLocation, Integer>{
-
+	
+	
 }

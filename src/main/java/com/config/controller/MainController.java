@@ -75,7 +75,6 @@ public class MainController {
 		return "listfilm";
 	}
 	
-
 	
 	@ModelAttribute("listFilm")
 	public List<Object[]> getFilmsHotinMonth(){
