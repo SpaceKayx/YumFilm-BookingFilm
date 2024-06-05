@@ -37,80 +37,20 @@
 
 				<div class="col-12">
 					<div class="owl-carousel home__carousel">
-						<div class="item">
+						<div class="item" th:each="adminFiml : ${listAdminFilm}">>
 							<!-- card -->
 							<div class="card card--big">
 								<div class="card__cover">
-									<img src="img/covers/cover.jpg" alt=""> <a href="#"
+									<img th:src="@{'/images/' + ${adminFiml[4]}}" alt="" style="width: 250px; height: 350px"> <a href="#"
 										class="card__play"> <i class="icon ion-ios-play"></i>
 									</a>
 								</div>
 								<div class="card__content">
 									<h3 class="card__title">
-										<a href="#">I Dream in Another Language</a>
+										<a href="#" th:text="${adminFiml[1]}"></a>
 									</h3>
-									<span class="card__category"> <a href="#">Action</a> <a
-										href="#">Triler</a>
-									</span> <span class="card__rate"><i class="icon ion-ios-star"></i>8.4</span>
-								</div>
-							</div>
-							<!-- end card -->
-						</div>
-
-						<div class="item">
-							<!-- card -->
-							<div class="card card--big">
-								<div class="card__cover">
-									<img src="img/covers/cover2.jpg" alt=""> <a href="#"
-										class="card__play"> <i class="icon ion-ios-play"></i>
-									</a>
-								</div>
-								<div class="card__content">
-									<h3 class="card__title">
-										<a href="#">Benched</a>
-									</h3>
-									<span class="card__category"> <a href="#">Comedy</a>
-									</span> <span class="card__rate"><i class="icon ion-ios-star"></i>7.1</span>
-								</div>
-							</div>
-							<!-- end card -->
-						</div>
-
-						<div class="item">
-							<!-- card -->
-							<div class="card card--big">
-								<div class="card__cover">
-									<img src="img/covers/cover3.jpg" alt=""> <a href="#"
-										class="card__play"> <i class="icon ion-ios-play"></i>
-									</a>
-								</div>
-								<div class="card__content">
-									<h3 class="card__title">
-										<a href="#">Whitney</a>
-									</h3>
-									<span class="card__category"> <a href="#">Romance</a> <a
-										href="#">Drama</a>
-									</span> <span class="card__rate"><i class="icon ion-ios-star"></i>6.3</span>
-								</div>
-							</div>
-							<!-- end card -->
-						</div>
-
-						<div class="item">
-							<!-- card -->
-							<div class="card card--big">
-								<div class="card__cover">
-									<img src="img/covers/cover4.jpg" alt=""> <a href="#"
-										class="card__play"> <i class="icon ion-ios-play"></i>
-									</a>
-								</div>
-								<div class="card__content">
-									<h3 class="card__title">
-										<a href="#">Blindspotting</a>
-									</h3>
-									<span class="card__category"> <a href="#">Comedy</a> <a
-										href="#">Drama</a>
-									</span> <span class="card__rate"><i class="icon ion-ios-star"></i>7.9</span>
+									<span class="card__category"> <a th:text="${adminFiml[2]}"></a>
+									</span> <span class="card__rate"><i class="icon ion-ios-star" th:text="${adminFiml[5]}"></i></span>
 								</div>
 							</div>
 							<!-- end card -->
@@ -141,6 +81,9 @@
 							<li class="nav-item"><a class="nav-link" data-toggle="tab"
 								href="#tab-2" role="tab" aria-controls="tab-2"
 								aria-selected="false">Đồ ăn</a></li>
+							<li class="nav-item"><a class="nav-link" data-toggle="tab"
+								href="#tab-3" role="tab" aria-controls="tab-3"
+								aria-selected="false">Ghế ngồi</a></li>
 						</ul>
 						<!-- end content tabs nav -->
 
@@ -179,271 +122,77 @@
 				<div class="tab-pane fade show active" id="tab-1" role="tabpanel"
 					aria-labelledby="1-tab">
 					<div>
-						<button class="form__btn" style="margin-left: 1000px;">Thêm
-							phim</button>
+						<button class="form__btn" style="margin-left: 1000px; "><a th:href="@{/manager/film-detail}" style="list-style: none; color: white">Thêm Phim</a></button>
 					</div>
 					<div class="row">
 						<!-- card -->
-						<div class="col-6 col-sm-12 col-lg-6">
+						<div class="col-6 col-sm-12 col-lg-6"
+							th:each="adminFiml : ${listAdminFilm}">
 							<div class="card card--list">
 								<div class="row">
 									<div class="col-12 col-sm-4">
 										<div class="card__cover">
-											<img src="img/home/Ourbelovesummer.jpeg" alt=""> <a
-												href="#" class="card__play"> <i
+											<img th:src="@{'/images/' + ${adminFiml[4]}}" alt="" style="width: 180px; height: 250px">
+											<a href="#" class="card__play"> <i
 												class="icon ion-ios-play"></i>
 											</a>
 										</div>
 									</div>
 
-									<div class="col-12 col-sm-8">
+									<div class="col-12 col-sm-8">  
 										<form action="" method="post">
-											<div class="card__content">
-												<h3 class="card__title">
-													<a href="#">Mùa hè kỳ diệu của chúng ta</a>
-												</h3>
-												<div class="card__wrap">
-													<span class="card__rate"><i
-														class="icon ion-ios-star"></i>8.4</span>
-													<ul class="card__list">
-														<li>HD</li>
-														<li>16+</li>
-													</ul>
+
+												<div class="card__content">
+												
+													<h3 class="card__title">
+														<a href="#" th:text="${adminFiml[1]}"></a>
+													</h3>
+													<div class="card__wrap">
+														<span class="card__rate"><i
+															class="icon ion-ios-star" th:text="${adminFiml[5]}"></i></span>
+														<ul class="card__list">
+															<li>HD</li>
+															<li th:text="${adminFiml[3]} + '+'" ></li>
+														</ul>
+													</div>
+
+													<span class="card__category"> <a href="#" th:text="${adminFiml[2]}"></a>
+													</span>
+
+													<div class="card__description">
+														<p th:text="${adminFiml[6]}"></p> 
+													</div>
 												</div>
-
-												<span class="card__category"> <a href="#">Tình
-														cảm</a> <a href="#">Lãng mạng</a> <a href="#">Hài hước</a>
-												</span>
-
-												<div class="card__description">
-													<p>Lorem Ipsum is simply dummy text of the printing and
-														typesetting industry. Lorem Ipsum has been the industry's
-														standard dummy text ever since the 1500s, when an unknown
-														printer took a galley of type and scrambled it to make a
-														type specimen book.</p>
-												</div>
-											</div>
-											<button class="form__btn" formaction="/manager/film-detail">Chỉnh sửa chi tiết</button>
-										</form>
+													
+													<button type="submit" class="form__btn"><a th:href="@{/manager/film-detail/edit(filmId=${adminFiml[0]})}" style="list-style: none; color: white">Chỉnh sửa chi tiết</a></button>
+											</form>
 									</div>
 								</div>
 							</div>
 						</div>
 						<!-- end card -->
-
-						<!-- card -->
-						<div class="col-6 col-sm-12 col-lg-6">
-							<div class="card card--list">
-								<div class="row">
-									<div class="col-12 col-sm-4">
-										<div class="card__cover">
-											<img src="img/home/Ourbelovesummer.jpeg" alt=""> <a
-												href="#" class="card__play"> <i
-												class="icon ion-ios-play"></i>
-											</a>
-										</div>
-									</div>
-
-									<div class="col-12 col-sm-8">
-										<div class="card__content">
-											<h3 class="card__title">
-												<a href="#">Mùa hè kỳ diệu của chúng ta</a>
-											</h3>
-											<div class="card__wrap">
-												<span class="card__rate"><i class="icon ion-ios-star"></i>8.4</span>
-												<ul class="card__list">
-													<li>HD</li>
-													<li>16+</li>
-												</ul>
-											</div>
-
-											<span class="card__category"> <a href="#">Tình cảm</a>
-												<a href="#">Lãng mạng</a> <a href="#">Hài hước</a>
-											</span>
-
-											<div class="card__description">
-												<p>Lorem Ipsum is simply dummy text of the printing and
-													typesetting industry. Lorem Ipsum has been the industry's
-													standard dummy text ever since the 1500s, when an unknown
-													printer took a galley of type and scrambled it to make a
-													type specimen book.</p>
-											</div>
-
-										</div>
-										<button class="form__btn">Chỉnh sửa chi tiết</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- end card -->
-						<!-- card -->
-						<div class="col-6 col-sm-12 col-lg-6">
-							<div class="card card--list">
-								<div class="row">
-									<div class="col-12 col-sm-4">
-										<div class="card__cover">
-											<img src="img/home/Ourbelovesummer.jpeg" alt=""> <a
-												href="#" class="card__play"> <i
-												class="icon ion-ios-play"></i>
-											</a>
-										</div>
-									</div>
-
-									<div class="col-12 col-sm-8">
-										<div class="card__content">
-											<h3 class="card__title">
-												<a href="#">Mùa hè kỳ diệu của chúng ta</a>
-											</h3>
-											<div class="card__wrap">
-												<span class="card__rate"><i class="icon ion-ios-star"></i>8.4</span>
-												<ul class="card__list">
-													<li>HD</li>
-													<li>16+</li>
-												</ul>
-											</div>
-
-											<span class="card__category"> <a href="#">Tình cảm</a>
-												<a href="#">Lãng mạng</a> <a href="#">Hài hước</a>
-											</span>
-
-											<div class="card__description">
-												<p>Lorem Ipsum is simply dummy text of the printing and
-													typesetting industry. Lorem Ipsum has been the industry's
-													standard dummy text ever since the 1500s, when an unknown
-													printer took a galley of type and scrambled it to make a
-													type specimen book.</p>
-											</div>
-
-										</div>
-										<button class="form__btn">Chỉnh sửa chi tiết</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- end card -->
-						<!-- card -->
-						<div class="col-6 col-sm-12 col-lg-6">
-							<div class="card card--list">
-								<div class="row">
-									<div class="col-12 col-sm-4">
-										<div class="card__cover">
-											<img src="img/home/Ourbelovesummer.jpeg" alt=""> <a
-												href="#" class="card__play"> <i
-												class="icon ion-ios-play"></i>
-											</a>
-										</div>
-									</div>
-
-									<div class="col-12 col-sm-8">
-										<div class="card__content">
-											<h3 class="card__title">
-												<a href="#">Mùa hè kỳ diệu của chúng ta</a>
-											</h3>
-											<div class="card__wrap">
-												<span class="card__rate"><i class="icon ion-ios-star"></i>8.4</span>
-												<ul class="card__list">
-													<li>HD</li>
-													<li>16+</li>
-												</ul>
-											</div>
-
-											<span class="card__category"> <a href="#">Tình cảm</a>
-												<a href="#">Lãng mạng</a> <a href="#">Hài hước</a>
-											</span>
-
-											<div class="card__description">
-												<p>Lorem Ipsum is simply dummy text of the printing and
-													typesetting industry. Lorem Ipsum has been the industry's
-													standard dummy text ever since the 1500s, when an unknown
-													printer took a galley of type and scrambled it to make a
-													type specimen book.</p>
-											</div>
-
-										</div>
-										<button class="form__btn">Chỉnh sửa chi tiết</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- end card -->
-
-
 					</div>
 				</div>
-
 				<div class="tab-pane fade" id="tab-2" role="tabpanel"
 					aria-labelledby="2-tab">
 					<div>
 						<button class="form__btn" style="margin-left: 1000px;">Thêm
 							đồ ăn</button>
-					</div>
+					</div >
 					<div class="row">
 						<!-- card -->
-						<div class="col-6 col-sm-4 col-lg-3">
+						<div class="col-6 col-sm-4 col-lg-3" 
+							th:each="adminFood : ${listAdminFood}">
 							<div class="card">
 								<div class="card__cover">
-									<img src="img/home/bapnuoc.png" alt="">
+									<img th:src="@{'/images/' + ${adminFood.foodImage}}" alt="" style="width: 250px; height: 200px; margin-top: 10px">
 								</div>
 								<div class="card__content">
 									<h3 class="card__title">
-										<a href="/manager/food-detail">Combo bắp nước</a>
+										<a href="#" th:text="${adminFood.foodName}"></a>
 									</h3>
 									<h3 class="card__title">
-										<a href="#">232323 vnd</a>
-									</h3>
-									<button class="price__btn">sửa</button>
-								</div>
-							</div>
-						</div>
-						<!-- end card -->
-						<!-- card -->
-						<div class="col-6 col-sm-4 col-lg-3">
-							<div class="card">
-								<div class="card__cover">
-									<img src="img/home/bapnuoc.png" alt="">
-								</div>
-								<div class="card__content">
-									<h3 class="card__title">
-										<a href="#">Combo bắp nước</a>
-									</h3>
-									<h3 class="card__title">
-										<a href="#">232323 vnd</a>
-									</h3>
-									<button class="price__btn">sửa</button>
-								</div>
-							</div>
-						</div>
-						<!-- end card -->
-						<!-- card -->
-						<div class="col-6 col-sm-4 col-lg-3">
-							<div class="card">
-								<div class="card__cover">
-									<img src="img/home/bapnuoc.png" alt="">
-								</div>
-								<div class="card__content">
-									<h3 class="card__title">
-										<a href="#">Combo bắp nước</a>
-									</h3>
-									<h3 class="card__title">
-										<a href="#">232323 vnd</a>
-									</h3>
-									<button class="price__btn">sửa</button>
-								</div>
-							</div>
-						</div>
-						<!-- end card -->
-						<!-- card -->
-						<div class="col-6 col-sm-4 col-lg-3">
-							<div class="card">
-								<div class="card__cover">
-									<img src="img/home/bapnuoc.png" alt="">
-								</div>
-								<div class="card__content">
-									<h3 class="card__title">
-										<a href="#">Combo bắp nước</a>
-									</h3>
-									<h3 class="card__title">
-										<a href="#">232323 vnd</a>
+										<a href="#" th:text="${adminFood.price}"></a>
 									</h3>
 									<button class="price__btn">sửa</button>
 								</div>

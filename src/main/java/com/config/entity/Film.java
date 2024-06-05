@@ -1,8 +1,11 @@
 package com.config.entity;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -51,16 +54,22 @@ public class Film {
 	@Column(name = "Price" , nullable = false)
 	double price;
 	
+	@Column(name = "Age")
+	int age;
+	
+	@Column(name = "Rate")
+	double rate;
+	
 	@ManyToOne()
 	@JoinColumn(name = "CountryId" , nullable = false)
 	Country country;
 	
-	@OneToMany(mappedBy= "film")
+	@OneToMany(mappedBy= "film" , cascade = CascadeType.ALL)
 	List<FilmDetail> listFilmDetail;
 	
-	@OneToMany(mappedBy= "film")
+	@OneToMany(mappedBy= "film" , cascade = CascadeType.ALL)
 	List<ShowTime> listShowTime;
 	
-	@OneToMany(mappedBy= "film")
+	@OneToMany(mappedBy= "film" , cascade = CascadeType.ALL)
 	List<FilmGenres> listFilmGenres;
 }

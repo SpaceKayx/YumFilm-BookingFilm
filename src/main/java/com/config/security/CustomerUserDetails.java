@@ -8,6 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.config.entity.User;
+import com.config.utils.Auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -65,9 +66,5 @@ public class CustomerUserDetails implements UserDetails{
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return true;
-	}
-	public boolean isRole()
-	{
-		return user.isRole();
 	}
 }

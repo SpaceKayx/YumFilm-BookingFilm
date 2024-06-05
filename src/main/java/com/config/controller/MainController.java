@@ -1,8 +1,6 @@
 package com.config.controller;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +25,10 @@ import com.config.repository.FilmRepository;
 import com.config.repository.UserRepository;
 import com.config.service.FilmDetailService;
 import com.config.service.FilmService;
+import com.config.security.CustomerUserDetails;
+import com.config.utils.Auth;
+
+import lombok.AllArgsConstructor;
 
 @Controller
 @RequestMapping("/home")
@@ -59,6 +61,10 @@ public class MainController {
 //		for (Object[] filmDetail : filmDetailService.findAllFilms()) {
 //			System.out.println(filmDetail[0]);
 //		}
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+		System.out.println(authorities);
 		return "index";
 	}
 	

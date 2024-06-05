@@ -1,7 +1,11 @@
 package com.config.entity;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 //import org.hibernate.metamodel.ValueClassification;
 
@@ -30,7 +34,7 @@ import lombok.experimental.FieldDefaults;
 @Table(name = "Invoice" )
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Invoice {
+public class Invoice  implements Serializable{
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	@Column(name = "InvoiceId")
@@ -38,7 +42,7 @@ public class Invoice {
 	
 	@Temporal(value = TemporalType.TIMESTAMP)
 	@Column(name = "CreateDate", columnDefinition = "datetime", nullable = false)
-	Timestamp creatDate;
+	Date creatDate;
 	
 	@Column(name = "PaymentStatus", nullable = false)
 	boolean paymentStatus;
@@ -65,8 +69,10 @@ public class Invoice {
 	Payment payment;
 	
 	@OneToMany(mappedBy="invoice")
+	@JsonIgnore
 	List<OrderFood> listOrderFood;
 	
 	@OneToMany(mappedBy="invoice")
+	@JsonIgnore
 	List<InvoiceDetail> listInvoiceDetail;
 }

@@ -1,4 +1,4 @@
-package com.config.entity;
+	package com.config.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,8 +28,10 @@ public class CinemaRoom {
 	@Column(name = "CinemaRoomId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int cinemaRoomId;
+	
 	@Column(name = "NameRoom", columnDefinition = "nvarchar(50)", nullable = false)
 	String nameRoom;
+	
 	@Column(name = "Status", nullable = false)
 	boolean status;
 	
