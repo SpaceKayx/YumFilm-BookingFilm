@@ -3,6 +3,10 @@ package com.config.entity;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.config.service.FilmService;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -67,4 +71,7 @@ public class Film {
 	
 	@OneToMany(mappedBy= "film")
 	List<FilmGenres> listFilmGenres;
+	
+	
+	
 }
