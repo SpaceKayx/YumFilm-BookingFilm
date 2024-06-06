@@ -18,5 +18,7 @@ public class SeatLocationService {
 		return seatLocationRepository.findAll();
 	}
 	
-	
+	public SeatLocation findBySeatNumber(String name) {
+		return seatLocationRepository.findBySeatNumber(name);
+	}
 }

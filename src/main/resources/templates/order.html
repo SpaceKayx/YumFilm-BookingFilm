@@ -271,7 +271,7 @@
 
 		var seat = [];
 		var total = 0;
-
+		
 		$('.btn-showTime').on("click", function (event) {
 			event.preventDefault();
 			$(".showTime").text(jQuery(this).text());
@@ -280,24 +280,26 @@
 
 		$(".btn-seat").click(function () {
 			$(this).toggleClass("bg-white text-dark");
-			if (!seat.find((se) => se === jQuery(this).text())) {
-				seat.push(jQuery(this).text())
-				total += $(this).attr("data-seatPrice") * 1
+			var seatPrice = $(this).attr("data-seatPrice")
+			if (!seat.find((se) => se.seatName === jQuery(this).text())) {
+				seat.push({seatName : jQuery(this).text(), seatPrice : seatPrice})
+				total += seatPrice * 1
 			} else {
-				seat = seat.filter((se) => se !== jQuery(this).text())
-				total -= $(this).attr("data-seatPrice") * 1;
+				seat = seat.filter((se) => se.seatName !== jQuery(this).text())
+				total -= seatPrice * 1;
 			}
 			var seatBooking;
 			var filmID = $(this).attr("data-filmId")
+			
 			if (seat.length) {
 				seatBooking = (`
 				<div class="row" style="margin-top: 10px; color: white;  border-bottom: 2px dotted #ff55a5; padding-bottom: 15px ;">
 					<div class="col-6 ">
 								<span style="font-size: 16px;">${seat.length}x ghế đơn</span> <br>
 									<input name='idFilm' value='${filmID}' hidden>
-									<input name='seatList' value='${seat}' hidden>
+									<input name='seatList' value='${seat.map((s) => s.seatName + " " +s.seatPrice).join(", ")}' hidden>
 									<input name='totalSeat' value='${total}' hidden>
-								<span style="font-size: 16px; font-weight: bold;">Ghế: ${seat.join(", ")}</span>
+								<span style="font-size: 16px; font-weight: bold;">Ghế: ${seat.map((s) => s.seatName).join(", ")}</span>
 							</div>
 							<div class="col-6" style="display: flex; justify-content: center;>
 								<span style="margin-left: 100px; color: orange; align-items: center;">${total.toLocaleString()}VNĐ</span>

@@ -5,8 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import com.config.entity.SeatLocation;
 
+
 @Repository
 public interface SeatLocationRepository extends JpaRepository<SeatLocation, Integer>{
-	
-	
+	SeatLocation findBySeatNumber(String seatNumber);
 }

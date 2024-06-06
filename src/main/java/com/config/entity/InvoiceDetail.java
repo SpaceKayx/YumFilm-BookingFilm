@@ -40,7 +40,6 @@ public class InvoiceDetail {
 	
 	@ManyToOne
 	@JoinColumn(name = "InvoiceId")
-	@JsonIgnore
 	Invoice invoice;
 	
 	@ManyToOne

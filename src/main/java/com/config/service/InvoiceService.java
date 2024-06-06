@@ -16,12 +16,12 @@ public class InvoiceService
 	
 	public Invoice createInvoice(Invoice invoice)
 	{
-		System.out.println("CREATE INVOICE");
-		System.out.println(invoice.getInvoiceId());
-		if(selectById((int) invoice.getInvoiceId()) != null)
-		{
-			throw new IllegalArgumentException("Invoice đã tồn tại !!");
-		}
+//		System.out.println("CREATE INVOICE");
+//		System.out.println(invoice.getInvoiceId());
+//		if(selectById((int) invoice.getInvoiceId()) != null)
+//		{
+//			throw new IllegalArgumentException("Invoice đã tồn tại !!");
+//		}
 		return invoiceRepository.save(invoice);
 	}
 	

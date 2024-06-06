@@ -19,7 +19,11 @@ public class FoodService {
 		return foodRepository.findAll();
 	}
 
+	public Food findById(Integer id) {
+		return foodRepository.findById(id).get();
+	}
 
+	
 	
 
 	
