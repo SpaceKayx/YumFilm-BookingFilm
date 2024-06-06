@@ -120,6 +120,7 @@ public class BookingController {
 	@GetMapping("/orderFood")
 	public String showOderFood(@RequestParam("showTime") int showTimeId, @RequestParam("idFilm") int id,
 			@RequestParam("seatList") String[] seatList, @RequestParam("totalSeat") Float totalSeat, Model model) {
+		System.out.println(id);
 		showTime = showTimeService.findById(showTimeId);
 		film = filmService.findById(id);
 		model.addAttribute("showTime", showTime);
@@ -171,192 +172,197 @@ public class BookingController {
 		return "order";
 	}
 
-//	@PostMapping("/pay")
-//	public String pay() {
-//		
-//		return "pay";
-//	}
+	@PostMapping("/pay")
+	public String pay(
+			@RequestParam("idFilm") int id,
+			@RequestParam("totalPrice") Double totalPrice
+			) {
+		System.out.println("hihi");
+		System.out.println(id);
+		System.out.println(totalPrice);
+		return "pay";
+	}
 
 	@Autowired
 	HttpServletResponse resp;
 
-	@PostMapping("/pay")
-	public String payment(Model model) throws IOException {
-//		session.removeAttribute("invoice");
-		int invoiceID = 10;
-		Date date = new Date();
-		boolean paymentStatus = false;
-		String note = "note của invoice1";
-		double total = 1000000 * 100;
-		boolean status = false; // trạng thái hóa đơn, còn tồn tại không
-
-		int value_in_voucher = 35;
-		Voucher voucher = new Voucher();
-//		Voucher voucher = new Voucher(invoiceID, "voucher name1", date, date, value_in_voucher, status, null);
-
-		Authentication authen = SecurityContextHolder.getContext().getAuthentication();
-
-		User user = userService.findByUsername((String) authen.getPrincipal());
-
-		Payment payment = new Payment(2, "Thanh toan vnpay1", status, null);
-
-		List<OrderFood> list_orderFood = new ArrayList<>();
-
-		List<InvoiceDetail> list_invoiceDetail = new ArrayList<>();
-
-		Invoice i = new Invoice(invoiceID, date, paymentStatus, note, total, status, null, user, payment,
-				list_orderFood, list_invoiceDetail);
-		System.out.println(user.getUsername());
-
-		String vnp_TxnRef = VNPayConfig.getRandomNumber(8);
-		String vnp_TmnCode = VNPayConfig.vnp_TmnCode;
-
-//		  String vnp_OrderInfo = "Thanh toan qua VNPay"; // lời nhắn
-//	        String orderType = "100000";
-//	        String vnp_IpAddr = "13.160.92.202";
-
-		long amount = (long) (i.getTotal());
-		System.out.println(0);
-		Map<String, String> vnp_Params = new HashMap<>();
-		System.out.println(1);
-		vnp_Params.put("vnp_Version", VNPayConfig.vnp_Version);
-		System.out.println(2);
-		vnp_Params.put("vnp_Command", VNPayConfig.vnp_Command);
-		System.out.println(3);
-		vnp_Params.put("vnp_TmnCode", vnp_TmnCode);
-		System.out.println(4);
-		vnp_Params.put("vnp_Amount", String.valueOf(amount));
-		System.out.println(5);
-		vnp_Params.put("vnp_CurrCode", "VND");
-		System.out.println(6);
-//        String bank_code = req.getParameter("bankcode"); // mã ngân hàng. Nếu kh gửi mã ngân hàng thì auto cho chọn
-//        if (bank_code != null && !bank_code.isEmpty()) {
-		vnp_Params.put("vnp_BankCode", "NCB");
-		System.out.println(7);
-//        }
-		vnp_Params.put("vnp_TxnRef", vnp_TxnRef);
-		System.out.println(8);
-		vnp_Params.put("vnp_OrderInfo", "Thanh toan: " + String.valueOf(amount));
-		System.out.println(9);
-		vnp_Params.put("vnp_OrderType", String.valueOf(2));
-		System.out.println(10);
-		vnp_Params.put("vnp_Locale", "vn"); // địa chỉ ở việt nam
-		System.out.println(11);
-
-//        String locate = req.getParameter("language");
-//        if (locate != null && !locate.isEmpty()) {
-//            vnp_Params.put("vnp_Locale", locate);
-//        } else {
-
-//        }
-		vnp_Params.put("vnp_ReturnUrl", VNPayConfig.vnp_ReturnUrl);
-		System.out.println(12);
-		vnp_Params.put("vnp_IpAddr", "127.0.0.1");
-		System.out.println(13);
-		Calendar cld = Calendar.getInstance(TimeZone.getTimeZone("Etc/GMT+7"));
-		System.out.println(14);
-
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
-		System.out.println(15);
-		String vnp_CreateDate = formatter.format(cld.getTime());
-		System.out.println(16);
-
-		vnp_Params.put("vnp_CreateDate", vnp_CreateDate);
-		System.out.println(11);
-		cld.add(Calendar.MINUTE, 17);
-		System.out.println(18);
-		String vnp_ExpireDate = formatter.format(cld.getTime());
-		System.out.println(19);
-		// Add Params of 2.1.0 Version
-		vnp_Params.put("vnp_ExpireDate", vnp_ExpireDate);
-		System.out.println(20);
-//        //Billing
-//        vnp_Params.put("vnp_Bill_Mobile", "vnp_Bill_Mobile");
-//        vnp_Params.put("vnp_Bill_Email", "vnp_Bill_Email");
-//        String fullName = ("Nguyen Man Dat");
-//        if (fullName != null && !fullName.isEmpty()) {
-//            int idx = fullName.indexOf(' ');
-//            String firstName = fullName.substring(0, idx);
-//            String lastName = fullName.substring(fullName.lastIndexOf(' ') + 1);
-//            vnp_Params.put("vnp_Bill_FirstName", firstName);
-//            vnp_Params.put("vnp_Bill_LastName", lastName);
+//	@PostMapping("/pay")
+//	public String payment(Model model) throws IOException {
+////		session.removeAttribute("invoice");
+//		int invoiceID = 10;
+//		Date date = new Date();
+//		boolean paymentStatus = false;
+//		String note = "note của invoice1";
+//		double total = 1000000 * 100;
+//		boolean status = false; // trạng thái hóa đơn, còn tồn tại không
 //
-//        }
-//        vnp_Params.put("vnp_Bill_Address", "txt_inv_addr1");
-//        vnp_Params.put("vnp_Bill_City", "txt_bill_city");
-//        vnp_Params.put("vnp_Bill_Country", ("txt_bill_country"));
-//        if (req.getParameter("txt_bill_state") != null && !req.getParameter("txt_bill_state").isEmpty()) {
-//            vnp_Params.put("vnp_Bill_State", req.getParameter("txt_bill_state"));
-//        }
-		// Invoice
-//        vnp_Params.put("vnp_Inv_Phone", "txt_inv_mobile");
-//        vnp_Params.put("vnp_Inv_Email", "txt_inv_email");
-//        vnp_Params.put("vnp_Inv_Customer", "txt_inv_customer");
-//        vnp_Params.put("vnp_Inv_Address", "txt_inv_addr1");
-//        vnp_Params.put("vnp_Inv_Company", "txt_inv_company");
-//        vnp_Params.put("vnp_Inv_Taxcode", "txt_inv_taxcode");
-//        vnp_Params.put("vnp_Inv_Type", "cbo_inv_type");
-		// Build data to hash and querystring
-		List fieldNames = new ArrayList(vnp_Params.keySet());
-		System.out.println(21);
-		Collections.sort(fieldNames);
-		System.out.println(22);
-		StringBuilder hashData = new StringBuilder();
-		System.out.println(23);
-		StringBuilder query = new StringBuilder();
-		System.out.println(24);
-		Iterator itr = fieldNames.iterator();
-		System.out.println(25);
-		while (itr.hasNext()) {
-			String fieldName = (String) itr.next();
-			String fieldValue = (String) vnp_Params.get(fieldName);
-			if ((fieldValue != null) && (fieldValue.length() > 0)) {
-				// Build hash data
-				hashData.append(fieldName);
-				hashData.append('=');
-				hashData.append(URLEncoder.encode(fieldValue, StandardCharsets.US_ASCII.toString()));
-				// Build query
-				query.append(URLEncoder.encode(fieldName, StandardCharsets.US_ASCII.toString()));
-				query.append('=');
-				query.append(URLEncoder.encode(fieldValue, StandardCharsets.US_ASCII.toString()));
-				if (itr.hasNext()) {
-					query.append('&');
-					hashData.append('&');
-				}
-			}
-		}
-		System.out.println(26);
-		String queryUrl = query.toString();
-		System.out.println(27);
-		String vnp_SecureHash = VNPayConfig.hmacSHA512(VNPayConfig.secretKey, hashData.toString());
-		System.out.println(28);
-		queryUrl += "&vnp_SecureHash=" + vnp_SecureHash;
-		System.out.println(29);
-		String paymentUrl = VNPayConfig.vnp_PayUrl + "?" + queryUrl;
-		System.out.println(30);
-		com.google.gson.JsonObject job = new JsonObject();
-		System.out.println(31);
-		job.addProperty("code", "00");
-		System.out.println(32);
-		job.addProperty("message", "success");
-		System.out.println(33);
-		job.addProperty("data", paymentUrl);
-		System.out.println(34);
-		Gson gson = new Gson();
-		System.out.println(35);
-		System.out.println("vnp_TxnRef: " + vnp_TxnRef);
-		System.out.println(36);
-		System.out.println(37);
-		System.out.println(38);
-
-		Invoice invoice = invoiceService.createInvoice(i);
-		session.setAttribute("invoice", invoice.getInvoiceId());
-		System.out.println("invoice id in /pay: " + invoice.getInvoiceId());
-		System.out.println(39);
-//        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(job));
-//        resp.getWriter().write(gson.toJson(job));
-		return "redirect:" + paymentUrl;
-	}
+//		int value_in_voucher = 35;
+//		Voucher voucher = new Voucher();
+////		Voucher voucher = new Voucher(invoiceID, "voucher name1", date, date, value_in_voucher, status, null);
+//
+//		Authentication authen = SecurityContextHolder.getContext().getAuthentication();
+//
+//		User user = userService.findByUsername((String) authen.getPrincipal());
+//
+//		Payment payment = new Payment(2, "Thanh toan vnpay1", status, null);
+//
+//		List<OrderFood> list_orderFood = new ArrayList<>();
+//
+//		List<InvoiceDetail> list_invoiceDetail = new ArrayList<>();
+//
+//		Invoice i = new Invoice(invoiceID, date, paymentStatus, note, total, status, null, user, payment,
+//				list_orderFood, list_invoiceDetail);
+//		System.out.println(user.getUsername());
+//
+//		String vnp_TxnRef = VNPayConfig.getRandomNumber(8);
+//		String vnp_TmnCode = VNPayConfig.vnp_TmnCode;
+//
+////		  String vnp_OrderInfo = "Thanh toan qua VNPay"; // lời nhắn
+////	        String orderType = "100000";
+////	        String vnp_IpAddr = "13.160.92.202";
+//
+//		long amount = (long) (i.getTotal());
+//		System.out.println(0);
+//		Map<String, String> vnp_Params = new HashMap<>();
+//		System.out.println(1);
+//		vnp_Params.put("vnp_Version", VNPayConfig.vnp_Version);
+//		System.out.println(2);
+//		vnp_Params.put("vnp_Command", VNPayConfig.vnp_Command);
+//		System.out.println(3);
+//		vnp_Params.put("vnp_TmnCode", vnp_TmnCode);
+//		System.out.println(4);
+//		vnp_Params.put("vnp_Amount", String.valueOf(amount));
+//		System.out.println(5);
+//		vnp_Params.put("vnp_CurrCode", "VND");
+//		System.out.println(6);
+////        String bank_code = req.getParameter("bankcode"); // mã ngân hàng. Nếu kh gửi mã ngân hàng thì auto cho chọn
+////        if (bank_code != null && !bank_code.isEmpty()) {
+//		vnp_Params.put("vnp_BankCode", "NCB");
+//		System.out.println(7);
+////        }
+//		vnp_Params.put("vnp_TxnRef", vnp_TxnRef);
+//		System.out.println(8);
+//		vnp_Params.put("vnp_OrderInfo", "Thanh toan: " + String.valueOf(amount));
+//		System.out.println(9);
+//		vnp_Params.put("vnp_OrderType", String.valueOf(2));
+//		System.out.println(10);
+//		vnp_Params.put("vnp_Locale", "vn"); // địa chỉ ở việt nam
+//		System.out.println(11);
+//
+////        String locate = req.getParameter("language");
+////        if (locate != null && !locate.isEmpty()) {
+////            vnp_Params.put("vnp_Locale", locate);
+////        } else {
+//
+////        }
+//		vnp_Params.put("vnp_ReturnUrl", VNPayConfig.vnp_ReturnUrl);
+//		System.out.println(12);
+//		vnp_Params.put("vnp_IpAddr", "127.0.0.1");
+//		System.out.println(13);
+//		Calendar cld = Calendar.getInstance(TimeZone.getTimeZone("Etc/GMT+7"));
+//		System.out.println(14);
+//
+//		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+//		System.out.println(15);
+//		String vnp_CreateDate = formatter.format(cld.getTime());
+//		System.out.println(16);
+//
+//		vnp_Params.put("vnp_CreateDate", vnp_CreateDate);
+//		System.out.println(11);
+//		cld.add(Calendar.MINUTE, 17);
+//		System.out.println(18);
+//		String vnp_ExpireDate = formatter.format(cld.getTime());
+//		System.out.println(19);
+//		// Add Params of 2.1.0 Version
+//		vnp_Params.put("vnp_ExpireDate", vnp_ExpireDate);
+//		System.out.println(20);
+////        //Billing
+////        vnp_Params.put("vnp_Bill_Mobile", "vnp_Bill_Mobile");
+////        vnp_Params.put("vnp_Bill_Email", "vnp_Bill_Email");
+////        String fullName = ("Nguyen Man Dat");
+////        if (fullName != null && !fullName.isEmpty()) {
+////            int idx = fullName.indexOf(' ');
+////            String firstName = fullName.substring(0, idx);
+////            String lastName = fullName.substring(fullName.lastIndexOf(' ') + 1);
+////            vnp_Params.put("vnp_Bill_FirstName", firstName);
+////            vnp_Params.put("vnp_Bill_LastName", lastName);
+////
+////        }
+////        vnp_Params.put("vnp_Bill_Address", "txt_inv_addr1");
+////        vnp_Params.put("vnp_Bill_City", "txt_bill_city");
+////        vnp_Params.put("vnp_Bill_Country", ("txt_bill_country"));
+////        if (req.getParameter("txt_bill_state") != null && !req.getParameter("txt_bill_state").isEmpty()) {
+////            vnp_Params.put("vnp_Bill_State", req.getParameter("txt_bill_state"));
+////        }
+//		// Invoice
+////        vnp_Params.put("vnp_Inv_Phone", "txt_inv_mobile");
+////        vnp_Params.put("vnp_Inv_Email", "txt_inv_email");
+////        vnp_Params.put("vnp_Inv_Customer", "txt_inv_customer");
+////        vnp_Params.put("vnp_Inv_Address", "txt_inv_addr1");
+////        vnp_Params.put("vnp_Inv_Company", "txt_inv_company");
+////        vnp_Params.put("vnp_Inv_Taxcode", "txt_inv_taxcode");
+////        vnp_Params.put("vnp_Inv_Type", "cbo_inv_type");
+//		// Build data to hash and querystring
+//		List fieldNames = new ArrayList(vnp_Params.keySet());
+//		System.out.println(21);
+//		Collections.sort(fieldNames);
+//		System.out.println(22);
+//		StringBuilder hashData = new StringBuilder();
+//		System.out.println(23);
+//		StringBuilder query = new StringBuilder();
+//		System.out.println(24);
+//		Iterator itr = fieldNames.iterator();
+//		System.out.println(25);
+//		while (itr.hasNext()) {
+//			String fieldName = (String) itr.next();
+//			String fieldValue = (String) vnp_Params.get(fieldName);
+//			if ((fieldValue != null) && (fieldValue.length() > 0)) {
+//				// Build hash data
+//				hashData.append(fieldName);
+//				hashData.append('=');
+//				hashData.append(URLEncoder.encode(fieldValue, StandardCharsets.US_ASCII.toString()));
+//				// Build query
+//				query.append(URLEncoder.encode(fieldName, StandardCharsets.US_ASCII.toString()));
+//				query.append('=');
+//				query.append(URLEncoder.encode(fieldValue, StandardCharsets.US_ASCII.toString()));
+//				if (itr.hasNext()) {
+//					query.append('&');
+//					hashData.append('&');
+//				}
+//			}
+//		}
+//		System.out.println(26);
+//		String queryUrl = query.toString();
+//		System.out.println(27);
+//		String vnp_SecureHash = VNPayConfig.hmacSHA512(VNPayConfig.secretKey, hashData.toString());
+//		System.out.println(28);
+//		queryUrl += "&vnp_SecureHash=" + vnp_SecureHash;
+//		System.out.println(29);
+//		String paymentUrl = VNPayConfig.vnp_PayUrl + "?" + queryUrl;
+//		System.out.println(30);
+//		com.google.gson.JsonObject job = new JsonObject();
+//		System.out.println(31);
+//		job.addProperty("code", "00");
+//		System.out.println(32);
+//		job.addProperty("message", "success");
+//		System.out.println(33);
+//		job.addProperty("data", paymentUrl);
+//		System.out.println(34);
+//		Gson gson = new Gson();
+//		System.out.println(35);
+//		System.out.println("vnp_TxnRef: " + vnp_TxnRef);
+//		System.out.println(36);
+//		System.out.println(37);
+//		System.out.println(38);
+//
+//		Invoice invoice = invoiceService.createInvoice(i);
+//		session.setAttribute("invoice", invoice.getInvoiceId());
+//		System.out.println("invoice id in /pay: " + invoice.getInvoiceId());
+//		System.out.println(39);
+////        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(job));
+////        resp.getWriter().write(gson.toJson(job));
+//		return "redirect:" + paymentUrl;
+//	}
 
 	@GetMapping("/payment-status")
 	public String paymentStatus(Model model) throws IOException {

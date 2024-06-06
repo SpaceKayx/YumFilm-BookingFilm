@@ -178,7 +178,7 @@
 									lại</button>
 							</div>
 							<div class="col-6 m-0 p-0 px-2">
-								<button type="submit" class="btn btn-warning w-100">Tiếp
+								<button type="submit" class="btn btn-warning w-100" formaction="/booking/pay">Tiếp
 									tục</button>
 							</div>
 						</div>
@@ -313,10 +313,10 @@
 								<span style="font-size: 16px; font-weight: bold;">${food.foodName}</span>
 						</div>`).join("")
 						}
-							<input name='filmID' value='${filmID}' hidden>
+							
 							<input name='foodOrder' value='${foodBookingList.map((food) => food.foodId + " " + food.quantity).join(" ,")}' hidden>			
 							<input name='showTime' value='${showTime}' hidden>
-							
+							<input name='idFilm' value='${filmID}' hidden>
 							<input name='totalPrice' value='${totalPrice}' hidden>
 					</div>
 						<div class="col-6" style="display: flex; justify-content: center;">
