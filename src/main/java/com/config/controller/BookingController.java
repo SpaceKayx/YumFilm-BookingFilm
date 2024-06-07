@@ -160,7 +160,7 @@ public class BookingController {
 		invoice.setListOrderFood(orderFoods);
 		
 		session.setAttribute("invoice", invoice);
-		
+	
 		return "redirect:/booking/pay";
 	}
 
@@ -190,7 +190,8 @@ public class BookingController {
 		for (InvoiceDetail i : invoiceDetail) 
 		{
 			seatName = seatName.concat( " ," +i.getSeatLocation().getSeatNumber());
-			seatPrice += i.getSeatLocation().getSeatType().getPrice() * i.getPrice();
+//			seatPrice += i.getSeatLocation().getSeatType().getPrice() * i.getPrice();
+			seatPrice += i.getPrice();
 		}
 		for (OrderFood food : orderFood) {
 			foodPrice += food.getPrice();
