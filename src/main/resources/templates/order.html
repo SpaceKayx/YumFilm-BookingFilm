@@ -173,7 +173,7 @@
 						</div>
 						<div style="margin-top: 15px; display: flex; justify-content: space-between;">
 							<strong style="color: white;">Tổng cổng: </strong>
-							<span style="color: orange;"><span class="total"></span>đ</span>
+							<span style="color: orange;"><span class="total"></span> VNĐ</span>
 						</div>
 						<div class="row" style="margin-top: 20px; ">
 							<div class="col-6 m-0 p-0 px-2">
@@ -301,8 +301,8 @@
 									<input name='totalSeat' value='${total}' hidden>
 								<span style="font-size: 16px; font-weight: bold;">Ghế: ${seat.map((s) => s.seatName).join(", ")}</span>
 							</div>
-							<div class="col-6" style="display: flex; justify-content: center;>
-								<span style="margin-left: 100px; color: orange; align-items: center;">${total.toLocaleString()}VNĐ</span>
+							<div class="col-6" style="display: flex; justify-content: end; color: orange !important; align-items: center;">
+								<span style=""> ${total.toLocaleString()} VNĐ</span>
 							</div>	
 				</div>				
 			`)

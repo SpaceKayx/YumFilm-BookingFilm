@@ -158,8 +158,8 @@
 								<span id="seatName" style="font-size: 16px; font-weight: bold;"></span>
 							</div>
 
-							<div class="col-6" style="display: flex; justify-content: space-between;">
-								<span style="margin-left: 100px;color: orange; margin-top: 12px; "
+							<div class="col-6" style="display: flex; justify-content: end;">
+								<span style="color: orange; margin-top: 12px; "
 									th:text="@{${#numbers.formatDecimal(totalSeat, 0, 'COMMA', 0, 'POINT')} + ' VNĐ' }"></span>
 							</div>
 						</div>
@@ -318,7 +318,7 @@
 							<input name='showTime' value='${showTime}' hidden>
 							<input name='totalPrice' value='${totalPrice}' hidden>
 					</div>
-						<div class="col-6" style="display: flex; justify-content: center;">
+						<div class="col-6" style="display: flex; justify-content: end;">
 							<span style="margin-left: 100px; color: orange;  align-items: center;">${total.toLocaleString()} VNĐ</span>
 						</div>
 					</div>
