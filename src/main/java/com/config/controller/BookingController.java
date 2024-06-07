@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TimeZone;
 import java.util.stream.Stream;
 
@@ -118,7 +119,7 @@ public class BookingController {
 //	}
 
 	@GetMapping("/orderFood")
-	public String showOderFood(@RequestParam("showTime") int showTimeId, @RequestParam("idFilm") int id,
+	public String showOderFood(@RequestParam("showTime") int showTimeId, @RequestParam( value ="idFilm" , required = false) int id,
 			@RequestParam("seatList") String[] seatList, @RequestParam("totalSeat") Float totalSeat, Model model) {
 		System.out.println(id);
 		showTime = showTimeService.findById(showTimeId);
@@ -132,15 +133,11 @@ public class BookingController {
 	}
 
 	@PostMapping("/orderFood")
-	public String showPay(@RequestParam("showTime") Integer showTimeId, @RequestParam("idFilm") int id,
+	public String showPay(
+			@RequestParam("showTime") Integer showTimeId, @RequestParam("idFilm") int id,
 			@RequestParam("seatList") String[] seatList, @RequestParam("totalPrice") Double totalPrice,
-			@RequestParam("foodOrder") String[] foodOrder, Model model) {
-//			for (String[] string : foodOrder) {
-//				a1 100, a2 130	
-//				seatName seatPrice , seatName seatPrice
-		// 1 2, 3 2, 3 1
-		// foodId foodQty,foodId foodQty,foodId foodQty
-//			}
+			@RequestParam("foodOrder") String[] foodOrder, Model model
+			) {
 		Invoice invoice = Invoice.builder()
 				.total(totalPrice)
 				.build();
@@ -160,34 +157,36 @@ public class BookingController {
 		}).toList();
 		invoice.setListInvoiceDetail(invoiceDetails);
 		invoice.setListOrderFood(orderFoods);
-		invoiceService.createInvoice(invoice);
-		return "orderFood";
+//		invoiceService.createInvoice(invoice);
+		session.setAttribute("invoice", invoice);
+		return "redirect:/booking/pay";
 	}
 
 	@GetMapping("/seat")
-	public String oderSeat(@RequestParam("idFilm") int idFilm, Model model) {
+	public String oderSeat(@RequestParam(value = "idFilm", required = false) int idFilm, Model model) {
 		film = filmService.findById(idFilm);
 		showTime.setFilm(film);
 		model.addAttribute("film", film);
 		return "order";
 	}
 
-	@PostMapping("/pay")
-	public String pay(
-			@RequestParam("idFilm") int id,
-			@RequestParam("totalPrice") Double totalPrice
-			) {
-		System.out.println("hihi");
-		System.out.println(id);
-		System.out.println(totalPrice);
+
+	@GetMapping("/pay")
+	public String payment(Model model)
+	{
+		System.out.println("get /pay");
+		Invoice invoice = (Invoice) session.getAttribute("invoice");
+		
+		List<InvoiceDetail> invoiceDetail = invoice.getListInvoiceDetail();
+		String seatName;
+		
+		System.out.println("img: " +invoice.getListInvoiceDetail().get(0).getShowTime().getFilm().getFilmImage());
+		model.addAttribute("invoice", invoice);
 		return "pay";
 	}
 
-	@Autowired
-	HttpServletResponse resp;
-
 //	@PostMapping("/pay")
-//	public String payment(Model model) throws IOException {
+//	public String payment(Model model,amoutn ,request) throws IOException {
 ////		session.removeAttribute("invoice");
 //		int invoiceID = 10;
 //		Date date = new Date();
@@ -198,7 +197,7 @@ public class BookingController {
 //
 //		int value_in_voucher = 35;
 //		Voucher voucher = new Voucher();
-////		Voucher voucher = new Voucher(invoiceID, "voucher name1", date, date, value_in_voucher, status, null);
+//		Voucher voucher = new Voucher(invoiceID, "voucher name1", date, date, value_in_voucher, status, null);
 //
 //		Authentication authen = SecurityContextHolder.getContext().getAuthentication();
 //
@@ -361,7 +360,7 @@ public class BookingController {
 //		System.out.println(39);
 ////        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(job));
 ////        resp.getWriter().write(gson.toJson(job));
-//		return "redirect:" + paymentUrl;
+//		 requet.REDIC()
 //	}
 
 	@GetMapping("/payment-status")
@@ -383,7 +382,8 @@ public class BookingController {
 	}
 
 	@ModelAttribute("listShowTime")
-	public List<Object[]> getFilmShowTime(@RequestParam("idFilm") int idFilm) {
-		return showTimeService.getFilmShowTime(idFilm);
+	public List<Object[]> getFilmShowTime(@RequestParam( value = "idFilm", required = false) Integer idFilm) {
+		if(idFilm != null) return showTimeService.getFilmShowTime(idFilm);
+		return null;
 	}
 }

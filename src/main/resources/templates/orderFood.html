@@ -61,7 +61,7 @@
 	<!-- details -->
 	<div class="content" style="padding: 0px; background-color: #2b2b31; margin-bottom: 20px;">
 		<div class="container">
-			<form method="post">
+			<form method="post" >
 				<div class="row">
 					<div class="col-12" style="margin-top: 15px;">
 						<div class="step_oder">
@@ -178,7 +178,7 @@
 									lại</button>
 							</div>
 							<div class="col-6 m-0 p-0 px-2">
-								<button type="submit" class="btn btn-warning w-100" formaction="/booking/pay">Tiếp
+								<button type="submit" class="btn btn-warning w-100">Tiếp
 									tục</button>
 							</div>
 						</div>
@@ -316,7 +316,6 @@
 							
 							<input name='foodOrder' value='${foodBookingList.map((food) => food.foodId + " " + food.quantity).join(" ,")}' hidden>			
 							<input name='showTime' value='${showTime}' hidden>
-							<input name='idFilm' value='${filmID}' hidden>
 							<input name='totalPrice' value='${totalPrice}' hidden>
 					</div>
 						<div class="col-6" style="display: flex; justify-content: center;">

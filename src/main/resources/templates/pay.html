@@ -16,7 +16,7 @@
 	<!-- home -->
 	<section class="home">
 		<div class="container">
-			<form  th:action="@{/booking/pay}" method="post">
+			<form  th:action="@{/booking/pay}" method="get">
 				<div class="d-flex justify-content-between row">
 					<div class="col-7 border border-light">
 						<form  th:action="@{/booking}" method="get">
@@ -284,11 +284,24 @@
 					<div class="col-5">
 						<div class="row" style="padding: 10px;">
                         <div class="col-5" style="padding: 0px; margin: 0px;">
-                            <img src="img/haikyuu-the-dumpster-battle-4_1715588036535.jpg" alt=""
+                           <img th:src="@{'/image/' + ${invoice.listInvoiceDetail.get(0).showTime.film.filmImage}}" alt=""
                                 style="width: 170px; height: 220px;padding: 0; ">
                         </div>
                         <div class="col-7">
-                            <label style="font-weight: bold; color: white; font-size: 18px;">Haikyu!!: Trận Chiến Bãi Phế Liệu</label>
+                            <label 
+	                            style="font-weight: bold; 
+	                            color: white; 
+	                            font-size: 18px;" 
+	                            th:text="
+	                            ${
+	                            	invoice
+		                            .listInvoiceDetail
+		                            .get(0)
+		                            .showTime
+		                            .film
+		                            .filmName}">
+                            </label>
+                            <br>
                             <label style="color: white;">2D Phụ Đề</label>
                         </div>
                     </div>
@@ -299,14 +312,43 @@
                     </div>
                     <div style="margin-top: 10px; color: white;  border-bottom: 2px dotted #ff55a5; padding-bottom: 15px ;">
                         <span style="font-size: 16px;">Suất: </span>
-                        <span style="font-size: 16px; font-weight: bold;">9:00</span>
+                        <span style="font-size: 16px; font-weight: bold;" th:text="${invoice.listInvoiceDetail.get(0).showTime.showTimeList.showTimeFrame}"></span>
                         <span> - </span>
                         <span style="font-size: 16px;">Thứ 3, </span>
                         <span style="font-size: 16px; font-weight: bold;">21-05-2024</span>
                     </div>
-                    <div style="margin-top: 15px;">
+                    <div class="row" style="margin-top: 10px; color: white;  border-bottom: 2px dotted #ff55a5; padding-bottom: 15px ;">
+							<div class="col-6 ">
+								<span style="font-size: 16px;" th:text="${invoice.listInvoiceDetail.size() + 'x ' + 'Ghế đơn' + '-' + 'Member'}"></span> <br>
+								<span id="seatName" style="font-size: 16px; font-weight: bold;" th:each=" seat : ${invoice.listInvoiceDetail}" th:text="'Ghế: '+ ${seat.seatLocation.seatNumber}"></span>
+							</div>
+
+							<div class="col-6" style="display: flex; justify-content: space-between;">
+								<span style="margin-left: 100px;color: orange; margin-top: 12px; "
+									th:text="@{${#numbers.formatDecimal(totalSeat, 0, 'COMMA', 0, 'POINT')} + ' VNĐ' }"></span>
+							</div>
+					</div>
+					<div class="foodBooking">
+						
+						<div class="row" style="margin-top: 10px; color: white;  border-bottom: 2px dotted #ff55a5; padding-bottom: 15px ;">
+					<div class="col-6 ">
+						<div th:each="orderFoods : ${orderFoods}"> 
+								<span style="font-size: 16px;" th:text=" ${orderFoods.food.quantity} + ' x'"></span>
+								<span style="font-size: 16px; font-weight: bold;" th:text="${orderFoods.food.foodName}"></span>
+						</div>
+							
+					</div>
+						<div class="col-6" style="display: flex; justify-content: center;">
+							<span style="margin-left: 100px; color: orange;  align-items: center;" th:text="@{${#numbers.formatDecimal(foodTotal, 0, 'COMMA', 0, 'POINT')} + ' VNĐ' }"></span>
+							
+						</div>
+					</div>
+					</div>
+                    <div style="margin-top: 15px;" class="d-flex justify-content-between">
                         <strong style="color: white;">Tổng cổng: </strong>
-                        <span style="color: orange; margin-left: 400px;">0đ</span>
+                        <span style="color: orange;">
+                        	<span th:text="@{${#numbers.formatDecimal(totalPrice, 0, 'COMMA', 0, 'POINT')} + ' VNĐ' }"> </span>
+                        </span>
                     </div>
                     <div class="row" style="margin-top: 20px; ">
                         <div class="col-6 m-0 p-0 px-2">
