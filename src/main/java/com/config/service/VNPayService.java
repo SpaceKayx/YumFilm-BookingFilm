@@ -4,11 +4,16 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
 import com.config.entity.Invoice;
+import com.config.entity.InvoiceDetail;
+import com.config.entity.OrderFood;
+import com.config.entity.SeatLocation;
+import com.config.entity.Ticket;
 import com.config.utils.QRCodeUtils;
 import com.config.vnpay.VNPayConfig;
 
@@ -69,16 +74,38 @@ public class VNPayService {
 						System.out.println("00");
 						invoice.setPaymentStatus(true);
 						QRCodeUtils utils = new QRCodeUtils();
-						Invoice invoice1 = new Invoice();
-						invoice1.setInvoiceId(invoice.getInvoiceId());
-
-						String convertEntityToJSon = utils.prettyObj(invoice1);
+						
+						Ticket ticket = new Ticket();
+						
+						ticket.setTicketId((int) invoice.getInvoiceId());
+						ticket.setTicketPrice((long) invoice.getTotal());
+						
+						List<OrderFood> orderFoods = invoice.getListOrderFood();
+						Map<String, Integer> food = new HashMap<>();
+						for (OrderFood orderFood : orderFoods) 
+						{
+							food.put(orderFood.getFood().getFoodName(), orderFood.getQuantity());
+						}
+						ticket.setTicketFood(food);
+						
+						int count = 0;
+						String seat = "";
+						List<InvoiceDetail> invoiceDetail = invoice.getListInvoiceDetail();
+						for (InvoiceDetail detail : invoiceDetail) {
+							seat = seat.concat( " ," +detail.getSeatLocation().getSeatNumber());
+						}
+						String seatName = seat.substring(2);
+						ticket.setTicketSeat(seatName);
+						
+						
+						String convertEntityToJSon = utils.prettyObj(ticket);
+						String QRCode = utils.createQRCode(convertEntityToJSon, 500, 500);
+						
 						invoiceService.updateInvoice(invoice);
 						System.out.println("{\"RspCode\":\"00\",\"Message\":\"Confirm Success\"}");
 						request.setAttribute("paymentNameBank", request.getAttribute("vnp_BankCode"));
 						request.setAttribute("paymentMoney", request.getAttribute("vnp_Amount"));
 						request.setAttribute("message", "Thanh toán thành công !!");
-						String QRCode = utils.createQRCode(convertEntityToJSon, 500, 500);
 
 						request.setAttribute("QRCode", QRCode);
 						request.setAttribute("success", successSVG);
