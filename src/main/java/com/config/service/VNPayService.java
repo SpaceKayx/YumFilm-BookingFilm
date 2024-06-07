@@ -17,11 +17,6 @@ import jakarta.servlet.http.HttpSession;
 
 @Service
 public class VNPayService {
-
-//	@Autowired
-//	invoiceServicesitory invoiceService;
-
-	
 	String successSVG = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"48\" height=\"48\" viewBox=\"0 0 48 48\"><defs><style>.a{fill:#e4f4ff;opacity:0;}.b{fill:none;stroke:#51d3c7;stroke-width:2px;}.c{fill:#51d3c7;}</style></defs><g transform=\"translate(-13.312 -114.115)\"><circle class=\"a\" cx=\"24\" cy=\"24\" r=\"24\" transform=\"translate(13.312 114.115)\"/></g><circle class=\"b\" cx=\"20\" cy=\"20\" r=\"20\" transform=\"translate(4 4)\"/><g transform=\"translate(-13.312 -112.115)\"><path class=\"c\" d=\"M35.94,142.629a1,1,0,0,1-.667-.255l-4.9-4.395A1,1,0,1,1,31.7,136.49l4.176,3.742,8.1-8.65a1,1,0,1,1,1.459,1.367l-8.772,9.364A1,1,0,0,1,35.94,142.629Z\"/></g></svg>";
 	String warningSVG = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"72\" height=\"72\" viewBox=\"0 0 72 72\">\r\n"
 			+ "  <g id=\"Group_18129\" data-name=\"Group 18129\" transform=\"translate(-604 -170)\">\r\n"
@@ -33,25 +28,16 @@ public class VNPayService {
 
 	public boolean validVNPay(HttpSession session, HttpServletRequest request, InvoiceService invoiceService) {
 		System.out.println("VNPayService");
-		System.out.println(0);
 		long invoiceId = (long) session.getAttribute("invoice");
-		System.out.println(1);
-		System.out.println("ID invocie after payment: " +invoiceId);
-		System.out.println(2);
-		Invoice invoice = invoiceService.selectById((int)invoiceId);
-		System.out.println(3);
-		
-		if (invoice == null)
-		{
-			System.out.println("invoice null");
+		Invoice invoice = invoiceService.selectById((int) invoiceId);
+
+		if (invoice == null) {
 			return false;
 		}
 		try {
 			// ex: PaymnentStatus = 0; pending
 			// PaymnentStatus = 1; success
 			// PaymnentStatus = 2; Faile
-
-			// Begin process return from VNPAY
 			Map fields = new HashMap();
 			for (Enumeration params = request.getParameterNames(); params.hasMoreElements();) {
 				String fieldName = URLEncoder.encode((String) params.nextElement(),
@@ -62,7 +48,6 @@ public class VNPayService {
 					fields.put(fieldName, fieldValue);
 				}
 			}
-
 			String vnp_SecureHash = request.getParameter("vnp_SecureHash");
 			double vnp_Amount = Double.parseDouble(request.getParameter("vnp_Amount")) / 100;
 			if (fields.containsKey("vnp_SecureHashType")) {
@@ -71,69 +56,41 @@ public class VNPayService {
 			if (fields.containsKey("vnp_SecureHash")) {
 				fields.remove("vnp_SecureHash");
 			}
-//            ?vnp_Amount=100000000
-//            &vnp_BankCode=NCB
-//            &vnp_BankTranNo=VNP14441785
-//            &vnp_CardType=ATM&vnp_OrderInfo=Thanh+toan%3A+100000000
-//            &vnp_PayDate=20240603164441
-//            &vnp_ResponseCode=00
-//            &vnp_TmnCode=6LI5JEUX
-//            &vnp_TransactionNo=14441785
-//            &vnp_TransactionStatus=00
-//            &vnp_TxnRef=92081925
-//            &vnp_SecureHash=ba9c3ac6316267c93ea3598fafd87347140d7840cbac094262518f0fb6c4b87950f348b7ed17bd7fb685d580ad7a374b02bc748dcff9f12ad3c2fb3eeedb25d9
-			// Check checksum
 			String signValue = VNPayConfig.hashAllFields(fields);
 			if (signValue.equals(vnp_SecureHash)) {
 				boolean checkAmount = false;
-					if (invoice.getTotal() == vnp_Amount)
-						checkAmount = true;
-				// vnp_Amount is valid (Check vnp_Amount VNPAY returns compared to the amount of
-				// the code (vnp_TxnRef) in the Your database).
-				boolean checkOrderStatus = false; // PaymnentStatus = 0 (pending)
-					if (invoice.isPaymentStatus() == checkOrderStatus)
-						checkOrderStatus = true;
+				if (invoice.getTotal() == vnp_Amount)
+					checkAmount = true;
+				boolean checkOrderStatus = false;
+				if (invoice.isPaymentStatus() == checkOrderStatus)
+					checkOrderStatus = true;
 				if (checkAmount) {
-//					if (checkOrderStatus) {
-						if ("00".equals(request.getParameter("vnp_ResponseCode"))) {
-							System.out.println("00");
-							// Here Code update PaymnentStatus = 1 into your Database
-							invoice.setPaymentStatus(true);
-//							System.out.println(invoiceInSession);
-							QRCodeUtils utils = new QRCodeUtils();
-							System.out.println("hihi: " +invoice.getInvoiceId());
-							
-							Invoice invoice1 = new Invoice();
-							invoice1.setInvoiceId(invoice.getInvoiceId());
-							
-							String convertEntityToJSon = utils.prettyObj(invoice1);
-							invoiceService.updateInvoice(invoice);
-							System.out.println("{\"RspCode\":\"00\",\"Message\":\"Confirm Success\"}");
-							request.setAttribute("paymentNameBank", request.getAttribute("vnp_BankCode"));
-							request.setAttribute("paymentMoney", request.getAttribute("vnp_Amount"));
-							request.setAttribute("message", "Thanh toán thành công !!");
-							System.out.println("convertEntityToJSon: " +convertEntityToJSon);
-							String QRCode = utils.createQRCode(convertEntityToJSon, 500, 500);
-							
-							request.setAttribute("QRCode", QRCode);
-							request.setAttribute("success", successSVG);
-							return true;
-						} else {
-							request.setAttribute("message", "Thanh toán không thành công !!");
-							request.setAttribute("warning", warningSVG);
-							return false;
-							// Here Code update PaymnentStatus = 2 into your Database
-						}
-//					} 
-//				else {
-//
-//						System.out.println("{\"RspCode\":\"02\",\"Message\":\"Order already confirmed\"}");
-//						request.setAttribute("message", "Thanh toán không thành công !!");
-//						request.setAttribute("warning", warningSVG);
-//						return false;
-//					}
-				} 
-			else {
+					if ("00".equals(request.getParameter("vnp_ResponseCode"))) {
+						System.out.println("00");
+						invoice.setPaymentStatus(true);
+						QRCodeUtils utils = new QRCodeUtils();
+						Invoice invoice1 = new Invoice();
+						invoice1.setInvoiceId(invoice.getInvoiceId());
+
+						String convertEntityToJSon = utils.prettyObj(invoice1);
+						invoiceService.updateInvoice(invoice);
+						System.out.println("{\"RspCode\":\"00\",\"Message\":\"Confirm Success\"}");
+						request.setAttribute("paymentNameBank", request.getAttribute("vnp_BankCode"));
+						request.setAttribute("paymentMoney", request.getAttribute("vnp_Amount"));
+						request.setAttribute("message", "Thanh toán thành công !!");
+						String QRCode = utils.createQRCode(convertEntityToJSon, 500, 500);
+
+						request.setAttribute("QRCode", QRCode);
+						request.setAttribute("success", successSVG);
+						System.out.println("convertEntityToJSon: " + convertEntityToJSon);
+						return true;
+					} else {
+						request.setAttribute("message", "Thanh toán không thành công !!");
+						request.setAttribute("warning", warningSVG);
+						return false;
+						// Here Code update PaymnentStatus = 2 into your Database
+					}
+				} else {
 					System.out.println("{\"RspCode\":\"04\",\"Message\":\"Invalid Amount\"}");
 					request.setAttribute("message", "Thanh toán không thành công !!");
 					request.setAttribute("warning", warningSVG);

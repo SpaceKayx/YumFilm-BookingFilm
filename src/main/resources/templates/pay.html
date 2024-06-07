@@ -343,11 +343,11 @@
 								<div class="col-6 ">
 									<div th:each="orderFoods : ${orderFood}">
 										<span style="font-size: 16px;"
-											th:text=" ${orderFoods.getValue()} + ' x'">
+											th:text=" ${orderFoods.quantity} + ' x'">
 										</span> 
 										<span
 											style="font-size: 16px; font-weight: bold;"
-											th:text="${orderFoods.getKey()}">
+											th:text="${orderFoods.food.foodName}">
 										</span>
 									</div>
 								</div>

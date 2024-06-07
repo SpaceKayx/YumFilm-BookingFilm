@@ -112,10 +112,10 @@ public class BookingController {
 
 
 	@GetMapping("/orderFood")
-	public String showOderFood(@RequestParam("showTime") int showTimeId, 
-			@RequestParam( value ="idFilm" , required = false) int id,
-			@RequestParam("seatList") String[] seatList, 
-			@RequestParam("totalSeat") Float totalSeat, Model model) {
+	public String showOderFood(@RequestParam(value = "showTime", required = false) Integer showTimeId, 
+			@RequestParam( value = "idFilm" , required = false) Integer id,
+			@RequestParam(value = "seatList", required = false) String[] seatList, 
+			@RequestParam(value = "totalSeat", required = false) Float totalSeat, Model model) {
 		showTime = showTimeService.findById(showTimeId);
 		film = filmService.findById(id);
 		
@@ -142,7 +142,11 @@ public class BookingController {
 			String[] foodOrderSplit = f.split(" ");
 			Integer foodId = Integer.parseInt(foodOrderSplit[0]);
 			Food food = foodService.findById(foodId);
-			return OrderFood.builder().invoice(invoice).food(food).price(food.getPrice()).quantity(Integer.parseInt(foodOrderSplit[1]))
+			return OrderFood.builder()
+					.invoice(invoice)
+					.food(food)
+					.quantity(Integer.parseInt(foodOrderSplit[1]))
+					.price(food.getPrice() * Integer.parseInt(foodOrderSplit[1]))
 					.build();
 		}).toList();
 
@@ -175,32 +179,29 @@ public class BookingController {
 	public String showPayment(Model model)
 	{
 		Invoice invoice = (Invoice) session.getAttribute("invoice");
+		List<OrderFood> orderFood = invoice.getListOrderFood();
+		
 		List<InvoiceDetail> invoiceDetail = invoice.getListInvoiceDetail();
 		
 		String seatName = "";
 		double seatPrice = 0;
-		Map<String, Integer> orderFood = new HashMap();
 		double foodPrice = 0;
-		int count = 0;
 		
 		for (InvoiceDetail i : invoiceDetail) 
 		{
 			seatName = seatName.concat( " ," +i.getSeatLocation().getSeatNumber());
 			seatPrice += i.getSeatLocation().getSeatType().getPrice() * i.getPrice();
-			foodPrice += i.getInvoice().getListOrderFood().get(count).getPrice() * i.getInvoice().getListOrderFood().get(count).getQuantity();
-			orderFood.put(
-					i.getInvoice().getListOrderFood().get(count).getFood().getFoodName(),
-					i.getInvoice().getListOrderFood().get(count).getQuantity());
-			count++;
 		}
-		
+		for (OrderFood food : orderFood) {
+			foodPrice += food.getPrice();
+		}
 		String seatNameSplit = seatName.substring(2);
 		
 		model.addAttribute("invoice", invoice);
+		model.addAttribute("orderFood", orderFood);
 		model.addAttribute("seatName", seatNameSplit);
 		model.addAttribute("seatPrice", seatPrice);
 		model.addAttribute("foodPrice", foodPrice);
-		model.addAttribute("orderFood", orderFood.entrySet());
 		
 		return "pay";
 	}

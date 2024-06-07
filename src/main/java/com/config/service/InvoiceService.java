@@ -28,12 +28,9 @@ public class InvoiceService
 	public Invoice selectById(int id)
 	{
 		System.out.println("SELECT BY ID");
-		System.out.println(id);
 		Optional<Invoice> opt_invoice =  invoiceRepository.findById(id);
-		System.out.println(2);
 		if(opt_invoice.isPresent())
 		{
-//			System.out.println("hihi: " +opt_invoice.get());
 			return opt_invoice.get();
 		}
 		System.out.println(3);

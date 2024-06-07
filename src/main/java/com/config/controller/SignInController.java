@@ -39,7 +39,6 @@ public class SignInController {
 
 	@PostMapping()
 	public String login(@ModelAttribute User user_form) {
-		System.out.println(0);
 	    try {
 	        String username = user_form.getUsername();
 	        String rawPassword = user_form.getPassword();
