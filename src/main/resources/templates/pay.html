@@ -16,7 +16,7 @@
 	<!-- home -->
 	<section class="home">
 		<div class="container">
-			<form  th:action="@{/booking/pay}" method="get">
+			<form  th:action="@{/booking/pay}" method="post">
 				<div class="d-flex justify-content-between row">
 					<div class="col-7 border border-light">
 						<form  th:action="@{/booking}" method="get">
@@ -40,7 +40,7 @@
 								<h3 class="card-title mb-3">Phương thức thanh toán</h3>
 								<div class="mb-3">
 									<div class="form-check mb-4">
-										<input class="form-check-input mt-4 me-3" type="radio" name="" id="" />
+										<input class="form-check-input mt-4 me-3" type="radio" name="payment" th:value="1" id="" />
 										<picture>
 											<source srcset="sourceset" type="image/svg" />
 											<svg xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +75,7 @@
 										<label class="form-check-label ms-3" for="">Ví thanh toán Momo</label>
 									</div>
 									<div class="form-check mb-4">
-										<input class="form-check-input mt-4 me-3" type="radio" name="" id="" />
+										<input class="form-check-input mt-4 me-3" type="radio" name="payment" th:value="3" id="" />
 										<picture>
 											<source srcset="sourceset" type="image/svg" />
 											<svg xmlns="http://www.w3.org/2000/svg"
@@ -103,7 +103,7 @@
 										<label class="form-check-label ms-3" for="">Ví thanh toán Shopee Pay</label>
 									</div>
 									<div class="form-check mb-4">
-										<input class="form-check-input mt-2 me-3" type="radio" name="" id="" />
+										<input class="form-check-input mt-2 me-3" type="radio" name="payment" th:value="2" id="" />
 										<picture>
 											<source srcset="sourceset" type="image/svg" />
 											<svg xmlns="http://www.w3.org/2000/svg"
@@ -320,26 +320,26 @@
                     <div class="row" style="margin-top: 10px; color: white;  border-bottom: 2px dotted #ff55a5; padding-bottom: 15px ;">
 							<div class="col-6 ">
 								<span style="font-size: 16px;" th:text="${invoice.listInvoiceDetail.size() + 'x ' + 'Ghế đơn' + '-' + 'Member'}"></span> <br>
-								<span id="seatName" style="font-size: 16px; font-weight: bold;" th:each=" seat : ${invoice.listInvoiceDetail}" th:text="'Ghế: '+ ${seat.seatLocation.seatNumber}"></span>
+								<span id="seatName" style="font-size: 16px; font-weight: bold;"th:text="'Ghế: '+ ${seatName}"></span>
 							</div>
 
 							<div class="col-6" style="display: flex; justify-content: space-between;">
 								<span style="margin-left: 100px;color: orange; margin-top: 12px; "
-									th:text="@{${#numbers.formatDecimal(totalSeat, 0, 'COMMA', 0, 'POINT')} + ' VNĐ' }"></span>
+									th:text="@{${#numbers.formatDecimal(seatPrice, 0, 'COMMA', 0, 'POINT')} + ' VNĐ' }"></span>
 							</div>
 					</div>
 					<div class="foodBooking">
 						
 						<div class="row" style="margin-top: 10px; color: white;  border-bottom: 2px dotted #ff55a5; padding-bottom: 15px ;">
 					<div class="col-6 ">
-						<div th:each="orderFoods : ${orderFoods}"> 
-								<span style="font-size: 16px;" th:text=" ${orderFoods.food.quantity} + ' x'"></span>
-								<span style="font-size: 16px; font-weight: bold;" th:text="${orderFoods.food.foodName}"></span>
+						<div th:each="orderFoods : ${orderFood}"> 
+								<span style="font-size: 16px;" th:text=" ${orderFoods.getValue()} + ' x'"></span>
+								<span style="font-size: 16px; font-weight: bold;" th:text="${orderFoods.getKey()}"></span>
 						</div>
 							
 					</div>
 						<div class="col-6" style="display: flex; justify-content: center;">
-							<span style="margin-left: 100px; color: orange;  align-items: center;" th:text="@{${#numbers.formatDecimal(foodTotal, 0, 'COMMA', 0, 'POINT')} + ' VNĐ' }"></span>
+							<span style="margin-left: 100px; color: orange;  align-items: center;" th:text="@{${#numbers.formatDecimal(foodPrice, 0, 'COMMA', 0, 'POINT')} + ' VNĐ' }"></span>
 							
 						</div>
 					</div>
@@ -347,7 +347,7 @@
                     <div style="margin-top: 15px;" class="d-flex justify-content-between">
                         <strong style="color: white;">Tổng cổng: </strong>
                         <span style="color: orange;">
-                        	<span th:text="@{${#numbers.formatDecimal(totalPrice, 0, 'COMMA', 0, 'POINT')} + ' VNĐ' }"> </span>
+                        	<span th:text="@{${#numbers.formatDecimal(foodPrice + seatPrice, 0, 'COMMA', 0, 'POINT')} + ' VNĐ' }"> </span>
                         </span>
                     </div>
                     <div class="row" style="margin-top: 20px; ">

@@ -64,7 +64,7 @@ public class VNPayService {
 			}
 
 			String vnp_SecureHash = request.getParameter("vnp_SecureHash");
-			double vnp_Amount = Double.parseDouble(request.getParameter("vnp_Amount"));
+			double vnp_Amount = Double.parseDouble(request.getParameter("vnp_Amount")) / 100;
 			if (fields.containsKey("vnp_SecureHashType")) {
 				fields.remove("vnp_SecureHashType");
 			}
