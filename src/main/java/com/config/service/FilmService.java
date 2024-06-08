@@ -1,6 +1,8 @@
 package com.config.service;
 
 import java.util.List;
+
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,12 @@ public class FilmService {
 	public Film findById(Integer id) {
 		return filmRepository.findById(id).get();
 	}
-	
+////public Country findByCountryName(String countryName) {
+////Country country = new Country();
+////for (Film film : filmRepository.findAll()) {
+////	country = filmRepository.findById(film.getFilmId()).get().getCountry();
+////}
+////return country;
+////}
 	
 }
