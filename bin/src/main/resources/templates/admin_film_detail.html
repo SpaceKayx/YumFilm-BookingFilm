@@ -7,7 +7,6 @@
 	<!-- header -->
 	<header th:insert="~{header/header}"></header>
 	<!-- end header -->
-
 	<!-- details -->
 	<section class="section details">
 		<!-- details background -->
@@ -15,14 +14,16 @@
 		<!-- end details background -->
 
 		<!-- details content -->
-		<div class="container">
-			<div>
-				<h1 class="details__title">Mùa hè kì diệu của chúng ta</h1>
-			</div>
-			<div class="row">
+		<div class="container" >
+			<div class="row" th:object="${detailFimlAdmin}" >
 				<div class=" col-lg-4 col-md-6 col-sm-12 ">
+					<div>
+						<h1 class="details__title"  th:text="*{FilmName}"></h1>
+					</div>
 					<div class="card__cover">
-						<img src="img/home/Ourbelovesummer.jpeg" alt="">
+						
+						<img th:src="@{'/images/' + *{FilmImage}}" alt="">
+						
 					</div>
 					<div>
 						<button class="price__btn">Thêm ảnh</button>
@@ -32,47 +33,49 @@
 				<div class="col-lg-8 col-md-6 col-sm-12">
 					<div class="row">
 						<div class="col-lg-6">
-							<label for="" style="color: aliceblue;">Tên phim</label>
-							<input type="text" class="form__input">
+							<label for="" style="color: aliceblue;">Tên phim</label> 
+							<input name = "filmName" type="text" class="form__input" th:field="*{FilmName}">
 						</div>
 						<div class="col-lg-6">
-							<label for="" style="color: aliceblue;">Năm sản xuất</label>
-							<input type="text" class="form__input">
+							<label for="" style="color: aliceblue;">Năm sản xuất</label> 
+							<input name = "yearProduction" type="text" class="form__input" th:field="*{YearProduction}">
 						</div>
 					</div>
 					<form action="">
-					<div class="row">
-						<div class="col-lg-6">
-							<label for="" style="color: aliceblue;">Thời lượng phim</label>
-							<input type="text" class="form__input">
+						<div class="row">
+							<div class="col-lg-6">
+								<label for="" style="color: aliceblue;">Thời lượng phim</label>
+								<input name = "filmTime" type="text" class="form__input" th:field="*{FilmTime}">
+							</div>
+							<div class="col-lg-6">
+								<label for="" style="color: aliceblue;">Đạo diễn</label> 
+								<input name = "directorName" type="text" class="form__input" th:field="*{DirectorName}">
+							</div>
 						</div>
-						<div class="col-lg-6">
-							<label for="" style="color: aliceblue;">Đạo diễn</label>
-							<input type="text" class="form__input">
-						</div>
-					</div>
 					</form>
 					<div class="row">
 						<div class="col-lg-6">
 							<label for="" style="color: aliceblue;">Thể loại</label>
-
+							<textarea  class="form__textarea" name="fimlTypes" id="" th:field="*{FILMTYPES}"></textarea>
 						</div>
 						<div class="col-lg-6">
-							<label for="" style="color: aliceblue;">Thời gian công chiếu</label>
-							<input type="date" class="form__input">
+							<label for="" style="color: aliceblue;">Thời gian công chiếu</label> 
+							<input name = "premiereDate" type="date" class="form__input" th:field="*{PremiereDate}"> 
+								<label for="" style="color: aliceblue;">Quốc gia</label> 
+								<input name = "countryName" type="text" class="form__input" th:field="*{CountryName}">
 						</div>
 					</div>
 					<div class="row">
-					<div class="col-lg-6">
-						<label for="" style="color: aliceblue;">Diễn viên</label>
-						<textarea class="form__textarea" name="" id=""></textarea>
-					</div>
+						<div class="col-lg-6">
+							<label for="" style="color: aliceblue;">Diễn viên</label>
+							<textarea name = "actor" class="form__textarea" name="" id="" th:field="*{ACTORS}"></textarea>
+						</div>
 
-					<div class="col-lg-6">
-						<label for="" style="color: aliceblue;">Nội dung phim</label>
-						<textarea class="form__textarea" name="" id=""></textarea>
+						<div class="col-lg-6">
+							<label for="" style="color: aliceblue;">Nội dung phim</label>
+							<textarea name = "description" class="form__textarea" name="" id="" th:field="*{Description}"></textarea>
+						</div>
 					</div>
-				</div>
 					<div class="row">
 						<div class="col-lg-3">
 							<button class="form__btn" style="margin-left: 15px;">Thêm</button>
@@ -84,7 +87,7 @@
 							<button class="form__btn">Xóa</button>
 						</div>
 						<div class="col-lg-3">
-							<button class="form__btn">Quay lại</button>
+							<button class="form__btn" >Quay lại</button>
 						</div>
 					</div>
 				</div>
@@ -127,9 +130,11 @@
 
 					<div class="pswp__counter"></div>
 
-					<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+					<button class="pswp__button pswp__button--close"
+						title="Close (Esc)"></button>
 
-					<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+					<button class="pswp__button pswp__button--fs"
+						title="Toggle fullscreen"></button>
 
 					<!-- Preloader -->
 					<div class="pswp__preloader">
@@ -141,9 +146,11 @@
 					</div>
 				</div>
 
-				<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+				<button class="pswp__button pswp__button--arrow--left"
+					title="Previous (arrow left)"></button>
 
-				<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+				<button class="pswp__button pswp__button--arrow--right"
+					title="Next (arrow right)"></button>
 
 				<div class="pswp__caption">
 					<div class="pswp__caption__center"></div>

@@ -1,8 +1,13 @@
 package com.config.entity;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 
 //import org.hibernate.metamodel.ValueClassification;
 
@@ -31,7 +36,7 @@ import lombok.experimental.FieldDefaults;
 @Table(name = "Invoice" )
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Invoice {
+public class Invoice  implements Serializable{
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	@Column(name = "InvoiceId")
@@ -39,19 +44,22 @@ public class Invoice {
 	
 	@Temporal(value = TemporalType.TIMESTAMP)
 	@Column(name = "CreateDate", columnDefinition = "datetime", nullable = false)
-	Date creatDate;
+	@Builder.Default
+	Date creatDate = new Date();
 	
 	@Column(name = "PaymentStatus", nullable = false)
-	boolean paymentStatus;
+	@Builder.Default
+	boolean paymentStatus = false;
 	
-	@Column(name = "Note" ,columnDefinition = "nvarchar(255)", nullable = false)
+	@Column(name = "Note" ,columnDefinition = "nvarchar(255)")
 	String note;
 	
 	@Column(name = "Total", nullable = false)
 	double total;
 	
 	@Column(name = "Status", nullable = false)
-	boolean status;
+	@Builder.Default
+	boolean status = true;
 	
 	@ManyToOne
 	@JoinColumn(name = "VoucherId")
@@ -65,9 +73,11 @@ public class Invoice {
 	@JoinColumn(name = "PaymentId")
 	Payment payment;
 	
-	@OneToMany(mappedBy="invoice")
+	@OneToMany(mappedBy="invoice", cascade = CascadeType.ALL)
+	@JsonIgnore
 	List<OrderFood> listOrderFood;
 	
-	@OneToMany(mappedBy="invoice")
+	@OneToMany(mappedBy="invoice", cascade = CascadeType.ALL)
+	@JsonIgnore
 	List<InvoiceDetail> listInvoiceDetail;
 }

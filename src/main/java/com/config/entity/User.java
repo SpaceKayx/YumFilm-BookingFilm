@@ -1,7 +1,10 @@
 package com.config.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,7 +30,7 @@ import lombok.experimental.FieldDefaults;
 @Table(name = "Users" , uniqueConstraints = @UniqueConstraint(columnNames = "username"))
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class User {
+public class User implements Serializable{
 	@Id
 	@Column(name = "UserId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,6 +67,7 @@ public class User {
 	@Column(name = "Status", nullable = false)
 	boolean status;
 	
-	@OneToMany(mappedBy = "user")
+	@OneToMany  (mappedBy = "user")
+	@JsonIgnore
 	List<Invoice> listInvoice;
 }

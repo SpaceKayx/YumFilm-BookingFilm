@@ -20,8 +20,9 @@ import lombok.experimental.FieldDefaults;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Food" )
 @Builder
+@Table(name = "Food" )
+
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Food {
 	@Id
@@ -47,6 +48,7 @@ public class Food {
 	@Column(name = "Status", nullable = false)
 	boolean status;
 	
+
 	@OneToMany(mappedBy = "food")
 	List<OrderFood> listOrderFood;
 }

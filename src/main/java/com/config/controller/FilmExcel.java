@@ -35,7 +35,7 @@ public class FilmExcel {
 	        response.setHeader(headerKey, headerValue);
 	        System.out.println(3);
 
-	        List<Film> listFilm = filmService.getAll();
+	        List<Film> listFilm = filmService.findAll();
 	        System.out.println(listFilm.get(0).getFilmName());
 	        System.out.println(listFilm.get(0).getCountry().getCountryName());
 	        System.out.println(listFilm.get(0).getPremiereDate());

@@ -2,6 +2,8 @@ package com.config.entity;
 
 import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -47,5 +49,8 @@ public class InvoiceDetail {
 	@ManyToOne
 	@JoinColumn(name = "ShowTimeId")
 	ShowTime showTime;
+	
+	
+	
 	
 }

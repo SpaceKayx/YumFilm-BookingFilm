@@ -19,13 +19,13 @@ public class QRCodeUtils {
 
 	public static String prettyObj(Object obj)
 	{
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
+			try {
+				ObjectMapper mapper = new ObjectMapper();
+				return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return "QRCode lỗi";
 	}
 	public static String createQRCode(String invoice, int width, int height) throws IOException
 	{
@@ -49,8 +49,6 @@ public class QRCodeUtils {
 	        e.printStackTrace();
 	        return null;
 	    }
-		
-		
 	}
 //	public static void main(String[] args) throws IOException {
 //		String hihi = "Ai quét thì phai mua cho Dat 1kg bánh tráng";
