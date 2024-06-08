@@ -30,7 +30,8 @@ public class VNPayService {
 			+ "      <rect id=\"Frame24\" width=\"40\" height=\"40\" fill=\"#c91d1d\" opacity=\"0\"/>\r\n"
 			+ "      <path id=\"alert\" d=\"M22.9,3.991l14.745,28.9A3.493,3.493,0,0,1,38,34.355a3.251,3.251,0,0,1-3.237,3.292H5.094a4.174,4.174,0,0,1-1.439-.366A3.3,3.3,0,0,1,2.4,32.891Q16.725,5.129,17.321,3.991A2.9,2.9,0,0,1,19.988,2.35,3.238,3.238,0,0,1,22.9,3.991ZM20,32.714a2.378,2.378,0,1,0-2.34-2.378A2.359,2.359,0,0,0,20,32.714ZM18.4,14.051v9.877a1.62,1.62,0,1,0,3.24,0V14.234a1.626,1.626,0,0,0-1.62-1.646A1.6,1.6,0,0,0,18.4,14.051Z\" transform=\"translate(0 -0.35)\" fill=\"#c91d1d\"/>\r\n"
 			+ "    </g>\r\n" + "  </g>\r\n" + "</svg>";
-
+	private final Integer QRCODE_WIDTH = 500;
+	private final Integer QRCODE_HEIGHT = 500;
 	public boolean validVNPay(HttpSession session, HttpServletRequest request, InvoiceService invoiceService) {
 		System.out.println("VNPayService");
 		long invoiceId = (long) session.getAttribute("invoice");
@@ -71,12 +72,12 @@ public class VNPayService {
 					checkOrderStatus = true;
 				if (checkAmount) {
 					if ("00".equals(request.getParameter("vnp_ResponseCode"))) {
-						System.out.println("00");
 						invoice.setPaymentStatus(true);
-						QRCodeUtils utils = new QRCodeUtils();
+						invoiceService.updateInvoice(invoice);
+						
+						QRCodeUtils qrCodeUtils = new QRCodeUtils();
 						
 						Ticket ticket = new Ticket();
-						
 						ticket.setTicketId((int) invoice.getInvoiceId());
 						ticket.setTicketPrice((long) invoice.getTotal());
 						
@@ -88,7 +89,6 @@ public class VNPayService {
 						}
 						ticket.setTicketFood(food);
 						
-						int count = 0;
 						String seat = "";
 						List<InvoiceDetail> invoiceDetail = invoice.getListInvoiceDetail();
 						for (InvoiceDetail detail : invoiceDetail) {
@@ -98,18 +98,19 @@ public class VNPayService {
 						ticket.setTicketSeat(seatName);
 						
 						
-						String convertEntityToJSon = utils.prettyObj(ticket);
-						String QRCode = utils.createQRCode(convertEntityToJSon, 500, 500);
+						String convertEntityToJSon = qrCodeUtils.prettyObj(ticket);
+						String QRCode = qrCodeUtils.createQRCode(convertEntityToJSon, QRCODE_WIDTH, QRCODE_HEIGHT);
 						
-						invoiceService.updateInvoice(invoice);
-						System.out.println("{\"RspCode\":\"00\",\"Message\":\"Confirm Success\"}");
+						
 						request.setAttribute("paymentNameBank", request.getAttribute("vnp_BankCode"));
 						request.setAttribute("paymentMoney", request.getAttribute("vnp_Amount"));
 						request.setAttribute("message", "Thanh toán thành công !!");
-
 						request.setAttribute("QRCode", QRCode);
 						request.setAttribute("success", successSVG);
+						
+						System.out.println("{\"RspCode\":\"00\",\"Message\":\"Confirm Success\"}");
 						System.out.println("convertEntityToJSon: " + convertEntityToJSon);
+						
 						return true;
 					} else {
 						request.setAttribute("message", "Thanh toán không thành công !!");

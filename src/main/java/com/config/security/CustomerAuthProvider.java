@@ -28,7 +28,7 @@ public class CustomerAuthProvider implements AuthenticationProvider{
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String userName = authentication.getName();
 		String passWord = authentication.getCredentials().toString().trim();
-		
+
 		CustomerUserDetails userDetail = (CustomerUserDetails) userService.loadUserByUsername(userName);
 		if(userDetail == null)
 		{

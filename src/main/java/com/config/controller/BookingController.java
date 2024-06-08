@@ -160,7 +160,6 @@ public class BookingController {
 		invoice.setListOrderFood(orderFoods);
 		
 		session.setAttribute("invoice", invoice);
-	
 		return "redirect:/booking/pay";
 	}
 

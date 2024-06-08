@@ -8,7 +8,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.config.entity.User;
-import com.config.utils.Auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
