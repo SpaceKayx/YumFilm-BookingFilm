@@ -33,34 +33,32 @@ public class SecurityConfig {
 		this.successHandler = successHandler;
 	}
 
-	@Bean
-    public SecurityFilterChain filter(HttpSecurity http) throws Exception {
-        http
-        .csrf().disable()
-        .authorizeHttpRequests((requests) -> requests
-        	.requestMatchers("/manager", "/manager/**").hasAuthority("ROLE_ADMIN")
-            .requestMatchers("/booking", "/manager", "/booking/**", "/manager/**").authenticated()
-            .requestMatchers("/**").permitAll()
-        )
-        .formLogin((form) -> form
-            .loginPage("/signin")
-            .successHandler(successHandler)
-            .permitAll()
-        )
-        .authenticationProvider(provider)
-        .logout((logout) -> logout
-        		.logoutUrl("/signout")
-        		.permitAll()
-        )
-        .exceptionHandling()
-        .accessDeniedHandler((request, response, AccessDeniedHandler) ->
-        {
-        	response.sendRedirect("/home");
-        })
-        ;
+	public SecurityFilterChain filter(HttpSecurity http) throws Exception {
+	    
+	    http.csrf().disable()
+	        .authorizeHttpRequests((requests) -> requests
+	            .requestMatchers("/manager", "/manager/**").hasAuthority("ROLE_ADMIN")
+	            .requestMatchers("/booking", "/manager", "/booking/**", "/manager/**").authenticated()
+	            .requestMatchers("/**").permitAll()
+	        )
+	        .userDetailsService(userService)
+	        .formLogin((form) -> form
+	            .loginPage("/signin")
+	            .successHandler(successHandler)
+	            .permitAll()
+	        )
+	        .authenticationProvider(provider)
+	        .logout((logout) -> logout
+	            .logoutUrl("/signout")
+	            .permitAll()
+	        )
+	        .exceptionHandling()
+	        .accessDeniedHandler((request, response, ex) -> {
+	            response.sendRedirect("/home");
+	        });
 
-        return http.build();
-    }
+	    return http.build();
+	}
 
     @Bean
     @Primary

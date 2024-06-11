@@ -57,4 +57,5 @@ public class FilmDetail {
 	@OneToMany(mappedBy = "filmDetail")
 	List<DirectorOfFilm> listDirectorOfFilm;
 	
+	
 }

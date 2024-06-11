@@ -1,7 +1,10 @@
 package com.config.entity;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,11 +37,11 @@ public class Voucher {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "StartDate" , columnDefinition = "datetime", nullable = false)
-	Timestamp startDate;
+	Date startDate;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "EndDate" ,columnDefinition = "datetime" , nullable = false)
-	Timestamp endDate;
+	Date endDate;
 	
 	@Column(name = "VoucherValue" , nullable = false)
 	int voucherValue;
@@ -47,5 +50,6 @@ public class Voucher {
 	boolean status;
 	
 	@OneToMany(mappedBy = "voucher")
+	@JsonIgnore
 	List<Invoice> listInvoice;
 }

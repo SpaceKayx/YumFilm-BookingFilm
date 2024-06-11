@@ -1,8 +1,19 @@
 package com.config.entity;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.config.service.FilmService;
+
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,23 +40,33 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Film {
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "FilmId")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	int filmId;
 	@Column(name = "FilmName" , columnDefinition ="nvarchar(255)", nullable = false)
 	String filmName;
+	
 	@Column(name = "FilmTime" , columnDefinition ="nvarchar(255)", nullable = false)
 	String filmTime; 
+	
 	@Column(name = "FilmImage" , columnDefinition ="nvarchar(255)", nullable = false)
 	String filmImage;
+
 	@Column(name = "VideoTrailer" , columnDefinition ="nvarchar(255)", nullable = false)
+
 	String videoTrailer;
+	
 	@Temporal(value = TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "PremiereDate" , columnDefinition ="date", nullable = false)
 	Date premiereDate;
+	
 	@Column(name = "Status", nullable = false)
 	boolean status;
+	
 	@Column(name = "Price" , nullable = false)
 	double price;
 	
@@ -59,12 +80,15 @@ public class Film {
 	@JoinColumn(name = "CountryId" , nullable = false)
 	Country country;
 	
-	@OneToMany(mappedBy= "film")
+	@OneToMany(mappedBy= "film" , cascade = CascadeType.ALL)
 	List<FilmDetail> listFilmDetail;
 	
-	@OneToMany(mappedBy= "film")
+	@OneToMany(mappedBy= "film" , cascade = CascadeType.ALL)
 	List<ShowTime> listShowTime;
 	
-	@OneToMany(mappedBy= "film")
+	@OneToMany(mappedBy= "film" , cascade = CascadeType.ALL)
 	List<FilmGenres> listFilmGenres;
+	
+	
+	
 }
