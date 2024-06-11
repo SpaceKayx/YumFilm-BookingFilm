@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head th:insert="~{title/title}"></head>
 
@@ -16,42 +16,60 @@
 
 		<!-- details content -->
 		<div class="container">
-			<div>
-				<h1 class="details__title">Combo Bắp Nước</h1>
-			</div>
-			<div class="row">
-				<div class=" col-lg-4 col-md-6 col-sm-12 ">
-					<div class="card__cover">
-						<img src="img/home/bapnuoc.png" alt="">
-					</div>
-					<div>
-						<button class="price__btn">Thêm ảnh</button>
-					</div>
+			<form method="post" th:object="${newFood}" enctype="multipart/form-data">
+				<div>
+					<h1 class="details__title">Combo Bắp Nước</h1>
 				</div>
-
-				<div class="col-lg-8 col-md-6 col-sm-12">
-					<div class="row">
-						<div class="col-lg-6">
-							<label for="" style="color: aliceblue;">Tên món ăn</label>
-							<input type="text" class="form__input">
+				<div class="row">
+					<input type="text" th:field="*{foodId}" hidden/>
+					<div class=" col-lg-4 col-md-6 col-sm-12 ">
+						<div class="card__cover">
+							<div class="card__cover">
+								<img th:if="${food != null}" th:src="@{'/images/' + *{foodImage}}" alt="">
+								<input name="showImage" th:value="*{foodImage}" hidden />
+							</div>
 						</div>
-						<div class="col-lg-6">
-							<label for="" style="color: aliceblue;">Giá </label>
-							<input type="text" class="form__input">
+						<div>
+							<input type="file" class="price__btn" name="fileImage">
+						</div>
+					</div>
+
+					<div class="col-lg-8 col-md-6 col-sm-12">
+						<div class="row">
+							<div class="col-lg-6">
+								<label for="" style="color: aliceblue;">Tên món ăn</label>
+								<input name="foodName" type="text" class="form__input" th:field="*{foodName}">
+							</div>
+							<div class="col-lg-6">
+								<label for="" style="color: aliceblue;">Giá </label>
+								<input name="price" type="text" class="form__input" th:field="*{price}">
+							</div>
+
+						</div>
+						<div class="row">
+							<label for="" style="color: aliceblue;">Mô tả</label>
+							<textarea name="description" type="text" class="form__input" th:field="*{description}" />
+						</div>
+						<div class="row">
+							<label for="" style="color: aliceblue;">Số lượng </label>
+							<input type="text" name="quantity" class="form__input" th:field="*{quantity}">
+						</div>
+						<div class="row">
+							<div class="col-lg-3">
+								<button class="form__btn" type="submit" th:formaction="@{/manager/food-detail/add}">Them</button>
+							</div>
+							<div class="col-lg-3">
+								<button class="form__btn" th:formaction="@{/manager/food-detail/update}"
+									style="margin-left: 15px;" type="submit">Sửa</button>
+							</div>
+							<div class="col-lg-3">
+								<button class="form__btn" th:formaction="@{/manager/food-detail/delete}" type="submit">Xóa</button>
+							</div>
 						</div>
 					</div>
 
-					<div class="row">
-						<div class="col-lg-3">
-							<button class="form__btn" style="margin-left: 15px;">Sửa</button>
-						</div>
-						<div class="col-lg-3">
-							<button class="form__btn">Xóa</button>
-						</div>
-					</div>
 				</div>
-
-			</div>
+			</form>
 		</div>
 		<!-- end details content -->
 	</section>
