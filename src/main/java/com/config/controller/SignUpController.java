@@ -21,10 +21,7 @@ public class SignUpController {
 	 public SignUpController(BCryptPasswordEncoder passwordEncoder) {
 	        this.passwordEncoder = passwordEncoder;
 	    }
-	
 	@Autowired
-	UserRepository repo;
-	
 	UserService service;
 	
 	@GetMapping()

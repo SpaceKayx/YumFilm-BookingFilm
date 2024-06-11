@@ -23,7 +23,6 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    	System.out.println("userService");
         User user = userRepository.findByUserName(username);
         if (user == null) {
             throw new UsernameNotFoundException("Không tìm thấy người dùng với tên: " + username);

@@ -35,8 +35,8 @@ public class SecurityConfig {
 
 	@Bean
 	public SecurityFilterChain filter(HttpSecurity http) throws Exception {
-	    http
-	    	.csrf().disable()
+	    
+	    http.csrf().disable()
 	        .authorizeHttpRequests((requests) -> requests
 	            .requestMatchers("/manager", "/manager/**").hasAuthority("ROLE_ADMIN")
 	            .requestMatchers("/booking", "/manager", "/booking/**", "/manager/**").authenticated()

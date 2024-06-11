@@ -67,6 +67,7 @@ public class User implements Serializable{
 	@Column(name = "Status", nullable = false)
 	boolean status;
 	
-	@JsonIgnore @OneToMany  (mappedBy = "user")
+	@OneToMany  (mappedBy = "user")
+	@JsonIgnore
 	List<Invoice> listInvoice;
 }

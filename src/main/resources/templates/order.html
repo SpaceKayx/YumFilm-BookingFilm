@@ -4,341 +4,316 @@
 
 <head th:insert="~{title/titleBootstrap}"></head>
 <style>
-    .step_oder ul {
-        display: flex;
-        justify-content: center;
-        flex-wrap: nowrap;
-        max-width: 100%;
-        list-style: none;
-        background-color: #2b2b31;
-        cursor: pointer;
-        margin: 0px;
-    }
+	.step_oder ul {
+		display: flex;
+		justify-content: center;
+		flex-wrap: nowrap;
+		max-width: 100%;
+		list-style: none;
+		background-color: #2b2b31;
+		cursor: pointer;
+		margin: 0px;
+	}
 
-    .step_oder li {
-        font-size: 17px;
-        padding-top: 1rem;
-        padding: 1rem;
-    }
+	.step_oder li {
+		font-size: 17px;
+		padding-top: 1rem;
+		padding: 1rem;
+	}
 
-    .showtime {
-        margin-left: 40px;
-    }
+	.showtime {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		justify-content: center;
+		align-items: center;
+	}
 
-    .showtime button {
-        padding: 5 px;
-        background-image: -webkit-linear-gradient(90deg, #ff55a5 0%, #ff5860 100%);
-        color: white;
-        box-shadow: 0 0 20px 0 rgba(255, 88, 96, 0.5);
-        cursor: pointer;
-        width: 80px;
-        border-radius: 5px;
-        height: 40px;
-    }
+	.showtime button {
+		padding: 5 px;
+		background-image: -webkit-linear-gradient(90deg, #ff55a5 0%, #ff5860 100%);
+		color: white;
+		box-shadow: 0 0 20px 0 rgba(255, 88, 96, 0.5);
+		cursor: pointer;
+		width: 120px;
+		border-radius: 5px;
+		height: 40px;
 
-    .showtime button:hover {
-        background-image: linear-gradient(90deg, #ff55a5 0%, #ff5860 100%);
-    }
 
-    .seatLocation .seat {
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-    }
+	}
 
-    .seatLocation .seat li div {
-        padding-bottom: 10px;
-        display: flex;
-        justify-content: space-between;
-    }
+	.showtime button:hover {
+		background-image: linear-gradient(90deg, #ff55a5 0%, #ff5860 100%);
+	}
+
+	.seatLocation .seat {
+		padding: 0;
+	}
+	.seatLocation .seat li {
+		width: 50px;
+		height: 50px;
+		padding-bottom: 10px;
+		display: block;
+		display: inline-block;
+		justify-content: space-between;
+		margin-right: 22px;	
+	}
 </style>
 
 <body class="body">
 
-    <!-- header -->
-    <header th:insert="~{header/header}"></header>
-    <!-- end header -->
+	<!-- header -->
+	<header th:insert="~{header/header}"></header>
+	<!-- end header -->
 
-    <!-- details -->
-    <div class="content" style="padding: 0px; background-color: #2b2b31; ">
-        <div class="container">
-			<form th:action="@{/booking}" method="post">
-            <div class="row">
-                <div class="col-12" style="margin-top: 15px;">
-                    <div class="step_oder">
-                        <ul style="color: white;">
-                            <li style="background-color: #ff55a5;">Chọn / Rạp / Suất</li>
-                            <li style="background-color: #ff55a5;">Chọn ghế</li>
-                            <li>Chọn thức ăn</li>
-                            <li>Thanh toán</li>
-                            <li>Xác nhận</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-12 col-xl-6" style="margin-top: 30px;">
-                    <div class="row" style="text-align: center; background-color: #2b2b31; ">
-                        <div class="col-4" style="color: white;">
-                            <label style="padding: 5px;">Đổi suất chiếu</label>
-                        </div>
-                        <div class="col-6 showtime">
-                            <button>9:00</button>
-                            <button>15:00</button>
-                            <button>19:00</button>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 30px; ">
-                        <div class="card-body seatLocation" style="background-color:#2b2b31;">
-                            <ul class="seat">
-                                <li>
-                                    <div>
-                                        <button type="button" class="btn btn-outline-light">H1</button>
-                                        <button type="button" class="btn btn-outline-light">H1</button>
-                                        <button type="button" class="btn btn-outline-light">H1</button>
-                                        <button type="button" class="btn btn-outline-light">H1</button>
-                                        <button type="button" class="btn btn-outline-light">H1</button>
-                                        <button type="button" class="btn btn-outline-light">H1</button>
-                                        <button type="button" class="btn btn-outline-light">H1</button>
-                                        <button type="button" class="btn btn-outline-light">H1</button>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <button type="button" class="btn btn-outline-light">G1</button>
-                                        <button type="button" class="btn btn-outline-light">G1</button>
-                                        <button type="button" class="btn btn-outline-light">G1</button>
-                                        <button type="button" class="btn btn-outline-light">G1</button>
-                                        <button type="button" class="btn btn-outline-light">G1</button>
-                                        <button type="button" class="btn btn-outline-light">G1</button>
-                                        <button type="button" class="btn btn-outline-light">G1</button>
-                                        <button type="button" class="btn btn-outline-light">G1</button>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <button type="button" class="btn btn-outline-light">F1</button>
-                                        <button type="button" class="btn btn-outline-light">F1</button>
-                                        <button type="button" class="btn btn-outline-light">F1</button>
-                                        <button type="button" class="btn btn-outline-light">F1</button>
-                                        <button type="button" class="btn btn-outline-light">F1</button>
-                                        <button type="button" class="btn btn-outline-light">F1</button>
-                                        <button type="button" class="btn btn-outline-light">F1</button>
-                                        <button type="button" class="btn btn-outline-light">F1</button>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <button type="button" class="btn btn-outline-light">E1</button>
-                                        <button type="button" class="btn btn-outline-light">E1</button>
-                                        <button type="button" class="btn btn-outline-light">E1</button>
-                                        <button type="button" class="btn btn-outline-light">E1</button>
-                                        <button type="button" class="btn btn-outline-light">E1</button>
-                                        <button type="button" class="btn btn-outline-light">E1</button>
-                                        <button type="button" class="btn btn-outline-light">E1</button>
-                                        <button type="button" class="btn btn-outline-light">E1</button>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <button type="button" class="btn btn-outline-light">D1</button>
-                                        <button type="button" class="btn btn-outline-light">D1</button>
-                                        <button type="button" class="btn btn-outline-light">D1</button>
-                                        <button type="button" class="btn btn-outline-light">D1</button>
-                                        <button type="button" class="btn btn-outline-light">D1</button>
-                                        <button type="button" class="btn btn-outline-light">D1</button>
-                                        <button type="button" class="btn btn-outline-light">D1</button>
-                                        <button type="button" class="btn btn-outline-light">D1</button>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <button type="button" class="btn btn-outline-light">C1</button>
-                                        <button type="button" class="btn btn-outline-light">C1</button>
-                                        <button type="button" class="btn btn-outline-light">C1</button>
-                                        <button type="button" class="btn btn-outline-light">C1</button>
-                                        <button type="button" class="btn btn-outline-light">C1</button>
-                                        <button type="button" class="btn btn-outline-light">C1</button>
-                                        <button type="button" class="btn btn-outline-light">C1</button>
-                                        <button type="button" class="btn btn-outline-light">C1</button>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <button type="button" class="btn btn-outline-light">B1</button>
-                                        <button type="button" class="btn btn-outline-light">B1</button>
-                                        <button type="button" class="btn btn-outline-light">B1</button>
-                                        <button type="button" class="btn btn-outline-light">B1</button>
-                                        <button type="button" class="btn btn-outline-light">B1</button>
-                                        <button type="button" class="btn btn-outline-light">B1</button>
-                                        <button type="button" class="btn btn-outline-light">B1</button>
-                                        <button type="button" class="btn btn-outline-light">B1</button>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <button type="button" class="btn btn-outline-light">A1</button>
-                                        <button type="button" class="btn btn-outline-light">A1</button>
-                                        <button type="button" class="btn btn-outline-light">A1</button>
-                                        <button type="button" class="btn btn-outline-light">A1</button>
-                                        <button type="button" class="btn btn-outline-light">A1</button>
-                                        <button type="button" class="btn btn-outline-light">A1</button>
-                                        <button type="button" class="btn btn-outline-light">A1</button>
-                                        <button type="button" class="btn btn-outline-light">A1</button>
-                                    </div>
-                                </li>
-                            </ul>
-                            <div style="margin-top: 25px; text-align: center;">
-                                <label style="color: white; font-size: 10px;">Màn hình</label>
-                                <hr style="height: 2px; color: red;">
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="row">
-                                        <div class="col-6" style="padding: 0;">
-                                            <button type="button" class="btn btn-secondary"
-                                                style="width: 40px; height: 30px;"></button>
-                                            <span style="color: white; font-size: 14px;">Ghế đã bán</span>
-                                        </div>
-                                        <div class="col-6" style="padding: 0;">
-                                            <button type="button" class="btn btn-light"
-                                                style="width: 40px; height: 30px;"></button>
-                                            <span style="color: white; font-size: 14px;">Ghế đang chọn</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="row">
-                                        <div class="col-6" style="padding: 0;">
-                                            <button type="button" class="btn btn-outline-warning" disabled
-                                                style="width: 40px; height: 30px;"></button>
-                                            <span style="color: white; font-size: 14px;">Ghế vip</span>
-                                        </div>
-                                        <div class="col-6" style="padding: 0;">
-                                            <button type="button" class="btn btn-outline-light" disabled
-                                                style="width: 40px; height: 30px;"></button>
-                                            <span style="color: white; font-size: 14px;">Ghế thường</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-xl-5" style="background-color: #2b2b31; margin-left: 60px; margin-top: 30px;">
-                    <div class="row" style="padding: 10px;">
-                        <div class="col-4" style="padding: 0px; margin: 0px;">
-                            <img src="img/haikyuu-the-dumpster-battle-4_1715588036535.jpg" alt=""
-                                style="width: 170px; height: 220px;padding: 0; ">
-                        </div>
-                        <div class="col-8">
-                            <label style="font-weight: bold; color: white; font-size: 18px;">Haikyu!!: Trận Chiến Bãi Phế Liệu</label>
-                            <label style="color: white;">2D Phụ Đề</label>
-                        </div>
-                    </div>
-                    <div style="margin-top: 10px; color: white; ">
-                        <span style="font-size: 16px; font-weight: bold;">FumFilm Quang Trung</span>
-                        <span> - </span>
-                        <span>RAP 3</span>
-                    </div>
-                    <div style="margin-top: 10px; color: white;  border-bottom: 2px dotted #ff55a5; padding-bottom: 15px ;">
-                        <span style="font-size: 16px;">Suất: </span>
-                        <span style="font-size: 16px; font-weight: bold;">9:00</span>
-                        <span> - </span>
-                        <span style="font-size: 16px;">Thứ 3, </span>
-                        <span style="font-size: 16px; font-weight: bold;">21-05-2024</span>
-                    </div>
-                    <div style="margin-top: 15px;">
-                        <strong style="color: white;">Tổng cổng: </strong>
-                        <span style="color: orange; margin-left: 400px;">0đ</span>
-                    </div>
-                    <div class="row" style="margin-top: 20px; ">
-                        <div class="col-6 m-0 p-0 px-2">
-                            <button type="submit" class="btn btn-light w-100" formmethod="get" formaction="/home/film-detail">Quay lại</button>
-                        </div>
-                        <div class="col-6 m-0 p-0 px-2">
-                            <button type="submit" formmethod="get" formaction="/booking/orderFood" class="btn btn-warning w-100">Tiếp tục</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </form>
-        </div>
-    </div>
-    <!-- end content -->
+	<!-- details -->
+	<div class="content" style="padding: 0px; background-color: #2b2b31; ">
+		<div class="container">
+			<form method="get" action="/booking/orderFood">
+				<div class="row">
+					<div class="col-12" style="margin-top: 15px;">
+						<div class="step_oder">
+							<ul style="color: white;">
+								<li style="background-color: #ff55a5;">Chọn / Rạp / Suất</li>
+								<li style="background-color: #ff55a5;">Chọn ghế</li>
+								<li>Chọn thức ăn</li>
+								<li>Thanh toán</li>
+								<li>Xác nhận</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-12 col-xl-6" style="margin-top: 30px;">
+						<div class="row" style="text-align: center; background-color: #2b2b31; ">
+							<div class="col-12" style="color: white;">
+								<label style="padding: 5px;">Đổi suất chiếu</label>
+							</div>
+							<div class="col-12 showtime">
+								<button type="button" class="btn-showTime" th:each="filmShowTime : ${listShowTime}"
+									th:text="${filmShowTime[7]}" th:data-showTimeId="${filmShowTime[0]}"></button>
+							</div>
+						</div>
+						<div class="row" style="margin-top: 30px; ">
+							<div class="card-body seatLocation" style="background-color:#2b2b31;">
+								<ul class="seat">
+									<li th:each="seat : ${listSeat}">
+										<button type="button" class="btn-seat btn btn-outline-light"
+											th:text="${seat.seatNumber}"
+											th:data-seatPrice="${seat.seatType.price * film.price}" 
+											th:data-filmId="${film.filmId}">
+											</button>
+									</li>
+								</ul>
 
-    <!-- footer -->
-    <footer th:insert="~{footer/footer}"></footer>
-    <!-- end footer -->
+								<div style="margin-top: 25px; text-align: center;">
+									<label style="color: white; font-size: 10px;">Màn hình</label>
+									<hr style="height: 2px; color: red;">
+								</div>
+								<div class="row">
+									<div class="col-6">
+										<div class="row">
+											<div class="col-6" style="padding: 0;">
+												<button type="button" class="btn btn-secondary"
+													style="width: 40px; height: 30px;"></button>
+												<span style="color: white; font-size: 14px;">Ghế đã bán</span>
+											</div>
+											<div class="col-6" style="padding: 0;">
+												<button type="button" class="btn btn-light"
+													style="width: 40px; height: 30px;"></button>
+												<span style="color: white; font-size: 14px;">Ghế đang chọn</span>
+											</div>
+										</div>
+									</div>
+									<div class="col-6">
+										<div class="row">
+											<div class="col-6" style="padding: 0;">
+												<button type="button" class="btn btn-outline-warning" disabled
+													style="width: 40px; height: 30px;"></button>
+												<span style="color: white; font-size: 14px;">Ghế vip</span>
+											</div>
+											<div class="col-6" style="padding: 0;">
+												<button type="button" class="btn btn-outline-light" disabled
+													style="width: 40px; height: 30px;"></button>
+												<span style="color: white; font-size: 14px;">Ghế thường</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-xl-5"
+						style="background-color: #2b2b31; margin-left: 60px; margin-top: 30px;">
+						<div class="row" style="padding: 10px;">
+							<div class="col-4" style="padding: 0px; margin: 0px;">
+								<img th:src="@{'/image/' + ${film.filmImage}}" alt=""
+									style="width: 170px; height: 220px;padding: 0; ">
+							</div>
+							<div class="col-8">
+								
+								<label style="font-weight: bold; color: white; font-size: 18px;"
+									th:text="${film.filmName}"></label>
+								<br>
+								<label style="color: white;">2D Phụ Đề</label>
+							</div>
+						</div>
+						<div style="margin-top: 10px; color: white; ">
+							<span style="font-size: 16px; font-weight: bold;">FumFilm Quang Trung</span>
+							<span> - </span>
+							<span>RAP 3</span>
+						</div>
+						<div
+							style="margin-top: 10px; color: white;  border-bottom: 2px dotted #ff55a5; padding-bottom: 15px ;">
+							<span style="font-size: 16px;">Suất: </span>
+							<span style="font-size: 16px; font-weight: bold;" class="showTime">00:00</span>
+							<input name="showTime" hidden></input>
+							<span> - </span>
+							<span style="font-size: 16px; font-weight: bold;">21-05-2024</span>
+						</div>
+						<div class="seatBooking">
 
-    <!-- Root element of PhotoSwipe. Must have class pswp. -->
-    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+						</div>
+						<div style="margin-top: 15px; display: flex; justify-content: space-between;">
+							<strong style="color: white;">Tổng cổng: </strong>
+							<span style="color: orange;"><span class="total"></span> VNĐ</span>
+						</div>
+						<div class="row" style="margin-top: 20px; ">
+							<div class="col-6 m-0 p-0 px-2">
+								<button type="submit" class="btn btn-light w-100" formmethod="get"
+									formaction="/home/film-detail">Quay lại</button>
+							</div>
+							<div class="col-6 m-0 p-0 px-2">
+								<button type="submit" class="btn btn-warning w-100">Tiếp
+									tục</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- end content -->
 
-        <!-- Background of PhotoSwipe. 
+	<!-- footer -->
+	<footer th:insert="~{footer/footer}"></footer>
+	<!-- end footer -->
+
+	<!-- Root element of PhotoSwipe. Must have class pswp. -->
+	<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+		<!-- Background of PhotoSwipe. 
 		It's a separate element, as animating opacity is faster than rgba(). -->
-        <div class="pswp__bg"></div>
+		<div class="pswp__bg"></div>
 
-        <!-- Slides wrapper with overflow:hidden. -->
-        <div class="pswp__scroll-wrap">
+		<!-- Slides wrapper with overflow:hidden. -->
+		<div class="pswp__scroll-wrap">
 
-            <!-- Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory. -->
-            <!-- don't modify these 3 pswp__item elements, data is added later on. -->
-            <div class="pswp__container">
-                <div class="pswp__item"></div>
-                <div class="pswp__item"></div>
-                <div class="pswp__item"></div>
-            </div>
+			<!-- Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory. -->
+			<!-- don't modify these 3 pswp__item elements, data is added later on. -->
+			<div class="pswp__container">
+				<div class="pswp__item"></div>
+				<div class="pswp__item"></div>
+				<div class="pswp__item"></div>
+			</div>
 
-            <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-            <div class="pswp__ui pswp__ui--hidden">
+			<!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+			<div class="pswp__ui pswp__ui--hidden">
 
-                <div class="pswp__top-bar">
+				<div class="pswp__top-bar">
 
-                    <!--  Controls are self-explanatory. Order can be changed. -->
+					<!--  Controls are self-explanatory. Order can be changed. -->
 
-                    <div class="pswp__counter"></div>
+					<div class="pswp__counter"></div>
 
-                    <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+					<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
 
-                    <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+					<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
 
-                    <!-- Preloader -->
-                    <div class="pswp__preloader">
-                        <div class="pswp__preloader__icn">
-                            <div class="pswp__preloader__cut">
-                                <div class="pswp__preloader__donut"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+					<!-- Preloader -->
+					<div class="pswp__preloader">
+						<div class="pswp__preloader__icn">
+							<div class="pswp__preloader__cut">
+								<div class="pswp__preloader__donut"></div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-                <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+				<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
 
-                <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+				<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
 
-                <div class="pswp__caption">
-                    <div class="pswp__caption__center"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+				
+				<div class="pswp__caption">
+					<div class="pswp__caption__center"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <!-- JS -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.mousewheel.min.js"></script>
-    <script src="js/jquery.mCustomScrollbar.min.js"></script>
-    <script src="js/wNumb.js"></script>
-    <script src="js/nouislider.min.js"></script>
-    <script src="js/plyr.min.js"></script>
-    <script src="js/jquery.morelines.min.js"></script>
-    <script src="js/photoswipe.min.js"></script>
-    <script src="js/photoswipe-ui-default.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<!-- JS -->
+	<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+	<script src="js/bootstrap.bundle.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/jquery.mousewheel.min.js"></script>
+	<script src="js/jquery.mCustomScrollbar.min.js"></script>
+	<script src="js/wNumb.js"></script>
+	<script src="js/nouislider.min.js"></script>
+	<script src="js/plyr.min.js"></script>
+	<script src="js/jquery.morelines.min.js"></script>
+	<script src="js/photoswipe.min.js"></script>
+	<script src="js/photoswipe-ui-default.min.js"></script>
+	<script src="js/main.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script>
+
+		var seat = [];
+		var total = 0;
+		
+		$('.btn-showTime').on("click", function (event) {
+			event.preventDefault();
+			$(".showTime").text(jQuery(this).text());
+			$("input[name='showTime']").attr('value', $(this).attr("data-showTimeId"))
+		})
+
+		$(".btn-seat").click(function () {
+			$(this).toggleClass("bg-white text-dark");
+			var seatPrice = $(this).attr("data-seatPrice")
+			if (!seat.find((se) => se.seatName === jQuery(this).text())) {
+				seat.push({seatName : jQuery(this).text(), seatPrice : seatPrice})
+				total += seatPrice * 1
+			} else {
+				seat = seat.filter((se) => se.seatName !== jQuery(this).text())
+				total -= seatPrice * 1;
+			}
+			var seatBooking;
+			var filmID = $(this).attr("data-filmId")
+			
+			if (seat.length) {
+				seatBooking = (`
+				<div class="row" style="margin-top: 10px; color: white;  border-bottom: 2px dotted #ff55a5; padding-bottom: 15px ;">
+					<div class="col-6 ">
+								<span style="font-size: 16px;">${seat.length}x ghế đơn</span> <br>
+									<input name='idFilm' value='${filmID}' hidden>
+									<input name='seatList' value='${seat.map((s) => s.seatName + " " +s.seatPrice).join(", ")}' hidden>
+									<input name='totalSeat' value='${total}' hidden>
+								<span style="font-size: 16px; font-weight: bold;">Ghế: ${seat.map((s) => s.seatName).join(", ")}</span>
+							</div>
+							<div class="col-6" style="display: flex; justify-content: end; color: orange !important; align-items: center;">
+								<span style=""> ${total.toLocaleString()} VNĐ</span>
+							</div>	
+				</div>				
+			`)
+			} else {
+				seatBooking = ``;
+			}
+			$('.total').text(total.toLocaleString())
+			$(".seatBooking").html(seatBooking)
+		});
+	</script>
 </body>
 
 </html>
