@@ -9,8 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.config.entity.Film;
 
-import jakarta.persistence.NamedQuery;
-
 @Repository
 public interface FilmRepository extends JpaRepository<Film, Integer> {
 	

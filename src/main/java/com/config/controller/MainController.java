@@ -36,31 +36,15 @@ public class MainController {
 
 	@Autowired
 	UserRepository repo;
-//	
-//	@Autowired
-//	FilmRepository filmRepository;
 	
 	@Autowired
 	FilmService filmService;
-	
-//	@Autowired
-//	FilmDetailRepository filmDetailRepository;
 	
 	@Autowired
 	FilmDetailService filmDetailService;
 	@GetMapping()
 	public String init()
 	{
-//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-//		System.out.println(authorities);
-//		for (Object[] film : filmService.findFilmsHot()) {
-//			System.out.println(film[1]);
-		
-//		}
-//		for (Object[] filmDetail : filmDetailService.findAllFilms()) {
-//			System.out.println(filmDetail[0]);
-//		}
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
 		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
