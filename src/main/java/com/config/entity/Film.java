@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -42,9 +44,10 @@ public class Film {
 	String filmTime; 
 	@Column(name = "FilmImage" , columnDefinition ="nvarchar(255)", nullable = false)
 	String filmImage;
-	@Column(name = "VideoTrailer" , columnDefinition ="nvarchar(255)", nullable = false)
+	@Column(name = "VideoTrailer" , columnDefinition ="nvarchar(255)")
 	String videoTrailer;
 	@Temporal(value = TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "PremiereDate" , columnDefinition ="date", nullable = false)
 	Date premiereDate;
 	@Column(name = "Status", nullable = false)

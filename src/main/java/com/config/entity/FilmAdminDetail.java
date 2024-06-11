@@ -1,6 +1,9 @@
 package com.config.entity;
 
 import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,7 +21,8 @@ public class FilmAdminDetail {
 	
 	private String FilmImage;
 	
-	private String YearProduction;
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	private Date YearProduction;
 	
 	private String Description;
 	
@@ -26,6 +30,7 @@ public class FilmAdminDetail {
 	
 	private String FilmTime;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date PremiereDate;
 	
 	private String DirectorName;
@@ -33,5 +38,11 @@ public class FilmAdminDetail {
 	private String ACTORS;
 	
 	private String CountryName;
+	
+	private String CountryId;
+	
+	private Double price;
+	
+	private int age;
 
 }
