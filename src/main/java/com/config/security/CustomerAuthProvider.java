@@ -41,7 +41,7 @@ public class CustomerAuthProvider implements AuthenticationProvider{
 			System.out.println("Provider password fail: Invalid username or password");
 			throw new BadCredentialsException("Invalid username or password");
 		}
-		return new UsernamePasswordAuthenticationToken(userDetail, passWord, userDetail.getAuthorities());
+		return new UsernamePasswordAuthenticationToken(userName, passWord, userDetail.getAuthorities());
 	}
 
 	@Override
