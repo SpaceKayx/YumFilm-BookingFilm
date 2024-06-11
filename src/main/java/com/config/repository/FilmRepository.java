@@ -2,6 +2,8 @@ package com.config.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -32,5 +34,10 @@ public interface FilmRepository extends JpaRepository<Film, Integer> {
 			+ "GROUP BY f.FilmName, f.Rate, f.FilmImage", nativeQuery = true)
 	List<Object[]> findupcomingMovie();
 
-		
+	
+	@Query(value = "SELECT f FROM Film f WHERE f.status = True")
+	Page<Film> getFilmTable(Pageable pageable);
+
+	@Query(value = "SELECT f FROM Film f WHERE f.status = True")
+	List<Film> getFilmStatusTrue();
 }

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>YumFilm Report</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" th:href="@{/dashboard/vendors/ti-icons/css/themify-icons.css}">
+  <link rel="stylesheet" th:href="@{/dashboard/vendors/base/vendor.bundle.base.css}">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" th:href="@{/dashboard/css/style.css}">
+  <!-- endinject -->
+  <link rel="shortcut icon" th:href="@{/dashboard/images/favicon.png}" />
+</head>
+<body>
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row ">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center bg-black">
+        <a th:href="@{/manager}" class="header__logo">
+          <svg xmlns="http://www.w3.org/2000/svg" width="200" height="90">
+            <g transform="translate(100, 100) rotate(-0.0663417)">
+              <text stroke="#000" font-weight="bold" xml:space="preserve" text-anchor="middle" font-family="Noto Sans JP" font-size="28" y="-45" x="-40" fill="#ffffff">Yum</text>
+              <text stroke="#000" font-weight="bold" xml:space="preserve" text-anchor="middle" font-family="Noto Sans JP" font-size="34" y="-43" x="22" fill="#ff0000">Film</text>
+            </g>
+          </svg>
+        </a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end bg-black">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="ti-view-list"></span>
+        </button>
+        
+        <ul class="navbar-nav navbar-nav-right">
+          <!--  -->
+          <li class="nav-item nav-profile dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
+              <img src="images/faces/face28.jpg" alt="profile"/>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+              <a class="dropdown-item">
+                <i class="ti-user text-primary"></i>
+                Profile
+              </a>
+              <a class="dropdown-item">
+                <i class="ti-power-off text-primary"></i>
+                Logout
+              </a>
+            </div>
+          </li>
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+          <span class="ti-view-list"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/dashboard}">
+              <i class="ti-shield menu-icon"></i>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+              <i class="ti-palette menu-icon"></i>
+              <span class="menu-title">UI Elements</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-basic">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/dashboard/forms}">
+              <i class="ti-layout-list-post menu-icon"></i>
+              <span class="menu-title">Form elements</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/dashboard/chartjs}">
+              <i class="ti-pie-chart menu-icon"></i>
+              <span class="menu-title">Charts</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/dashboard/tables}">
+              <i class="ti-view-list-alt menu-icon"></i>
+              <span class="menu-title">Tables</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"  th:href="@{/dashboard/icons}">
+              <i class="ti-star menu-icon"></i>
+              <span class="menu-title">Icons</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+              <i class="ti-user menu-icon"></i>
+              <span class="menu-title">User Pages</span>
+              <i class="menu-arrow"></i>
+            </a>
+            
+          </li>
+          
+        </ul>
+      </nav>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-md-12 grid-margin">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h4 class="font-weight-bold mb-0">YumFilm Dashboard</h4>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
+                      <i class="ti-clipboard btn-icon-prepend"></i>Report
+                    </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title text-md-center text-xl-left">Film</p>
+                  <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center"  name="listFilmSize">
+                    <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0" th:text= "${listFilmSize}"></h3>
+                    <i class="ti-video-camera icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
+                  </div>  
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title text-md-center text-xl-left">Revenue</p>
+                  <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+                    <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0" th:text="@{${#numbers.formatDecimal(revenue, 0, 'COMMA', 0, 'POINT')} + ' VND' }"></h3>
+                    <i class="ti-bar-chart icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
+                  </div>  
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title text-md-center text-xl-left">Total Invoice</p>
+                  <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+                    <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0" th:text="${listInvoice}"></h3>
+                    <i class="ti-check-box icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
+                  </div>  
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title text-md-center text-xl-left">Total Ticket</p>
+                  <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+                    <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0" th:text="${listInvoiceDetail}"></h3>
+                    <i class="ti-ticket icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
+                  </div>  
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title">Revenue details</p>
+                  <p class="text-muted font-weight-light">Store business details for 1 year</p>
+                  <div id="sales-legend" class="chartjs-legend mt-4 mb-2"></div>
+                  <canvas id="sales-chart"></canvas>
+                </div>
+                <div class="card border-right-0 border-left-0 border-bottom-0">
+                  <div class="d-flex justify-content-center justify-content-md-end">
+                    <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
+                      <button class="btn btn-lg btn-outline-light dropdown-toggle rounded-0 border-top-0 border-bottom-0" type="button" id="dropdownMenuDate2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Today
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
+                        <a class="dropdown-item" href="#">Year 2022</a>
+                        <a class="dropdown-item" href="#">Year 2023</a>
+                        <a class="dropdown-item" href="#">Year 2024</a>
+                      </div>
+                    </div>
+                    <!-- <button class="btn btn-lg btn-outline-light text-primary rounded-0 border-0 d-none d-md-block" type="button"> View all </button> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 grid-margin stretch-card">
+              <div class="card border-bottom-0">
+                <div class="card-body pb-0">
+                  <p class="card-title">Buy Tickets</p>
+                  <p class="text-muted font-weight-light"></p>
+                  <div class="d-flex flex-wrap mb-5">
+                    <div class="me-5 mt-3">
+                      <p class="text-muted">Total Ticket</p>
+                      <h3 th:text="${listInvoiceDetail}"></h3>
+                    </div>
+                    <div class="me-5 mt-3">
+                      <p class="text-muted">Total Price</p>
+                      <h3 th:text="@{${#numbers.formatDecimal(revenue, 0, 'COMMA', 0, 'POINT')} + ' VND' }"></h3>
+                    </div>
+                    
+                  </div>
+                </div>
+                <canvas id="order-chart" class="w-100"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title mb-0">Top Film</p>
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>Film Name</th>
+                          <th>Film Image</th>
+                          <th>Price</th>
+                          <th>Ticket</th>
+                          <th>Total</th>
+                          
+                        </tr>
+                      </thead>
+                      <tbody>
+	                     <tr th:each=" top6Film : ${top6FilmReport}">
+	                       <td th:text="${top6Film[0]}"></td>
+	                       <td > <img th:src="@{/image/{imageName}(imageName=${top6Film[1]})}" style= "width:130px; height:130px"> </td>
+	                       <td th:text="@{${#numbers.formatDecimal(top6Film[2], 0, 'COMMA', 0, 'POINT')} + ' VND' }"></td>
+	                       <td th:text="${top6Film[3]}"></td>
+	                       <td th:text="@{${#numbers.formatDecimal(top6Film[4], 0, 'COMMA', 0, 'POINT')} + ' VND' }"></td>
+	                       
+	                     </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+           
+          </div>
+          <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+              <div class="card position-relative">
+                <div class="card-body">
+                  <p class="card-title">Detailed Reports</p>
+                  <div class="row">
+                    <div class="col-md-12 col-xl-3 d-flex flex-column justify-content-center">
+                      <div class="ml-xl-4">
+                        <h1 th:text="${listInvoice}"></h1>
+                        <h3 class="font-weight-light mb-xl-4">Total Invoice</h3>
+                      </div>  
+                    </div>  
+                    <div class="col-md-12 col-xl-9">
+                      <div class="row">
+                        <div class="col-md-6 mt-3 col-xl-5">
+                          <canvas id="north-america-chart"></canvas>
+                          <div id="north-america-legend"></div>
+                        </div>
+                        <div class="col-md-6 col-xl-7">
+                          <div class="table-responsive mb-3 mb-md-0">
+                            <table class="table table-borderless report-table">
+                              <!-- List Top 6 Film -->
+                              	<tr th:each=" top6Film : ${top6FilmReport}">
+	                      	 		<td th:text="${top6Film[0]}"></td>
+	                       			<td class="w-100 px-0">
+                                  		<div class="progress progress-md mx-4">
+                                    		<div class="progress-bar bg-primary" role="progressbar" style="width: 75%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                                 		</div>
+                                	</td>
+	                       			<td th:text="${top6Film[3]}"></td>
+	                       			
+	                       
+	                     		</tr>
+                              
+                              
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © <a href="https://www.bootstrapdash.com/" target="_blank">bootstrapdash.com </a>2021</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Only the best <a href="https://www.bootstrapdash.com/" target="_blank"> Bootstrap dashboard </a> templates</span>
+          </div>
+        </footer>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+
+  <!-- plugins:js -->
+  <script src="/dashboard/vendors/base/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <script src="/dashboard/vendors/chart.js/Chart.min.js"></script>
+  <script src="/dashboard/js/jquery.cookie.js" type="text/javascript"></script>
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="/dashboard/js/off-canvas.js"></script>
+  <script src="/dashboard/js/hoverable-collapse.js"></script>
+  <script src="/dashboard/js/template.js"></script>
+  <script src="/dashboard/js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="/dashboard/js/dashboard.js"></script>
+  <!-- End custom js for this page-->
+</body>
+
+</html>
+

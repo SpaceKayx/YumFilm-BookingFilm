@@ -1,7 +1,6 @@
 package com.config.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +12,8 @@ public class FoodService{
 
 	@Autowired
 	FoodRepository foodRepository;
+
+	
 	
 	public List<Food> selectAll()
 	{
@@ -32,6 +33,4 @@ public class FoodService{
 	public Food findById(Integer id) {
 		return foodRepository.findById(id).get();
 	}
-	
-	
 }
