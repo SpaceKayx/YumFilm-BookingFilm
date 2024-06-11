@@ -15,7 +15,7 @@ import com.config.entity.FilmAdminDetail;
 public interface AdminFimlRepository extends JpaRepository<Film, Integer> {
 	
 	@Query(value = """
-		    WITH FilmGenresAggregated AS (
+		   WITH FilmGenresAggregated AS (
 		        SELECT 
 		            FILM.FilmId,
 		            STRING_AGG(FT.FilmTypeName, ', ') WITHIN GROUP (ORDER BY FT.FilmTypeName) AS FILMTYPES
@@ -42,7 +42,7 @@ public interface AdminFimlRepository extends JpaRepository<Film, Integer> {
 		        FILM.FilmId,
 		        FILM.FilmName,
 		        FILM.FilmImage,
-		        YEAR(FilmDetail.ProductionDate) AS YearProduction,
+				FilmDetail.ProductionDate AS YearProduction,
 		        FGA.FILMTYPES,
 		        FilmDetail.Description,
 		        Film.FilmTime,
@@ -50,7 +50,10 @@ public interface AdminFimlRepository extends JpaRepository<Film, Integer> {
 		        Director.DirectorName,
 		        FAA.ACTORS,
 				Country.CountryName,
-				Film.Rate
+				Film.Rate,
+				Country.CountryId,
+				Film.Age,
+				Film.Price
 				
 		    FROM 
 		        FILM
@@ -74,20 +77,24 @@ public interface AdminFimlRepository extends JpaRepository<Film, Integer> {
 		        Film.FilmTime,
 		        Director.DirectorName,
 		        FAA.ACTORS,
-		        YEAR(FilmDetail.ProductionDate),
+		        FilmDetail.ProductionDate,
 				Country.CountryName, 
-				Film.Rate
+				Film.Rate,
+				Country.CountryId,
+				Film.Age,
+				Film.Price
 				
 		    """, nativeQuery = true)
 	List<Object[]> detailFilmAdmin(@Param("filmId") Integer filmId);
 
 	
-	@Query(value = "SELECT FILM.FilmId,  FILM.FilmName, STRING_AGG( FilmTypeName , ', ') WITHIN GROUP (ORDER BY FILMTYPENAME) AS FILMTYPES, \r\n"
+	@Query(value = "SELECT DISTINCT FILM.FilmId,  FILM.FilmName, STRING_AGG( FilmTypeName , ', ') WITHIN GROUP (ORDER BY FILMTYPENAME) AS FILMTYPES, \r\n"
 			+ "		FILM.AGE, FILM.FilmImage, FILM.RATE,FilmDetail.Description\r\n"
 			+ "FROM FILM \r\n"
 			+ "	LEFT JOIN FilmDetail ON FILM.FilmId= FilmDetail.FilmId\r\n"
 			+ "	LEFT JOIN FilmGenres ON Film.FilmId = FilmGenres.FilmId\r\n"
 			+ "	LEFT JOIN FilmType ON FilmType.FilmTypeId = FilmGenres.FilmTypeId\r\n"
+			+ " WHERE FILM.Status = 1"
 			+ "GROUP BY FILM.FilmId, FILM.FILMNAME, FILM.AGE, FILM.RATE,FilmDetail.Description,FILM.FilmImage", nativeQuery = true)
 	List<Object[]> listFilmAdmin();
 	

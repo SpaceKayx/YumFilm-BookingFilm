@@ -15,33 +15,35 @@
 
 		<!-- details content -->
 		<div class="container" >
+		<form  method="post" enctype="multipart/form-data">
 			<div class="row" th:object="${detailFimlAdmin}" >
 				<div class=" col-lg-4 col-md-6 col-sm-12 ">
+					 <div class="card__cover">
+						<img  th:if="${detailFimlAdmin != null}" th:src="@{'/images/' + *{FilmImage}}" alt="">
+						<input name="showImage" th:value="*{FilmImage}" hidden />
+					</div> 
 					<div>
-						<h1 class="details__title"  th:text="*{FilmName}"></h1>
-					</div>
-					<div class="card__cover">
-						
-						<img th:src="@{'/images/' + *{FilmImage}}" alt="">
-						
-					</div>
-					<div>
-						<button class="price__btn">Thêm ảnh</button>
+					<input 
+						type="file" 
+						class="price__btn" 
+						name = "fileImage"
+						>
+						</input>
 					</div>
 				</div>
-
 				<div class="col-lg-8 col-md-6 col-sm-12">
 					<div class="row">
 						<div class="col-lg-6">
 							<label for="" style="color: aliceblue;">Tên phim</label> 
 							<input name = "filmName" type="text" class="form__input" th:field="*{FilmName}">
+                                                                                                                
 						</div>
 						<div class="col-lg-6">
 							<label for="" style="color: aliceblue;">Năm sản xuất</label> 
 							<input name = "yearProduction" type="text" class="form__input" th:field="*{YearProduction}">
 						</div>
 					</div>
-					<form action="">
+					
 						<div class="row">
 							<div class="col-lg-6">
 								<label for="" style="color: aliceblue;">Thời lượng phim</label>
@@ -52,46 +54,57 @@
 								<input name = "directorName" type="text" class="form__input" th:field="*{DirectorName}">
 							</div>
 						</div>
-					</form>
+					
 					<div class="row">
 						<div class="col-lg-6">
 							<label for="" style="color: aliceblue;">Thể loại</label>
-							<textarea  class="form__textarea" name="fimlTypes" id="" th:field="*{FILMTYPES}"></textarea>
+							<textarea  class="form__textarea" name="FILMTYPES" id="" th:field="*{FILMTYPES}"></textarea>
 						</div>
 						<div class="col-lg-6">
 							<label for="" style="color: aliceblue;">Thời gian công chiếu</label> 
 							<input name = "premiereDate" type="date" class="form__input" th:field="*{PremiereDate}"> 
 								<label for="" style="color: aliceblue;">Quốc gia</label> 
-								<input name = "countryName" type="text" class="form__input" th:field="*{CountryName}">
+								<input name = "countryId" type="text" class="form__input" th:field="*{CountryId}">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<label for="" style="color: aliceblue;">Giá</label>
+							<input name = "price" type="text" class="form__input" th:field="*{price}"> 
+							
+						</div>
+						<div class="col-lg-6">
+							<label for="" style="color: aliceblue;">Độ tuổi</label> 
+							<input name = "age" type="text" class="form__input" th:field="*{age}"> 
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-lg-6">
 							<label for="" style="color: aliceblue;">Diễn viên</label>
-							<textarea name = "actor" class="form__textarea" name="" id="" th:field="*{ACTORS}"></textarea>
+							<textarea name = "ACTORS" class="form__textarea" id="" th:field="*{ACTORS}"></textarea>
 						</div>
 
 						<div class="col-lg-6">
 							<label for="" style="color: aliceblue;">Nội dung phim</label>
-							<textarea name = "description" class="form__textarea" name="" id="" th:field="*{Description}"></textarea>
+							<textarea name = "description" class="form__textarea" id="" th:field="*{Description}"></textarea>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-lg-3">
-							<button class="form__btn" style="margin-left: 15px;">Thêm</button>
+							<button class="form__btn" style="margin-left: 15px;" th:formaction="@{/manager/film-detail/add}">Thêm</button>
 						</div>
 						<div class="col-lg-3">
-							<button class="form__btn" style="margin-left: 15px;">Sửa</button>
-						</div>
-						<div class="col-lg-3">
-							<button class="form__btn">Xóa</button>
+							<button class="form__btn" th:formaction="@{/manager/film-detail/update?filmId={FilmId} (FilmId = ${detailFimlAdmin.FilmId})}">Sửa</button>
 						</div>
 						<div class="col-lg-3">
 							<button class="form__btn" >Quay lại</button>
 						</div>
+						<div class="col-lg-3">
+							<button class="form__btn"  th:formaction="@{/manager/film-detail/delete?filmId={FilmId} (FilmId = ${detailFimlAdmin.FilmId})}">Xóa</button>
+						</div>
 					</div>
 				</div>
-
+				</form>
 			</div>
 		</div>
 		<!-- end details content -->

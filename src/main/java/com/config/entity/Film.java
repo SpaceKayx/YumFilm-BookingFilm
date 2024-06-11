@@ -5,9 +5,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.config.service.FilmService;
+
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -50,11 +54,13 @@ public class Film {
 	
 	@Column(name = "FilmImage" , columnDefinition ="nvarchar(255)", nullable = false)
 	String filmImage;
-	
+
 	@Column(name = "VideoTrailer" , columnDefinition ="nvarchar(255)", nullable = false)
+
 	String videoTrailer;
 	
 	@Temporal(value = TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "PremiereDate" , columnDefinition ="date", nullable = false)
 	Date premiereDate;
 	
