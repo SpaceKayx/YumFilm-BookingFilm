@@ -175,7 +175,13 @@ public class AdminController {
 		return "redirect:/manager" ;
 		
 	}
-
+	@PostMapping("/back")
+	public String back()
+	{
+		return "redirect:/manager";
+	}
+	
+	
 	@GetMapping("/film-detail")
 	public String filmDetail1(Model model) {
 		model.addAttribute("detailFimlAdmin", new FilmAdminDetail());

@@ -627,7 +627,7 @@ ul {
     display: none;
   }
   .header__nav-item {
-    margin: 0 45px 0 0;
+    margin: 0 30px 0 0;
     width: auto;
   }
   .header__nav-item:last-child {

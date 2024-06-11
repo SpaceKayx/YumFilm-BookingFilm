@@ -103,7 +103,14 @@ public class DashboardController {
 		Page<Film> pagesFilm = rpService.getFilmTable(pageableFilm);
 		model.addAttribute("pagesFilm", pagesFilm);
 
+		List<Object[]> pagesUser = rpService.getUserReport();
+		model.addAttribute("listUserReport",pagesUser);
 		
+		List<Object[]> listInvoiceUser = rpService.getUserInvoiceReportPaymentStatusTrue();
+		model.addAttribute("listInvoiceUser", listInvoiceUser);
+		
+		List<Object[]> listInvoiceUserFalse = rpService.getUserInvoiceReportPaymentStatusFalse();
+		model.addAttribute("listInvoiceUserFalse", listInvoiceUserFalse);
 		
 		return "dashboard/pages/tables/basic-table";
 	}
@@ -122,7 +129,14 @@ public class DashboardController {
 		Page<Film> pagesFilm = rpService.getFilmTable(pageableFilm);
 		model.addAttribute("pagesFilm", pagesFilm);
 
+		List<Object[]> pagesUser = rpService.getUserReport();
+		model.addAttribute("listUserReport",pagesUser);
 		
+		List<Object[]> listInvoiceUser = rpService.getUserInvoiceReportPaymentStatusTrue();
+		model.addAttribute("listInvoiceUser", listInvoiceUser);
+		
+		List<Object[]> listInvoiceUserFalse = rpService.getUserInvoiceReportPaymentStatusFalse();
+		model.addAttribute("listInvoiceUserFalse", listInvoiceUserFalse);
 		
 		return "dashboard/pages/tables/basic-table";
 	}

@@ -5,7 +5,7 @@
 
 <body class="body">
 	<!-- header -->
-	<header th:insert="~{header/header}"></header>
+	<header th:insert="~{header/headeradmin}"></header>
 	<!-- end header -->
 	<!-- details -->
 	<section class="section details">
@@ -97,7 +97,7 @@
 							<button class="form__btn" th:formaction="@{/manager/film-detail/update?filmId={FilmId} (FilmId = ${detailFimlAdmin.FilmId})}">Sửa</button>
 						</div>
 						<div class="col-lg-3">
-							<button class="form__btn" >Quay lại</button>
+							<button class="form__btn" th:formaction="@{/manager/back}">Quay lại</button>
 						</div>
 						<div class="col-lg-3">
 							<button class="form__btn"  th:formaction="@{/manager/film-detail/delete?filmId={FilmId} (FilmId = ${detailFimlAdmin.FilmId})}">Xóa</button>
