@@ -290,7 +290,7 @@ public class BookingController {
 
 	@ModelAttribute("listFood")
 	public List<Food> getFood() {
-		return foodService.findAll();
+		return foodService.selectAll();
 	}
 
 	@ModelAttribute("listSeat")

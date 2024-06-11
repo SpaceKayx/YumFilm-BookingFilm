@@ -24,8 +24,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import com.config.entity.Film;
+import com.config.entity.Food;
+import com.config.service.AdminFimlService;
+import com.config.service.FoodService;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import jakarta.servlet.ServletContext;
 import com.config.entity.Actor;
 import com.config.entity.Film;
 import com.config.entity.FilmAdminDetail;
@@ -51,10 +56,11 @@ public class AdminController {
 	AdminFimlService adminFilmService;
 
 	@Autowired
-	AdminFoodService adminFoodService;
-
+	FoodService foodService;
 	@Autowired
 	FilmRepository filmRepository;
+	AdminFoodService adminFoodService;
+
 	
 	@GetMapping("/film-detail/edit")
 	public String filmDetail(@RequestParam("filmId") Integer filmId, Model model) throws ParseException {
@@ -181,14 +187,71 @@ public class AdminController {
 		return "admin_food_detail";
 	}
 
+	@GetMapping("/food-detail/edit/{id}")
+	public String foodDetail(Model model, @PathVariable("id") int id ) {
+		System.out.println("hihi");
+		Food newFood = foodService.findById(id);
+		model.addAttribute("newFood", newFood);
+		return "admin_food_detail";
+	}
+
 	@GetMapping()
-	public String init() {
+	public String init(Model model) {
+		model.addAttribute("listAdminFood", foodService.selectAll());
 		return "admin_film";
 	}
 
 	@ModelAttribute("listAdminFilm")
 	public List<Object[]> getFilms() {
 		return adminFilmService.findAll();
+	}
+
+	@ModelAttribute("newFood")
+	public Food getFood() {
+		return Food.builder().build();
+	}
+
+	@PostMapping("/food-detail/update")
+	public String update(@ModelAttribute("newFood") Food food , @RequestParam("fileImage") MultipartFile file) throws IllegalStateException, IOException {
+		File saveImageFood = new File(application.getRealPath("/images/"));
+		if (!saveImageFood.exists()) {
+			saveImageFood.mkdirs();
+		}
+		System.out.println("file name: " +file.getOriginalFilename());
+		String fileName = file.getOriginalFilename();
+		saveImageFood = new File(saveImageFood + "/" + fileName);
+		file.transferTo(saveImageFood);
+		food.setFoodImage(fileName);
+		System.out.println("aloalo");
+		foodService.save(food);
+		return "redirect:/manager";
+	}
+
+	@PostMapping("/food-detail/add")
+	public String createFood(@ModelAttribute Food food, @RequestParam("fileImage") MultipartFile file) throws IllegalStateException, IOException {
+		File saveImageFood = new File(application.getRealPath("/images/"));
+		if (!saveImageFood.exists()) {
+			saveImageFood.mkdirs();
+		}
+		System.out.println("file name: " +file.getOriginalFilename());
+		String fileName = file.getOriginalFilename();
+		saveImageFood = new File(saveImageFood + "/" + fileName);
+		file.transferTo(saveImageFood);
+		food.setFoodImage(fileName);
+		try {
+			
+			foodService.save(food);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/manager";
+	}
+	
+	@PostMapping("food-detail/delete")
+	public String delete(@RequestParam("foodId") int id)
+	{
+		foodService.deleteById(id);
+		return "redirect:/manager";
 	}
 
 }

@@ -32,7 +32,6 @@ public class SecurityConfig {
 		this.provider = provider;
 		this.successHandler = successHandler;
 	}
-
 	@Bean
 	public SecurityFilterChain filter(HttpSecurity http) throws Exception {
 	    
