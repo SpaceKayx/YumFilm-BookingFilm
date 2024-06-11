@@ -7,20 +7,30 @@ import org.springframework.stereotype.Service;
 
 import com.config.entity.Food;
 import com.config.repository.FoodRepository;
-
 @Service
-public class FoodService {
+public class FoodService{
 
 	@Autowired
 	FoodRepository foodRepository;
 
 	
-	public List<Food> findAll() {
+	
+	public List<Food> selectAll()
+	{
 		return foodRepository.findAll();
 	}
+	
+
+	public void deleteById(int id) {
+		foodRepository.deleteById(id);
+	}
+
+	public <S extends Food> S save(S entity) {
+		return foodRepository.save(entity);
+	}
+
 
 	public Food findById(Integer id) {
 		return foodRepository.findById(id).get();
 	}
-
 }
