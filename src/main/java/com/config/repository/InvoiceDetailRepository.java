@@ -28,12 +28,12 @@ public interface InvoiceDetailRepository extends JpaRepository<InvoiceDetail, In
             "    WHERE Invoice.Status = 1 " +
             "    GROUP BY Invoice.InvoiceId " +
             ") " +
-            "SELECT TotalOrderFood.Total + TotalInvoice.Total AS TOTAL " +
+            "SELECT ISNULL(TotalOrderFood.Total,0)  + ISNULL(TotalInvoice.Total,0) AS TOTAL " +
             "FROM Invoice " +
-            "JOIN TotalInvoice ON Invoice.InvoiceId = TotalInvoice.InvoiceId " +
-            "JOIN TotalOrderFood ON Invoice.InvoiceId = TotalOrderFood.InvoiceId " +
+            " LEFT JOIN TotalInvoice ON Invoice.InvoiceId = TotalInvoice.InvoiceId " +
+            " LEFT JOIN TotalOrderFood ON Invoice.InvoiceId = TotalOrderFood.InvoiceId " +
             "WHERE Invoice.Status = 1 " +
-            "ORDER BY Invoice.InvoiceId", nativeQuery = true)
+            "ORDER BY Invoice.InvoiceId ", nativeQuery = true)
 	List<Object[]> getRevenue();
 	
 	@Query(value = "SELECT f.filmName, f.filmImage, f.price, COUNT(id.invoiceDetailId) , SUM(id.price)"
