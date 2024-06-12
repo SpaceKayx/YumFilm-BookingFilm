@@ -16,15 +16,15 @@ public interface InvoiceDetailRepository extends JpaRepository<InvoiceDetail, In
 	@Query(value = "WITH TotalInvoice AS ( " +
             "    SELECT Invoice.InvoiceId, SUM(InvoiceDetail.Price) AS Total " +
             "    FROM Invoice " +
-            "    JOIN InvoiceDetail ON Invoice.InvoiceId = InvoiceDetail.InvoiceId " +
+            "    LEFT JOIN InvoiceDetail ON Invoice.InvoiceId = InvoiceDetail.InvoiceId " +
             "    WHERE Invoice.Status = 1 " +
             "    GROUP BY Invoice.InvoiceId " +
             "), " +
             "TotalOrderFood AS ( " +
             "    SELECT Invoice.InvoiceId, SUM(OrderFood.Price) AS Total " +
             "    FROM OrderFood " +
-            "    JOIN FOOD ON OrderFood.FoodId = FOOD.FoodId " +
-            "    JOIN Invoice ON Invoice.InvoiceId = OrderFood.InvoiceId " +
+            "    LEFT JOIN FOOD ON OrderFood.FoodId = FOOD.FoodId " +
+            "    LEFT JOIN Invoice ON Invoice.InvoiceId = OrderFood.InvoiceId " +
             "    WHERE Invoice.Status = 1 " +
             "    GROUP BY Invoice.InvoiceId " +
             ") " +
@@ -41,6 +41,7 @@ public interface InvoiceDetailRepository extends JpaRepository<InvoiceDetail, In
 			+ " JOIN id.invoice i"
 			+ "	JOIN id.showTime st"
 			+ " JOIN st.film f"
+			+ " WHERE i.status = true"
 			+ " GROUP BY f.filmName, f.filmImage, f.price "
 			+ " ORDER BY COUNT(id.invoiceDetailId) DESC")
 	List<Object[]> getReportTop6Film();
